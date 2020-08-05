@@ -339,9 +339,11 @@ class RNNTask(BasePytorchTask):
     def eval_epoch_end(self, outputs, tag, dates):
         pred = pd.concat([x['pred'] for x in outputs], axis=0)
         label = pd.concat([x['label'] for x in outputs], axis=0)
-
         pred = pred.groupby(['row_idx', 'node_idx','forecast_idx']).mean()
         label = label.groupby(['row_idx', 'node_idx', 'forecast_idx']).mean()
+
+        align_countries = label.reset_index().node_idx.map(lambda x: self.countries[x]).values
+        align_dates = label.reset_index().row_idx.map(lambda x: dates[x]).values
 
         loss = np.mean(np.abs(pred['val'].values - label['val'].values))
         scores = self.produce_score(pred, label, dates)
@@ -360,6 +362,8 @@ class RNNTask(BasePytorchTask):
             'pred': pred,
             'label': label,
             'sf_score': scores,
+            'dates':align_dates,
+            'countries':align_countries
         }
 
         return out
@@ -379,7 +383,7 @@ class RNNTask(BasePytorchTask):
         eval_df['mape'] = mape_metric['val']
         if dates is not None:
             eval_df['date'] = eval_df.row_idx.map(lambda x: dates[x])
-        eval_df['zonecode'] = eval_df.node_idx.map(lambda x: self.countries[x])
+        eval_df['countries'] = eval_df.node_idx.map(lambda x: self.countries[x])
 
         def produce_percent_count(m_df):
             res = pd.Series()
