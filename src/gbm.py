@@ -24,6 +24,9 @@ class GBDTConfig(BaseConfig):
         self.lookahead_days = 1
         # at the last day, features within those hours behind this threshold will be removed
         self.data_split_ratio = '7:7'  # time slots of val and test sets
+        self.label = 'confirmed'
+        self.use_mobility = False
+
 
         self.exp_dir = '../gbdt'
         self.nthreads = 12
@@ -143,7 +146,13 @@ if __name__ == '__main__':
     args = parser.parse_args()
     config.update_by_dict(args.__dict__)
 
-    outputs = load_data(config.data_fp, config.start_date, config.min_peak_size, config.lookback_days, config.lookahead_days)
+    outputs = load_data(config.data_fp, 
+                        config.start_date, 
+                        config.min_peak_size, 
+                        config.lookback_days, 
+                        config.lookahead_days, 
+                        config.label,
+                        config.use_mobility)
     day_inputs, outputs, edge_index, dates, countries = outputs
     print(day_inputs.shape, outputs.shape, edge_index.shape)
     df = feature_engineering_raw_data(day_inputs, outputs, dates, countries)

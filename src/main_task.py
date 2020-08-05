@@ -41,6 +41,8 @@ class RNNConfig(BaseConfig):
         self.lookahead_days = 1
         # at the last day, features within those hours behind this threshold will be removed
         self.data_split_ratio = '7:7'  # time slots of val and test sets
+        self.label = 'confirmed'
+        self.use_mobility = False
 
         self.model_type = 'krnn'  # choices: krnn, sandwich, nbeats
         self.saint_batch_size = 500
@@ -91,6 +93,11 @@ class WrapperNet(nn.Module):
         super().__init__()
 
         self.config = config
+        self.label2idx = {
+        'confirmed':-4,
+        'deaths':-3,
+        'recovered':-2
+        }
         # self.net = Model(config)
         if self.config.model_type == 'krnn':
             self.net = KRNNModel(config)
@@ -110,9 +117,11 @@ class WrapperNet(nn.Module):
 
     def lr(self, input_day):
         sz = input_day.size()
-        ts = torch.expm1(input_day[:,:,:,1])     # label ts
-        pred = torch.matmul(ts, torch.sigmoid(self.weight_lr)) + self.b_lr
-        pred = torch.log1p(pred) 
+        # print(sz)
+        label_idx = self.label2idx.get(self.config.label,-4)
+        ts = torch.expm1(input_day[:,:,:,label_idx])     # label ts
+        pred = torch.matmul(ts, torch.sigmoid(self.weight_lr)) + self.b_lr 
+        pred = torch.log1p(pred)
         pred = pred.view(sz[0],sz[1],self.config.lookahead_days)
         return pred
 
@@ -133,7 +142,6 @@ class RNNTask(BasePytorchTask):
         self.init_data()
         self.loss_func = nn.L1Loss(reduction='none')
         # self.loss_func = ExpL1Loss(reduction='none')
-
         self.log('Config:\n{}'.format(
             json.dumps(self.config.to_dict(), ensure_ascii=False, indent=4)
         ))
@@ -147,8 +155,15 @@ class RNNTask(BasePytorchTask):
             day_inputs, gbm_outputs, outputs, edge_index, dates, countries = load_npz_data(data_fp)
         else:
             day_inputs, outputs, edge_index, dates, countries = \
-                load_data(data_fp, self.config.start_date, self.config.min_peak_size, self.config.lookback_days, self.config.lookahead_days, logger=self.log)
-            gbm_outputs = outputs.copy()
+                load_data(data_fp, 
+                self.config.start_date, 
+                self.config.min_peak_size, 
+                self.config.lookback_days, 
+                self.config.lookahead_days,
+                self.config.label,
+                self.config.use_mobility, 
+                logger=self.log)
+            gbm_outputs = outputs
         # numpy default dtype is float64, but torch default dtype is float32
         self.day_inputs = day_inputs
         self.outputs = outputs
@@ -256,7 +271,6 @@ class RNNTask(BasePytorchTask):
         input_day, y_gbm, y = inputs
         forecast_length = y.size()[-1]
         y_hat = self.model(input_day, g)
-
         if self.config.use_gbm:
             y_hat += y_gbm
 
@@ -329,14 +343,14 @@ class RNNTask(BasePytorchTask):
         pred = pred.groupby(['row_idx', 'node_idx','forecast_idx']).mean()
         label = label.groupby(['row_idx', 'node_idx', 'forecast_idx']).mean()
 
-        loss = np.mean(np.abs(pred.values - label.values))
-        sf_score = self.produce_sf_score(pred, label, dates)
+        loss = np.mean(np.abs(pred['val'].values - label['val'].values))
+        scores = self.produce_score(pred, label, dates)
 
         log_dict = {
             '{}_loss'.format(tag): loss,
-            '{}_total_mistakes'.format(tag): sf_score['total_mistakes'],
-            '{}_total_label'.format(tag): sf_score['total_label'],
-            '{}_total_predict'.format(tag): sf_score['total_predict']
+            '{}_total_mistakes'.format(tag): scores['total_mistakes'],
+            '{}_total_label'.format(tag): scores['total_label'],
+            '{}_total_predict'.format(tag): scores['total_predict']
         }
 
         out = {
@@ -345,21 +359,23 @@ class RNNTask(BasePytorchTask):
             VAL_SCORE_KEY: -loss,
             'pred': pred,
             'label': label,
-            'sf_score': sf_score,
+            'sf_score': scores,
         }
 
         return out
 
-    def produce_sf_score(self, pred, label, dates=None):
+    def produce_score(self, pred, label, dates=None):
         y_hat = pred.apply(lambda x: np.expm1(x))
         y = label.apply(lambda x: np.expm1(x))
         mape_metric = np.abs((y_hat+1)/(y+1)-1).reset_index(drop=False)
+
         total_mistakes = np.abs(y_hat.values - y.values).sum()
         total_label = np.abs(y.values).sum()
-        total_predict = np.abs(y_hat.values).sum()
+        total_predict = np.abs(y.values).sum()
         eval_df = pd.concat([y_hat.rename(columns={'val': 'pred'}),
                              y.rename(columns={'val': 'label'})],
                             axis=1).reset_index(drop=False)
+
         eval_df['mape'] = mape_metric['val']
         if dates is not None:
             eval_df['date'] = eval_df.row_idx.map(lambda x: dates[x])
@@ -372,16 +388,16 @@ class RNNTask(BasePytorchTask):
             res['mistake'] = np.abs(m_df['pred'] - m_df['label']).sum()
             return res
 
-        sf_score = {'total_mistakes':total_mistakes,'total_label':total_label,'total_predict':total_predict}
+        scores = {'total_mistakes':total_mistakes,'total_label':total_label,'total_predict':total_predict}
         for name, metric in [
             ('mistakes', eval_df),
         ]:
-            sf_score[name] = metric.groupby(
+            scores[name] = metric.groupby(
                 'row_idx').apply(produce_percent_count)
             if dates is not None:
-                sf_score[name]['date'] = dates
+                scores[name]['date'] = dates
 
-        return sf_score
+        return scores
 
     def val_step(self, batch, batch_idx):
         return self.eval_step(batch, batch_idx, 'val')

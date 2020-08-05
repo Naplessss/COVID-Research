@@ -4,15 +4,18 @@ import torch
 from torch import nn
 import os
 
-def raw_data_preprocessing():
+def raw_data_preprocessing(data_fp='../data/daily_mobility.csv'):
 
     # data link
     # mobility https://github.com/midas-network/COVID-19/tree/master/data/mobility/global/google_mobility
     # time series https://github.com/CSSEGISandData/COVID-19
-    mobility = pd.read_csv('../mobility/Global_Mobility_Report_20200721.csv')
-    daily_confirmed = pd.read_csv('../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv')
-    daily_deaths = pd.read_csv('../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv')
-    daily_recovered = pd.read_csv('../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv')
+
+    mobility_dir = '/home/zhgao/COVID19/mobility'
+    ts_dir = '/home/zhgao/COVID19/COVID-19'
+    mobility = pd.read_csv(os.path.join(mobility_dir, 'Global_Mobility_Report_20200728.csv'))
+    daily_confirmed = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'))
+    daily_deaths = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'))
+    daily_recovered = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv'))
     daily_features = [item for item in daily_confirmed.columns if item not in ['Province/State', 'Country/Region', 'Lat', 'Long']]
 
 
@@ -37,10 +40,15 @@ def raw_data_preprocessing():
                                                                                                                 0:'recovered'},
                                                                                                                 axis=1).groupby(['Country/Region','date'])['recovered'].sum().reset_index()  
 
-    daily_confirmed['confirmed'] = np.log1p(daily_confirmed.rolling(7,axis=1)['confirmed'].mean())
-    daily_deaths['deaths'] = np.log1p(daily_deaths.rolling(7,axis=1)['deaths'].mean())
-    daily_recovered['recovered'] = np.log1p(daily_recovered.rolling(7,axis=1)['recovered'].mean()) 
+    ## weekly rolling mean for confirmed, deaths, recovered
+    daily_confirmed['confirmed_rolling'] = np.log1p(daily_confirmed.groupby('Country/Region').apply(lambda x:x.rolling(7,axis=1)['confirmed'].mean()).values)
+    daily_deaths['deaths_rolling'] = np.log1p(daily_deaths.groupby('Country/Region').apply(lambda x:x.rolling(7,axis=1)['deaths'].mean()).values)
+    daily_recovered['recovered_rolling'] = np.log1p(daily_recovered.groupby('Country/Region').apply(lambda x:x.rolling(7,axis=1)['recovered'].mean()).values) 
 
+    daily_confirmed['confirmed'] = np.log1p(daily_confirmed['confirmed'])
+    daily_deaths['deaths'] = np.log1p(daily_deaths['deaths'])
+    daily_recovered['recovered'] = np.log1p(daily_recovered['recovered'])
+   
     daily_ts = pd.merge(daily_confirmed, daily_deaths, on=['Country/Region','date'],how='left')
     daily_ts = pd.merge(daily_ts, daily_recovered, on=['Country/Region','date'],how='left')    
     mobility_features = ['retail_and_recreation_percent_change_from_baseline',
@@ -63,11 +71,12 @@ def raw_data_preprocessing():
     daily_ts['date'] = pd.to_datetime(daily_ts.date)
 
     df = pd.merge(mobility, daily_ts, on=['Country/Region','date'], how='left')
+    df = df.fillna(0.0)
 
-    df.to_csv('../data/daily_mobility.csv',index=False,header=True)
+    df.to_csv(data_fp, index=False, header=True)
 
 
-def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days, logger=print):
+def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days, label='confirmed', use_mobility=False, logger=print):
     logger('Load Data from ' + data_fp)
     logger('lookback_days={}, lookahead_days={}, '.format(
         lookback_days, lookahead_days))
@@ -80,16 +89,20 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
     dates = data['date'].unique()
 
     countries = data['Country/Region'].unique()
+
     use_features = [
-        'retail_and_recreation_percent_change_from_baseline',
+       'retail_and_recreation_percent_change_from_baseline',
        'grocery_and_pharmacy_percent_change_from_baseline',
        'parks_percent_change_from_baseline',
        'transit_stations_percent_change_from_baseline',
        'workplaces_percent_change_from_baseline',
-       'residential_percent_change_from_baseline', 'confirmed', 'deaths',
-       'recovered',
-       'weekday']
-    use_features = ['confirmed', 'deaths','recovered','weekday']
+       'residential_percent_change_from_baseline', 
+       'confirmed_rolling', 'deaths_rolling','recovered_rolling',
+       'confirmed', 'deaths','recovered','weekday']
+    if not use_mobility:
+        use_features = [
+       'confirmed_rolling', 'deaths_rolling','recovered_rolling',
+       'confirmed', 'deaths','recovered','weekday']
 
     df = pd.DataFrame(index=pd.MultiIndex.from_product([countries, dates],
                       names=['Country/Region','date'])).reset_index()
@@ -99,17 +112,24 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
     
     day_inputs = []
     outputs = []
+    label2idx = {
+        'confirmed':-4,
+        'deaths':-3,
+        'recovered':-2
+    }
+    label_idx = label2idx.get(label, -4)
     for day_idx in range(lookback_days, len(dates) - lookahead_days):
-        day_input = df[:, day_idx-lookback_days:day_idx].copy()
-        output = df[:, day_idx:day_idx + lookahead_days,-4].copy()            # confirmed, deaths, recovered
+        day_input = df[:, day_idx-lookback_days:day_idx, :].copy()
+        output = df[:, day_idx:day_idx + lookahead_days, label_idx].copy()            
 
         day_inputs.append(day_input)
         outputs.append(output)
     
     # [num_samples, num_nodes, lookback_days, day_feature_dim]
     day_inputs = np.stack(day_inputs, axis=0)
-    # [num_samples, num_nodes, 3]ies
+    # [num_samples, num_nodes]
     outputs = np.stack(outputs, axis=0)
+
     day_inputs = torch.from_numpy(day_inputs).float()
     outputs = torch.from_numpy(outputs).float()
     A = torch.ones(len(countries),len(countries)).to_sparse()
@@ -142,3 +162,7 @@ class ExpL1Loss(nn.Module):
         input = torch.expm1(input)
         target = torch.expm1(target)
         return F.l1_loss(input, target, reduction=self.reduction) 
+
+
+if __name__ == "__main__":
+    raw_data_preprocessing()
