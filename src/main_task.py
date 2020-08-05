@@ -94,6 +94,7 @@ class WrapperNet(nn.Module):
         # self.net = Model(config)
         if self.config.model_type == 'krnn':
             self.net = KRNNModel(config)
+        elif self.config.model_type == 'nbeats':
             self.net = NBeatsModel(config)
         elif self.config.model_type == 'sandwich':
             self.net = SandwichModel(config)
