@@ -93,12 +93,9 @@ class KRNNModel(nn.Module):
 
         self.config = config
 
-        self.month_em = nn.Embedding(12, config.date_emb_dim)
-        self.day_em = nn.Embedding(31, config.date_emb_dim)
         self.week_em = nn.Embedding(7, config.date_emb_dim)
 
-        day_input_dim = config.day_fea_dim + 3 * (config.date_emb_dim - 1)
-        hour_input_dim = config.hour_fea_dim
+        day_input_dim = config.day_fea_dim + (config.date_emb_dim - 1)
 
         self.day_encoder = CNNKRNNEncoder(day_input_dim,
                                           config.cnn_dim,
@@ -106,34 +103,19 @@ class KRNNModel(nn.Module):
                                           config.rnn_dim,
                                           config.num_nodes,
                                           config.rnn_dups)
-        self.hour_encoder = CNNKRNNEncoder(hour_input_dim,
-                                           config.cnn_dim,
-                                           config.cnn_kernel_size,
-                                           config.rnn_dim,
-                                           config.num_nodes,
-                                           config.rnn_dups)
 
-        self.out_fc = nn.Linear(config.rnn_dim * 2, 1)
+        self.out_fc = nn.Linear(config.rnn_dim, config.lookahead_days)
 
     def add_date_embed(self, input_day):
-        # last 3 dims correspond to month, day, weekday
-        x = input_day[:, :, :, :-3]
-        month = self.month_em(input_day[:, :, :, -3].long())
-        day = self.day_em(input_day[:, :, :, -2].long())
+        x = input_day[:, :, :, :-1]
         weekday = self.week_em(input_day[:, :, :, -1].long())
 
-        return torch.cat([x, month, day, weekday], dim=-1)
+        return torch.cat([x, weekday], dim=-1)
 
-    def forward(self, input_day, input_hour, g):
+    def forward(self, input_day, g):
         input_day = self.add_date_embed(input_day)
-
         day_encode = self.day_encoder(input_day, g['cent_n_id'])
-        hour_encode = self.hour_encoder(input_hour, g['cent_n_id'])
-
         day_pool, _ = day_encode.max(dim=2)
-        hour_pool, _ = hour_encode.max(dim=2)
-
-        out = torch.cat([day_pool, hour_pool], dim=-1)
-        out = self.out_fc(out).squeeze(dim=-1)
+        out = self.out_fc(day_pool)
 
         return out

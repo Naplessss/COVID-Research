@@ -24,6 +24,7 @@ from dataset import SAINTDataset, SimpleDataset
 from utils import load_data, load_npz_data, ExpL1Loss
 from n_beats import NBeatsModel
 from sandwich import SandwichModel
+from krnn import KRNNModel
 
 class RNNConfig(BaseConfig):
     def __init__(self):
