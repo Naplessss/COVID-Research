@@ -41,7 +41,7 @@ class RNNConfig(BaseConfig):
         # the number of days before the current day for hourly series
         self.lookahead_days = 1
         # at the last day, features within those hours behind this threshold will be removed
-        self.data_split_ratio = '7:7'  # time slots of val and test sets
+        self.data_split_ratio = '14:14'  # time slots of val and test sets
         self.label = 'confirmed'
         self.use_mobility = False
 
@@ -111,8 +111,8 @@ class WrapperNet(nn.Module):
                 'Unsupported model type {}'.format(config.model_type))
 
         if config.use_lr:
-            self.weight_lr = nn.Parameter(torch.Tensor(self.config.lookback_days, 1))
-            self.b_lr = nn.Parameter(torch.Tensor([0.0]))
+            self.weight_lr = nn.Parameter(torch.Tensor(self.config.lookback_days, self.config.lookahead_days))
+            self.b_lr = nn.Parameter(torch.Tensor([0.0] * self.config.lookahead_days))
             self.reset_parameters()  
 
 
@@ -359,7 +359,7 @@ class RNNTask(BasePytorchTask):
         out = {
             BAR_KEY: log_dict,
             SCALAR_LOG_KEY: log_dict,
-            VAL_SCORE_KEY: -loss,
+            VAL_SCORE_KEY: -scores['total_mistakes'],
             'pred': pred,
             'label': label,
             'sf_score': scores,
