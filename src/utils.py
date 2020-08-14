@@ -107,9 +107,9 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv'):
                                                                                                                 axis=1).groupby(['Province_State','date'])['recovered'].sum().reset_index()  
 
     ## weekly rolling mean for confirmed, deaths, recovered
-    daily_confirmed['confirmed_rolling'] = np.log1p(daily_confirmed.groupby('Province_State').apply(lambda x:x.rolling(7,axis=1)['confirmed'].mean()).values)
-    daily_deaths['deaths_rolling'] = np.log1p(daily_deaths.groupby('Province_State').apply(lambda x:x.rolling(7,axis=1)['deaths'].mean()).values)
-    daily_recovered['recovered_rolling'] = np.log1p(daily_recovered.groupby('Province_State').apply(lambda x:x.rolling(7,axis=1)['recovered'].mean()).values) 
+    daily_confirmed['confirmed_rolling'] = np.log1p(daily_confirmed.groupby('Province_State').apply(lambda x:x.rolling(7,axis=1)['confirmed'].sum()).values)
+    daily_deaths['deaths_rolling'] = np.log1p(daily_deaths.groupby('Province_State').apply(lambda x:x.rolling(7,axis=1)['deaths'].sum()).values)
+    daily_recovered['recovered_rolling'] = np.log1p(daily_recovered.groupby('Province_State').apply(lambda x:x.rolling(7,axis=1)['recovered'].sum()).values) 
 
     daily_confirmed['confirmed'] = np.log1p(daily_confirmed['confirmed'])
     daily_deaths['deaths'] = np.log1p(daily_deaths['deaths'])
@@ -192,7 +192,7 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
     
     # [num_samples, num_nodes, lookback_days, day_feature_dim]
     day_inputs = np.stack(day_inputs, axis=0)
-    # [num_samples, num_nodes]
+    # [num_samples, num_nodes, lookahead_days]
     outputs = np.stack(outputs, axis=0)
 
     day_inputs = torch.from_numpy(day_inputs).float()
