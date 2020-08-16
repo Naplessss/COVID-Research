@@ -36,14 +36,15 @@ class RNNConfig(BaseConfig):
         # for data loading
         self.data_fp = '../data/gbm_dataset.npz'
         self.start_date = '2020-04-01'
-        self.min_peak_size = 1000  # min peak confirmed cases selected by country level
+        self.min_peak_size = -1  # min peak confirmed cases selected by country level
         self.lookback_days = 14  # the number of days before the current day for daily series
         # the number of days before the current day for hourly series
         self.lookahead_days = 1
         # at the last day, features within those hours behind this threshold will be removed
-        self.data_split_ratio = '14:14'  # time slots of val and test sets
-        self.label = 'confirmed'
-        self.use_mobility = False
+        self.forecast_date = '2020-06-29'
+        self.horizon = 7
+        self.label = 'deaths_target'
+        self.use_mobility = True
 
         self.model_type = 'krnn'  # choices: krnn, sandwich, nbeats
         self.saint_batch_size = 500
@@ -95,9 +96,9 @@ class WrapperNet(nn.Module):
 
         self.config = config
         self.label2idx = {
-        'confirmed':-4,
-        'deaths':-3,
-        'recovered':-2
+        'confirmed_target':-3,
+        'deaths_target':-2,
+        'recovered_target':-1
         }
         # self.net = Model(config)
         if self.config.model_type == 'krnn':
@@ -119,9 +120,9 @@ class WrapperNet(nn.Module):
     def lr(self, input_day):
         sz = input_day.size()
         # print(sz)
-        label_idx = self.label2idx.get(self.config.label,-4)
+        label_idx = self.label2idx.get(self.config.label,-1)
         ts = torch.expm1(input_day[:,:,:,label_idx])     # label ts
-        pred = torch.matmul(ts, torch.sigmoid(self.weight_lr)) + self.b_lr 
+        pred = torch.matmul(ts, torch.softmax(self.weight_lr, dim=0)) + self.b_lr 
         pred = torch.log1p(pred)
         pred = pred.view(sz[0],sz[1],self.config.lookahead_days)
         return pred
@@ -180,26 +181,25 @@ class RNNTask(BasePytorchTask):
         self.config.day_fea_dim = self.day_inputs.shape[3]
         self.config.edge_fea_dim = self.edge_attr.shape[1]
 
-        # train, val, test division
-        val_days, test_days = \
-            [int(x) for x in self.config.data_split_ratio.split(':')]
-        train_divi = -(val_days + test_days)
-        val_divi = -(test_days)
+        train_dates = [pd.to_datetime(item) for item in dates if pd.to_datetime(item)<pd.to_datetime(self.config.forecast_date)]
+        test_divi = len(train_dates)
+        val_divi = test_divi - self.config.horizon
+        train_divi = val_divi - 1
 
         self.train_day_inputs = self.day_inputs[:train_divi]
         self.train_gbm_outputs = self.gbm_outputs[:train_divi]
         self.train_outputs = self.outputs[:train_divi]
         self.train_dates = self.dates[:train_divi]
 
-        self.val_day_inputs = self.day_inputs[train_divi:val_divi]
-        self.val_gbm_outputs = self.gbm_outputs[train_divi:val_divi]
-        self.val_outputs = self.outputs[train_divi:val_divi]
-        self.val_dates = self.dates[train_divi:val_divi]
+        self.val_day_inputs = self.day_inputs[val_divi:val_divi+1]
+        self.val_gbm_outputs = self.gbm_outputs[val_divi:val_divi+1]
+        self.val_outputs = self.outputs[val_divi:val_divi+1]
+        self.val_dates = self.dates[val_divi:val_divi+1]
 
-        self.test_day_inputs = self.day_inputs[val_divi:]
-        self.test_gbm_outputs = self.gbm_outputs[val_divi:]
-        self.test_outputs = self.outputs[val_divi:]
-        self.test_dates = self.dates[val_divi:]
+        self.test_day_inputs = self.day_inputs[test_divi:test_divi+1]
+        self.test_gbm_outputs = self.gbm_outputs[test_divi:test_divi+1]
+        self.test_outputs = self.outputs[test_divi:test_divi+1]
+        self.test_dates = self.dates[test_divi:test_divi+1]
 
     def make_sample_dataloader(self, day_inputs, gbm_outputs, outputs, shuffle=False):
         if self.config.use_saintdataset:
