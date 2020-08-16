@@ -203,9 +203,9 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
     outputs = []
     label_dates = []
     label2idx = {
-        'confirmed_target':-7,
-        'deaths_target':-6,
-        'recovered_target':-5
+        'confirmed_target':-3,
+        'deaths_target':-2,
+        'recovered_target':-1
     }
     label_idx = label2idx.get(label, -2)
     for day_idx in range(lookback_days, len(dates) - lookahead_days):

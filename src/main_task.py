@@ -120,7 +120,7 @@ class WrapperNet(nn.Module):
     def lr(self, input_day):
         sz = input_day.size()
         # print(sz)
-        label_idx = self.label2idx.get(self.config.label,-2)
+        label_idx = self.label2idx.get(self.config.label,-3)
         ts = torch.expm1(input_day[:,:,:,label_idx])     # label ts
         pred = torch.matmul(ts, torch.softmax(self.weight_lr, dim=0)) + self.b_lr 
         pred = torch.log1p(pred)
