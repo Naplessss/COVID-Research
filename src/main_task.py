@@ -96,9 +96,9 @@ class WrapperNet(nn.Module):
 
         self.config = config
         self.label2idx = {
-        'confirmed_target':-3,
-        'deaths_target':-2,
-        'recovered_target':-1
+        'confirmed_target':-4,
+        'deaths_target':-3,
+        'recovered_target':-2
         }
         # self.net = Model(config)
         if self.config.model_type == 'krnn':
@@ -120,7 +120,7 @@ class WrapperNet(nn.Module):
     def lr(self, input_day):
         sz = input_day.size()
         # print(sz)
-        label_idx = self.label2idx.get(self.config.label,-1)
+        label_idx = self.label2idx.get(self.config.label,-2)
         ts = torch.expm1(input_day[:,:,:,label_idx])     # label ts
         pred = torch.matmul(ts, torch.softmax(self.weight_lr, dim=0)) + self.b_lr 
         pred = torch.log1p(pred)
@@ -185,6 +185,8 @@ class RNNTask(BasePytorchTask):
         test_divi = len(train_dates)
         val_divi = test_divi - self.config.horizon
         train_divi = val_divi - 1
+        print(train_divi,val_divi,test_divi)
+        print(dates[train_divi],dates[val_divi],dates[test_divi])
 
         self.train_day_inputs = self.day_inputs[:train_divi]
         self.train_gbm_outputs = self.gbm_outputs[:train_divi]

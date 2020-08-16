@@ -180,12 +180,14 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
        'transit_stations_percent_change_from_baseline',
        'workplaces_percent_change_from_baseline',
        'residential_percent_change_from_baseline', 
-       'confirmed', 'deaths','recovered','weekday',
-       'confirmed_rolling', 'deaths_rolling','recovered_rolling']
+       'confirmed', 'deaths','recovered',
+       'confirmed_rolling', 'deaths_rolling','recovered_rolling',
+       'weekday']
     if not use_mobility:
         use_features = [
+       'confirmed', 'deaths','recovered',
        'confirmed_rolling', 'deaths_rolling','recovered_rolling',
-       'confirmed', 'deaths','recovered','weekday']
+       'weekday']
     
     target_features = [
         'confirmed_target','deaths_target','recovered_target'
@@ -201,9 +203,9 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
     outputs = []
     label_dates = []
     label2idx = {
-        'confirmed_target':-3,
-        'deaths_target':-2,
-        'recovered_target':-1
+        'confirmed_target':-7,
+        'deaths_target':-6,
+        'recovered_target':-5
     }
     label_idx = label2idx.get(label, -2)
     for day_idx in range(lookback_days, len(dates) - lookahead_days):
