@@ -116,9 +116,9 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7
     daily_recovered = daily_recovered.sort_values(['Province_State','date'])
     
     # feature engineering: weekly rolling mean for confirmed, deaths, recovered
-    daily_confirmed['confirmed_rolling'] = np.log1p(daily_confirmed.groupby('Province_State')['confirmed'].apply(lambda x:x.rolling(7).sum()))
-    daily_deaths['deaths_rolling'] = np.log1p(daily_deaths.groupby('Province_State')['deaths'].apply(lambda x:x.rolling(7).sum()))
-    daily_recovered['recovered_rolling'] = np.log1p(daily_recovered.groupby('Province_State')['recovered'].apply(lambda x:x.rolling(7).sum()))
+    daily_confirmed['confirmed_rolling'] = np.log1p(daily_confirmed.groupby('Province_State')['confirmed'].apply(lambda x:x.rolling(horizon).sum()))
+    daily_deaths['deaths_rolling'] = np.log1p(daily_deaths.groupby('Province_State')['deaths'].apply(lambda x:x.rolling(horizon).sum()))
+    daily_recovered['recovered_rolling'] = np.log1p(daily_recovered.groupby('Province_State')['recovered'].apply(lambda x:x.rolling(horizon).sum()))
 
     # target, we need to forecast the cumsum of next horizon days.
     daily_confirmed['confirmed_target'] = np.log1p(daily_confirmed.groupby('Province_State')['confirmed'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
@@ -267,4 +267,4 @@ class ExpL1Loss(nn.Module):
 
 if __name__ == "__main__":
     # raw_data_preprocessing()
-    raw_data_preprocessing_US()
+    raw_data_preprocessing_US(horizon=14)
