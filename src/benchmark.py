@@ -9,7 +9,8 @@ warnings.filterwarnings(action='ignore')
 
 def get_benchmark(model_dir, model_name, location2name, target='1 wk ahead cum death'):
     baseline_fps = os.listdir(os.path.join(baseline_dir, baseline_name))
-    baseline_fps = [item for item in baseline_fps if not item.startswith('metadata')]
+    baseline_fps = [item for item in baseline_fps if not (item.startswith('metadata') or item.endswith('.txt'))]
+    horizon = 7 * int(target.split()[0])
     if len(baseline_fps)==0:
         return -1
     for i,_fp in enumerate(baseline_fps):
@@ -17,7 +18,7 @@ def get_benchmark(model_dir, model_name, location2name, target='1 wk ahead cum d
         tmp = tmp[tmp['type']=='point'][tmp['target']==target]
         tmp['region'] = tmp.location.map(location2name)
         tmp = tmp[tmp.region!='US'][['forecast_date','target_end_date','value','region']]
-        tmp['target_start_date'] = pd.to_datetime(tmp['target_end_date']) - datetime.timedelta(days=6)
+        tmp['target_start_date'] = pd.to_datetime(tmp['target_end_date']) - datetime.timedelta(days=horizon-1)
         tmp['target_end_date'] = pd.to_datetime(tmp['target_end_date'])
         if i==0:
             df = tmp.copy()
@@ -53,7 +54,7 @@ def get_label(death_fp, target_start_date, horizon=7):
     deaths[ts_features] = deaths[ts_features].mask(deaths[ts_features]<0,0)
     deaths_us = deaths.groupby('Province_State')[ts_features].sum().diff(axis=1).T
     deaths_us.index = pd.to_datetime(deaths_us.index)
-    use_index = pd.date_range(target_start_date,freq='D',periods=horizon)
+    use_index = pd.date_range(start=target_start_date,freq='D',periods=horizon)
     deaths_us = deaths_us.loc[use_index]
     deaths_us['target_start_date'] = pd.to_datetime(use_index[0])
     deaths_us['target_end_date'] = pd.to_datetime(use_index[-1])
@@ -91,14 +92,16 @@ if __name__ == "__main__":
     location2name = dict(zip(location['location'],location['location_name']))   
 
     
-    # sunday date of a epidemiological week
-    target_start_date = '2020-06-28'
-    model_fp = '/home/zhgao/COVID-Research/US_sandwich_7_{}'.format('_'.join(target_start_date.split('-')[-2:]))
+    # epidemiological week start date: should be sunday of a specific week
+    target_start_date = '2020-07-12'
+    horizon = 14
+    model_fp = '/home/zhgao/COVID-Research/US_sandwich_{}_{}'.format(horizon,'_'.join(target_start_date.split('-')[-2:]))
     res_test = get_model_predict(model_fp)
 
-    gt = get_label(death_fp, target_start_date, horizon=7)
-    pred = get_benchmark(baseline_dir, baseline_name, location2name) 
+    gt = get_label(death_fp, target_start_date, horizon=horizon)
+    pred = get_benchmark(baseline_dir, baseline_name, location2name, '2 wk ahead cum death') 
     pred = pd.merge(gt, pred, on=['target_start_date','region'], how='inner')
+    print(pred.head())
     print("{}_MAE: ".format(baseline_name), np.abs(pred['value'] - pred['cum_label']).mean())
     print("MAE: ", np.abs(res_test['pred'] - res_test['label']).mean())
     print(pred.head())
