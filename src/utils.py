@@ -1,5 +1,6 @@
 import pandas as pd 
 import numpy as np
+import datetime 
 import torch
 from torch import nn
 import os
@@ -114,11 +115,12 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7
     daily_deaths = daily_deaths.sort_values(['Province_State','date'])
     daily_recovered = daily_recovered.sort_values(['Province_State','date'])
     
-    ## weekly rolling mean for confirmed, deaths, recovered
+    # feature engineering: weekly rolling mean for confirmed, deaths, recovered
     daily_confirmed['confirmed_rolling'] = np.log1p(daily_confirmed.groupby('Province_State')['confirmed'].apply(lambda x:x.rolling(7).sum()))
     daily_deaths['deaths_rolling'] = np.log1p(daily_deaths.groupby('Province_State')['deaths'].apply(lambda x:x.rolling(7).sum()))
     daily_recovered['recovered_rolling'] = np.log1p(daily_recovered.groupby('Province_State')['recovered'].apply(lambda x:x.rolling(7).sum()))
 
+    # target, we need to forecast the cumsum of next horizon days.
     daily_confirmed['confirmed_target'] = np.log1p(daily_confirmed.groupby('Province_State')['confirmed'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
     daily_deaths['deaths_target'] = np.log1p(daily_deaths.groupby('Province_State')['deaths'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
     daily_recovered['recovered_target'] = np.log1p(daily_recovered.groupby('Province_State')['recovered'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
@@ -155,7 +157,8 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7
     df = pd.merge(mobility, daily_ts, on=['Country/Region','date'], how='left')
     df = df.fillna(0.0)
 
-    df.to_csv(data_fp, index=False, header=True)
+    save_fp = '.'.join(data_fp.split('.')[:-1]) + '_' + str(horizon) + '.csv'
+    df.to_csv(save_fp, index=False, header=True)
 
 
 def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days, label='deaths_target', use_mobility=True, logger=print):
@@ -170,7 +173,6 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
     data = data[data['Country/Region'].isin(use_countries)].reset_index(drop=True)
     data['weekday'] = data['date'].map(lambda x:x.weekday())
     dates = data['date'].unique()
-
     countries = data['Country/Region'].unique()
 
     use_features = [
@@ -197,8 +199,12 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
                       names=['Country/Region','date'])).reset_index()
     
     df = pd.merge(df, data, on=['Country/Region','date'], how='left').fillna(0.0)
-    df = df[use_features + target_features].values.reshape(len(countries), len(dates), -1)
+    df = df[use_features + target_features].values.reshape(len(countries), len(dates), len(use_features)+len(target_features))
     
+    # need to add the actually forecast day
+    dates = list(dates)
+    dates.append(datetime.timedelta(days=1) + pd.to_datetime(dates[-1]))
+    dates = list(map(lambda x: pd.to_datetime(x), dates))
     day_inputs = []
     outputs = []
     label_dates = []
@@ -208,9 +214,13 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
         'recovered_target':-1
     }
     label_idx = label2idx.get(label, -2)
-    for day_idx in range(lookback_days, len(dates) - lookahead_days):
+    for day_idx in range(lookback_days, len(dates) - 1):
         day_input = df[:, day_idx-lookback_days:day_idx, :-3].copy()
-        output = df[:, day_idx:day_idx + 1, label_idx].copy()            
+        if day_idx == (len(dates) - 1):
+            # because we can not achieve future date label, just use the last day as placeholder.
+            output = df[:, day_idx -1:day_idx, label_idx].copy()
+        else:
+            output = df[:, day_idx:day_idx + 1, label_idx].copy()            
 
         day_inputs.append(day_input)
         outputs.append(output)

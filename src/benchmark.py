@@ -42,19 +42,35 @@ def get_label(death_fp,forecast_date,horizon=7):
     
     return deaths_us
 
+def get_model_predict(model_fp):
+    test = torch.load(os.path.join(model_fp,'Output','test.out.cpt'))
+    res_test = pd.DataFrame({'pred':np.expm1(test['pred']['val'].values),
+              'label':np.expm1(test['label']['val']).values,
+              'forecast_idx':test['label'].reset_index()['forecast_idx'].values,
+              'countries':test['countries'],
+              'dates':test['dates']})    
+    return res_test
+
 if __name__ == "__main__":
     # benchmark link: https://github.com/reichlab/covid19-forecast-hub
-    model_dir = '/home/zhgao/COVID-Research/covid19-forecast-hub/data-processed'
-    model_name = 'UT-Mobility'
+    baseline_dir = '/home/zhgao/COVID-Research/covid19-forecast-hub/data-processed'
+    baseline_name = 'UT-Mobility'
     forecast_date = '2020-06-08'
     location_fp = '/home/zhgao/COVID-Research/covid19-forecast-hub/data-locations/locations.csv'
     death_fp ='/home/zhgao/COVID19/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv'
     location = pd.read_csv(location_fp)
-    location2name = dict(zip(location['location'],location['location_name']))    
+    location2name = dict(zip(location['location'],location['location_name']))   
+
+    model_fp = '/home/zhgao/COVID-Research/US_sandwich_7_6_29'
+    res_test = get_model_predict(model_fp)
 
     gt = get_label(death_fp, forecast_date, horizon=7)
-    pred = get_benchmark(model_dir, model_name, forecast_date, location2name) 
-    pred = pd.merge(pred,gt, on=['forecast_date','region'], how='left') 
-    print("MAE: ", np.abs(pred['value'] - pred['cum_label']).mean())
+    pred = get_benchmark(baseline_dir, baseline_name, forecast_date, location2name) 
+    pred = pd.merge(pred, gt, on=['forecast_date','region'], how='left') 
+    print("{}_MAE: ".format(baseline_name), np.abs(pred['value'] - pred['cum_label']).mean())
+    print("MAE: ", np.abs(res_test['pred'] - res_test['label']).mean())
     print(pred.head())
+
+
+
 
