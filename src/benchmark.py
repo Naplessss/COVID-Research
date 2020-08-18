@@ -85,7 +85,7 @@ def get_model_predict(model_fp):
 if __name__ == "__main__":
     # benchmark link: https://github.com/reichlab/covid19-forecast-hub
     baseline_dir = '/home/zhgao/COVID-Research/covid19-forecast-hub/data-processed'
-    baseline_name = 'UCLA-SuEIR'
+    baseline_name = 'IHME-CurveFit'
     location_fp = '/home/zhgao/COVID-Research/covid19-forecast-hub/data-locations/locations.csv'
     death_fp ='/home/zhgao/COVID19/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv'
     location = pd.read_csv(location_fp)
@@ -94,17 +94,24 @@ if __name__ == "__main__":
     
     # epidemiological week start date: should be sunday of a specific week
     target_start_date = '2020-07-12'
-    horizon = 14
-    model_fp = '/home/zhgao/COVID-Research/US_sandwich_{}_{}'.format(horizon,'_'.join(target_start_date.split('-')[-2:]))
+    horizon = 7
+    target = '1 wk ahead cum death'
+    model_name = 'sandwich'
+    model_fp = '/home/zhgao/COVID-Research/US_{}_{}_{}'.format(model_name, horizon,'_'.join(target_start_date.split('-')[-2:]))
     res_test = get_model_predict(model_fp)
 
     gt = get_label(death_fp, target_start_date, horizon=horizon)
-    pred = get_benchmark(baseline_dir, baseline_name, location2name, '2 wk ahead cum death') 
+    pred = get_benchmark(baseline_dir, baseline_name, location2name, target) 
     pred = pd.merge(gt, pred, on=['target_start_date','region'], how='inner')
-    print(pred.head())
+    print("{}_MSE: ".format(baseline_name), np.sqrt((np.abs(pred['value'] - pred['cum_label'])**2).mean()))
+    print("MSE: ", np.sqrt((np.abs(res_test['pred'] - res_test['label'])**2).mean()))
+
     print("{}_MAE: ".format(baseline_name), np.abs(pred['value'] - pred['cum_label']).mean())
     print("MAE: ", np.abs(res_test['pred'] - res_test['label']).mean())
+
     print(pred.head())
+    print(res_test.head())
+    print(pred.shape,res_test.shape)
 
 
 

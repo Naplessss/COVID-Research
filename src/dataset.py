@@ -13,7 +13,7 @@ class SAINTDataset(IterableDataset):
     def __init__(self, inputs, edge_index, edge_attr, num_nodes, batch_size,
                  shuffle=False, use_dist_sampler=False, rep_eval=None,
                  saint_sample_type='random_walk', saint_batch_size=100,
-                 saint_walk_length=2, saint_sample_coverage=50, use_saint_norm=True):
+                 saint_walk_length=2, saint_sample_coverage=50, use_saint_norm=False):
         self.inputs = inputs
 
         self.edge_index = edge_index

@@ -68,9 +68,12 @@ class MyGATConv(PyG.MessagePassing):
 
     def message(self, edge_index_i, x_i, x_j, edge_attr, edge_norm):
         x_i = torch.matmul(x_i, self.u)
-        x_j = torch.matmul(x_j, self.v)
-        # gate = torch.sigmoid((x_i * x_j * edge_attr.unsqueeze(dim=1)).sum(dim=-1))
-        gate = torch.sigmoid(x_i * x_j * edge_attr.unsqueeze(dim=1))
+        x_j = torch.matmul(x_j, self.u)
+        # gate = torch.sigmoid((x_i * x_j).sum(dim=-1)).unsqueeze(dim=-1)
+        gate = torch.sigmoid((x_i * x_j).sum(dim=-1)).unsqueeze(dim=-1)
+        self.gate = gate
+        self.x_i = x_i
+        self.x_j = x_j
         msg = x_j * gate
         if edge_norm is None:
             return msg

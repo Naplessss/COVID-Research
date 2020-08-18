@@ -18,13 +18,12 @@ class GBDTConfig(BaseConfig):
         # for data loading
         self.data_fp = '../data/daily_mobility.csv'
         self.start_date = '2020-04-01'
-        self.min_peak_size = 1000
+        self.min_peak_size = -1
         self.lookback_days = 14  # the number of days before the current day for daily series
-        # the number of days before the current day for hourly series
         self.lookahead_days = 1
-        # at the last day, features within those hours behind this threshold will be removed
-        self.data_split_ratio = '7:7'  # time slots of val and test sets
-        self.label = 'confirmed'
+        self.forecast_date = '2020-06-07'
+        self.horizon = 7
+        self.label = 'deaths_target'
         self.use_mobility = False
 
 
@@ -54,14 +53,14 @@ def feature_engineering_raw_data(day_inputs, outputs, dates, ids):
     return df
 
 
-def train_valid_test_split(label_date, data_split_ratio):
-    val_days, test_days = map(int, data_split_ratio.split(':'))
-    dates = pd.to_datetime(label_date)
-    train_datetime,val_datetime,test_datetime = dates[:-(val_days + test_days)],dates[-(val_days + test_days):-(test_days)],dates[-(test_days):]
+def train_valid_test_split(dates, forecast_date, horizon=7):
 
-    train = df[df.datetime.isin(train_datetime)]
-    val = df[df.datetime.isin(val_datetime)]
-    test = df[df.datetime.isin(test_datetime)]
+    forecast_date = pd.to_datetime(forecast_date)
+    val_date = forecast_date - datetime.timedelta(days=horizon+7)
+
+    train = df[df.datetime < val_date]
+    val = df[df.datetime == val_date]
+    test = df[df.datetime > val_date]
 
     return train, val, test
 
@@ -94,7 +93,7 @@ def dump(clf, imp, val, test, config):
     return True
 
 def train_lgb():
-    train, val, test = train_valid_test_split(dates, config.data_split_ratio)
+    train, val, test = train_valid_test_split(dates, config.forecast_date, config.horizon)
     fea_names = [item for item in train.columns if item not in ['datetime','id','label']]
     params = {
           "objective": "regression_l1",  #regression,mape

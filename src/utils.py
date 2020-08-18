@@ -267,4 +267,4 @@ class ExpL1Loss(nn.Module):
 
 if __name__ == "__main__":
     # raw_data_preprocessing()
-    raw_data_preprocessing_US(horizon=14)
+    raw_data_preprocessing_US(horizon=7)

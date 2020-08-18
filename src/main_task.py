@@ -38,9 +38,7 @@ class RNNConfig(BaseConfig):
         self.start_date = '2020-04-01'
         self.min_peak_size = -1  # min peak confirmed cases selected by country level
         self.lookback_days = 14  # the number of days before the current day for daily series
-        # the number of days before the current day for hourly series
         self.lookahead_days = 1
-        # at the last day, features within those hours behind this threshold will be removed
         self.forecast_date = '2020-06-29'
         self.horizon = 7
         self.label = 'deaths_target'
@@ -51,7 +49,7 @@ class RNNConfig(BaseConfig):
         self.saint_sample_type = 'node'
         self.date_emb_dim = 2
 
-        self.use_gbm = True
+        self.use_gbm = False
 
         # for krnn
         self.cnn_dim = 256
@@ -131,10 +129,14 @@ class WrapperNet(nn.Module):
         nn.init.xavier_uniform_(self.weight_lr)
 
     def forward(self, input_day, g):
-        out = self.net(input_day, g)
+        if config.model_type == 'sandwich':
+            out, atten_context = self.net(input_day, g)
+        else:
+            out = self.net(input_day, g)
+            atten_context = None
         if self.config.use_lr:
             out = out + self.lr(input_day)
-        return out
+        return out, atten_context
 
 class RNNTask(BasePytorchTask):
     def __init__(self, config):
@@ -142,7 +144,8 @@ class RNNTask(BasePytorchTask):
         self.log('Intialize {}'.format(self.__class__))
 
         self.init_data()
-        self.loss_func = nn.L1Loss(reduction='none')
+        # self.loss_func = nn.L1Loss(reduction='none')
+        self.loss_func = nn.MSELoss(reduction='none')
         # self.loss_func = ExpL1Loss(reduction='none')
         self.log('Config:\n{}'.format(
             json.dumps(self.config.to_dict(), ensure_ascii=False, indent=4)
@@ -250,7 +253,7 @@ class RNNTask(BasePytorchTask):
         input_day, y_gbm, y = inputs
         if self.config.use_gbm:
             y = y - y_gbm
-        y_hat = self.model(input_day, g)
+        y_hat, _ = self.model(input_day, g)
         assert(y.size() == y_hat.size())
         loss = self.loss_func(y_hat, y)
 
@@ -273,7 +276,7 @@ class RNNTask(BasePytorchTask):
         inputs, g, rows = batch
         input_day, y_gbm, y = inputs
         forecast_length = y.size()[-1]
-        y_hat = self.model(input_day, g)
+        y_hat, atten_context = self.model(input_day, g)
         if self.config.use_gbm:
             y_hat += y_gbm
 
@@ -337,6 +340,7 @@ class RNNTask(BasePytorchTask):
         return {
             'label': label,
             'pred': pred,
+            'atten': atten_context
         }
 
     def eval_epoch_end(self, outputs, tag, dates):
@@ -344,6 +348,7 @@ class RNNTask(BasePytorchTask):
         label = pd.concat([x['label'] for x in outputs], axis=0)
         pred = pred.groupby(['row_idx', 'node_idx','forecast_idx']).mean()
         label = label.groupby(['row_idx', 'node_idx', 'forecast_idx']).mean()
+        atten_context = [x['atten'] for x in outputs]
 
         align_countries = label.reset_index().node_idx.map(lambda x: self.countries[x]).values
         align_dates = label.reset_index().row_idx.map(lambda x: dates[x]).values
@@ -366,7 +371,8 @@ class RNNTask(BasePytorchTask):
             'label': label,
             'sf_score': scores,
             'dates':align_dates,
-            'countries':align_countries
+            'countries':align_countries,
+            'atten': atten_context
         }
 
         return out
