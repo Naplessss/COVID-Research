@@ -85,7 +85,7 @@ def get_model_predict(model_fp):
 if __name__ == "__main__":
     # benchmark link: https://github.com/reichlab/covid19-forecast-hub
     baseline_dir = '/home/zhgao/COVID-Research/covid19-forecast-hub/data-processed'
-    baseline_name = 'IHME-CurveFit'
+    baseline_name = 'GT-DeepCOVID'
     location_fp = '/home/zhgao/COVID-Research/covid19-forecast-hub/data-locations/locations.csv'
     death_fp ='/home/zhgao/COVID19/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv'
     location = pd.read_csv(location_fp)
@@ -93,9 +93,9 @@ if __name__ == "__main__":
 
     
     # epidemiological week start date: should be sunday of a specific week
-    target_start_date = '2020-07-05'
-    horizon = 7
-    target = '1 wk ahead cum death'
+    target_start_date = '2020-07-12'
+    horizon = 14
+    target = '2 wk ahead cum death'
     model_name = 'sandwich'
     model_fp = '/home/zhgao/COVID-Research/US_{}_{}_{}'.format(model_name, horizon,'_'.join(target_start_date.split('-')[-2:]))
     res_test = get_model_predict(model_fp)
