@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
     
     # epidemiological week start date: should be sunday of a specific week
-    target_start_date = '2020-07-12'
+    target_start_date = '2020-07-05'
     horizon = 7
     target = '1 wk ahead cum death'
     model_name = 'sandwich'
@@ -103,6 +103,12 @@ if __name__ == "__main__":
     gt = get_label(death_fp, target_start_date, horizon=horizon)
     pred = get_benchmark(baseline_dir, baseline_name, location2name, target) 
     pred = pd.merge(gt, pred, on=['target_start_date','region'], how='inner')
+
+    states = list(set(pred.region.unique()) & set(res_test.countries.unique())) 
+    print(states)
+    pred = pred[pred.region.isin(states)]
+    res_test = res_test[res_test.countries.isin(states)]
+
     print("{}_MSE: ".format(baseline_name), np.sqrt((np.abs(pred['value'] - pred['cum_label'])**2).mean()))
     print("MSE: ", np.sqrt((np.abs(res_test['pred'] - res_test['label'])**2).mean()))
 
