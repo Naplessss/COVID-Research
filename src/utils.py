@@ -5,7 +5,7 @@ import torch
 from torch import nn
 import os
 
-def raw_data_preprocessing(data_fp='../data/daily_mobility.csv'):
+def raw_data_preprocessing(data_fp='../data/daily_mobility.csv', horizon=7):
 
     # data link
     # mobility https://github.com/midas-network/COVID-19/tree/master/data/mobility/global/google_mobility
@@ -41,10 +41,23 @@ def raw_data_preprocessing(data_fp='../data/daily_mobility.csv'):
                                                                                                                 0:'recovered'},
                                                                                                                 axis=1).groupby(['Country/Region','date'])['recovered'].sum().reset_index()  
 
+    daily_confirmed['date'] = pd.to_datetime(daily_confirmed['date'])
+    daily_deaths['date'] = pd.to_datetime(daily_deaths['date'])
+    daily_recovered['date'] = pd.to_datetime(daily_recovered['date'])
+
+    daily_confirmed = daily_confirmed.sort_values(['Country/Region','date'])
+    daily_deaths = daily_deaths.sort_values(['Country/Region','date'])
+    daily_recovered = daily_recovered.sort_values(['Country/Region','date'])
+
     ## weekly rolling mean for confirmed, deaths, recovered
-    daily_confirmed['confirmed_rolling'] = np.log1p(daily_confirmed.groupby('Country/Region').apply(lambda x:x.rolling(7,axis=1)['confirmed'].mean()).values)
-    daily_deaths['deaths_rolling'] = np.log1p(daily_deaths.groupby('Country/Region').apply(lambda x:x.rolling(7,axis=1)['deaths'].mean()).values)
-    daily_recovered['recovered_rolling'] = np.log1p(daily_recovered.groupby('Country/Region').apply(lambda x:x.rolling(7,axis=1)['recovered'].mean()).values) 
+    daily_confirmed['confirmed_rolling'] = np.log1p(daily_confirmed.groupby('Country/Region').apply(lambda x:x.rolling(horizon, axis=1)['confirmed'].mean()).values)
+    daily_deaths['deaths_rolling'] = np.log1p(daily_deaths.groupby('Country/Region').apply(lambda x:x.rolling(horizon, axis=1)['deaths'].mean()).values)
+    daily_recovered['recovered_rolling'] = np.log1p(daily_recovered.groupby('Country/Region').apply(lambda x:x.rolling(horizon, axis=1)['recovered'].mean()).values) 
+
+    # target, we need to forecast the cumsum of next horizon days.
+    daily_confirmed['confirmed_target'] = np.log1p(daily_confirmed.groupby('Country/Region')['confirmed'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
+    daily_deaths['deaths_target'] = np.log1p(daily_deaths.groupby('Country/Region')['deaths'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
+    daily_recovered['recovered_target'] = np.log1p(daily_recovered.groupby('Country/Region')['recovered'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
 
     daily_confirmed['confirmed'] = np.log1p(daily_confirmed['confirmed'])
     daily_deaths['deaths'] = np.log1p(daily_deaths['deaths'])
@@ -74,7 +87,8 @@ def raw_data_preprocessing(data_fp='../data/daily_mobility.csv'):
     df = pd.merge(mobility, daily_ts, on=['Country/Region','date'], how='left')
     df = df.fillna(0.0)
 
-    df.to_csv(data_fp, index=False, header=True)
+    save_fp = '.'.join(data_fp.split('.')[:-1]) + '_' + str(horizon) + '.csv'
+    df.to_csv(save_fp, index=False, header=True)
 
 def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7):
     mobility_dir = '/home/zhgao/COVID19/mobility'
@@ -214,7 +228,7 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
         'recovered_target':-1
     }
     label_idx = label2idx.get(label, -2)
-    for day_idx in range(lookback_days, len(dates) - 1):
+    for day_idx in range(lookback_days, len(dates)):
         day_input = df[:, day_idx-lookback_days:day_idx, :-3].copy()
         if day_idx == (len(dates) - 1):
             # because we can not achieve future date label, just use the last day as placeholder.
@@ -224,7 +238,7 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
 
         day_inputs.append(day_input)
         outputs.append(output)
-        label_dates.append(dates[day_idx+1])
+        label_dates.append(dates[day_idx])
     
     # [num_samples, num_nodes, lookback_days, day_feature_dim]
     day_inputs = np.stack(day_inputs, axis=0)
@@ -266,5 +280,5 @@ class ExpL1Loss(nn.Module):
 
 
 if __name__ == "__main__":
-    # raw_data_preprocessing()
-    raw_data_preprocessing_US(horizon=7)
+    raw_data_preprocessing(horizon=7)
+    # raw_data_preprocessing_US(horizon=7)
