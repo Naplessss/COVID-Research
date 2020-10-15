@@ -340,7 +340,7 @@ class RNNTask(BasePytorchTask):
         return {
             'label': label,
             'pred': pred,
-            'atten': atten_context
+            # 'atten': atten_context
         }
 
     def eval_epoch_end(self, outputs, tag, dates):
@@ -348,7 +348,7 @@ class RNNTask(BasePytorchTask):
         label = pd.concat([x['label'] for x in outputs], axis=0)
         pred = pred.groupby(['row_idx', 'node_idx','forecast_idx']).mean()
         label = label.groupby(['row_idx', 'node_idx', 'forecast_idx']).mean()
-        atten_context = [x['atten'] for x in outputs]
+        # atten_context = [x['atten'] for x in outputs]
 
         align_countries = label.reset_index().node_idx.map(lambda x: self.countries[x]).values
         align_dates = label.reset_index().row_idx.map(lambda x: dates[x]).values
@@ -372,7 +372,7 @@ class RNNTask(BasePytorchTask):
             'sf_score': scores,
             'dates':align_dates,
             'countries':align_countries,
-            'atten': atten_context
+            # 'atten': atten_context
         }
 
         return out

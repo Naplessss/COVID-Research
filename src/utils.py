@@ -5,7 +5,7 @@ import torch
 from torch import nn
 import os
 
-def raw_data_preprocessing(data_fp='../data/daily_mobility.csv', horizon=7):
+def raw_data_preprocessing(data_fp='../data/daily_mobility.csv', horizon=7, only_china=False):
 
     # data link
     # mobility https://github.com/midas-network/COVID-19/tree/master/data/mobility/global/google_mobility
@@ -13,20 +13,28 @@ def raw_data_preprocessing(data_fp='../data/daily_mobility.csv', horizon=7):
 
     mobility_dir = '/home/zhgao/COVID19/mobility'
     ts_dir = '/home/zhgao/COVID19/COVID-19'
-    mobility = pd.read_csv(os.path.join(mobility_dir, 'Global_Mobility_Report_20200728.csv'))
+    mobility = pd.read_csv(os.path.join(mobility_dir, 'Global_Mobility_Report_20201006.csv'))
     daily_confirmed = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv'))
     daily_deaths = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv'))
     daily_recovered = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv'))
-    daily_features = [item for item in daily_confirmed.columns if item not in ['Province/State', 'Country/Region', 'Lat', 'Long']]
+    daily_features = [item for item in daily_confirmed.columns if item not in ['UID', 'iso2', 'iso3', 'code3', 'FIPS', 'Admin2', 'Province_State',
+        'Country_Region', 'Lat', 'Long_', 'Combined_Key', 'Country/Region', 'Province/State']]
 
+    if only_china:
+        daily_confirmed = daily_confirmed[daily_confirmed['Country/Region']=='China']
+        daily_deaths = daily_deaths[daily_deaths['Country/Region']=='China']
+        daily_recovered = daily_recovered[daily_recovered['Country/Region']=='China']
+        daily_confirmed['Country/Region'] = daily_confirmed['Province/State']
+        daily_deaths['Country/Region'] = daily_deaths['Province/State']
+        daily_recovered['Country/Region'] = daily_recovered['Province/State']
 
     daily_confirmed[daily_features] = daily_confirmed[daily_features].diff(axis=1)
     daily_deaths[daily_features] = daily_deaths[daily_features].diff(axis=1)
     daily_recovered[daily_features] = daily_recovered[daily_features].diff(axis=1)
 
-    daily_confirmed[daily_features] = daily_confirmed[daily_features].mask(daily_confirmed[daily_features]<0,0)
-    daily_deaths[daily_features] = daily_deaths[daily_features].mask(daily_deaths[daily_features]<0,0)
-    daily_recovered[daily_features] = daily_recovered[daily_features].mask(daily_recovered[daily_features]<0,0)      
+    # daily_confirmed[daily_features] = daily_confirmed[daily_features].mask(daily_confirmed[daily_features]<0,0)
+    # daily_deaths[daily_features] = daily_deaths[daily_features].mask(daily_deaths[daily_features]<0,0)
+    # daily_recovered[daily_features] = daily_recovered[daily_features].mask(daily_recovered[daily_features]<0,0)      
 
 
     daily_confirmed = daily_confirmed[['Country/Region'] + daily_features].set_index('Country/Region').stack().reset_index().rename({'level_1':'date',
@@ -41,13 +49,29 @@ def raw_data_preprocessing(data_fp='../data/daily_mobility.csv', horizon=7):
                                                                                                                 0:'recovered'},
                                                                                                                 axis=1).groupby(['Country/Region','date'])['recovered'].sum().reset_index()  
 
-    daily_confirmed['date'] = pd.to_datetime(daily_confirmed['date'])
-    daily_deaths['date'] = pd.to_datetime(daily_deaths['date'])
-    daily_recovered['date'] = pd.to_datetime(daily_recovered['date'])
 
+    daily_confirmed_Global = daily_confirmed.groupby('date')['confirmed'].sum().reset_index().rename({0:'confirmed'})
+    daily_confirmed_Global['Country/Region'] = 'Global'
+    daily_confirmed = pd.concat([daily_confirmed, daily_confirmed_Global], axis=0, ignore_index=True)
+    daily_confirmed['date'] = pd.to_datetime(daily_confirmed['date'])  
     daily_confirmed = daily_confirmed.sort_values(['Country/Region','date'])
+
+    daily_deaths_global = daily_deaths.groupby('date')['deaths'].sum().reset_index().rename({0:'deaths'})
+    daily_deaths_global['Country/Region'] = 'Global'
+    daily_deaths = pd.concat([daily_deaths, daily_deaths_global], axis=0, ignore_index=True)
+    daily_deaths['date'] = pd.to_datetime(daily_deaths['date'])  
     daily_deaths = daily_deaths.sort_values(['Country/Region','date'])
+
+    daily_recovered_global = daily_recovered.groupby('date')['recovered'].sum().reset_index().rename({0:'recovered'})
+    daily_recovered_global['Country/Region'] = 'Global'
+    daily_recovered = pd.concat([daily_recovered, daily_recovered_global], axis=0, ignore_index=True)
+    daily_recovered['date'] = pd.to_datetime(daily_recovered['date'])  
     daily_recovered = daily_recovered.sort_values(['Country/Region','date'])
+    
+    # refactor -inf 
+    daily_confirmed.loc[daily_confirmed['confirmed']<0,'confirmed']=0
+    daily_deaths.loc[daily_deaths['deaths']<0,'deaths']=0
+    daily_recovered.loc[daily_recovered['recovered']<0,'recovered']=0
 
     ## weekly rolling mean for confirmed, deaths, recovered
     daily_confirmed['confirmed_rolling'] = np.log1p(daily_confirmed.groupby('Country/Region').apply(lambda x:x.rolling(horizon, axis=1)['confirmed'].mean()).values)
@@ -58,7 +82,6 @@ def raw_data_preprocessing(data_fp='../data/daily_mobility.csv', horizon=7):
     daily_confirmed['confirmed_target'] = np.log1p(daily_confirmed.groupby('Country/Region')['confirmed'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
     daily_deaths['deaths_target'] = np.log1p(daily_deaths.groupby('Country/Region')['deaths'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
     daily_recovered['recovered_target'] = np.log1p(daily_recovered.groupby('Country/Region')['recovered'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
-
     daily_confirmed['confirmed'] = np.log1p(daily_confirmed['confirmed'])
     daily_deaths['deaths'] = np.log1p(daily_deaths['deaths'])
     daily_recovered['recovered'] = np.log1p(daily_recovered['recovered'])
@@ -71,20 +94,26 @@ def raw_data_preprocessing(data_fp='../data/daily_mobility.csv', horizon=7):
                         'transit_stations_percent_change_from_baseline',
                         'workplaces_percent_change_from_baseline',
                         'residential_percent_change_from_baseline']
-    mobility = mobility[mobility.sub_region_1.isnull()]\
+    mobility = mobility[mobility.sub_region_1.isnull()][mobility.sub_region_2.isnull()]\
+                        [mobility.metro_area.isnull()]\
                         [['country_region','date'] + mobility_features]\
                         .rename({'country_region':'Country/Region'},axis=1)\
                         .replace({'United States':'US'})
 
+    mobility_global = mobility.groupby('date')[mobility_features].mean().reset_index()
+    mobility_global['Country/Region'] = 'Global'
+    mobility = pd.concat([mobility, mobility_global], axis=0, ignore_index=True)
+    print(mobility.tail())
+
     use_countries = set(mobility['Country/Region'].unique()) & set(daily_ts['Country/Region'].unique()) 
+    # use_countries = daily_ts['Country/Region'].unique()
     mobility[mobility_features] = mobility[mobility_features] / 100.0
     mobility = mobility[mobility['Country/Region'].isin(use_countries)]
     mobility['date'] = pd.to_datetime(mobility.date)
 
     daily_ts = daily_ts[daily_ts['Country/Region'].isin(use_countries)]
     daily_ts['date'] = pd.to_datetime(daily_ts.date)
-
-    df = pd.merge(mobility, daily_ts, on=['Country/Region','date'], how='left')
+    df = pd.merge(daily_ts, mobility, on=['Country/Region','date'], how='left')
     df = df.fillna(0.0)
 
     save_fp = '.'.join(data_fp.split('.')[:-1]) + '_' + str(horizon) + '.csv'
@@ -93,7 +122,7 @@ def raw_data_preprocessing(data_fp='../data/daily_mobility.csv', horizon=7):
 def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7):
     mobility_dir = '/home/zhgao/COVID19/mobility'
     ts_dir = '/home/zhgao/COVID19/COVID-19'
-    mobility = pd.read_csv(os.path.join(mobility_dir, 'Global_Mobility_Report_20200728.csv'))
+    mobility = pd.read_csv(os.path.join(mobility_dir, 'Global_Mobility_Report_20201006.csv'))
     daily_confirmed = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv'))
     daily_deaths = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv'))
     # placeholder for daily_recovered, because no recovered data for US.
@@ -121,14 +150,29 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7
                                                                                                                 0:'recovered'},
                                                                                                                 axis=1).groupby(['Province_State','date'])['recovered'].sum().reset_index()  
 
-    daily_confirmed['date'] = pd.to_datetime(daily_confirmed['date'])
-    daily_deaths['date'] = pd.to_datetime(daily_deaths['date'])
-    daily_recovered['date'] = pd.to_datetime(daily_recovered['date'])
-
+    daily_confirmed_US = daily_confirmed.groupby('date')['confirmed'].sum().reset_index().rename({0:'confirmed'})
+    daily_confirmed_US['Province_State'] = 'US'
+    daily_confirmed = pd.concat([daily_confirmed, daily_confirmed_US], axis=0, ignore_index=True)
+    daily_confirmed['date'] = pd.to_datetime(daily_confirmed['date'])  
     daily_confirmed = daily_confirmed.sort_values(['Province_State','date'])
+
+    daily_deaths_US = daily_deaths.groupby('date')['deaths'].sum().reset_index().rename({0:'deaths'})
+    daily_deaths_US['Province_State'] = 'US'
+    daily_deaths = pd.concat([daily_deaths, daily_deaths_US], axis=0, ignore_index=True)
+    daily_deaths['date'] = pd.to_datetime(daily_deaths['date'])  
     daily_deaths = daily_deaths.sort_values(['Province_State','date'])
+
+    daily_recovered_US = daily_recovered.groupby('date')['recovered'].sum().reset_index().rename({0:'recovered'})
+    daily_recovered_US['Province_State'] = 'US'
+    daily_recovered = pd.concat([daily_recovered, daily_recovered_US], axis=0, ignore_index=True)
+    daily_recovered['date'] = pd.to_datetime(daily_recovered['date'])  
     daily_recovered = daily_recovered.sort_values(['Province_State','date'])
     
+    # refactor -inf 
+    daily_confirmed.loc[daily_confirmed['confirmed']<0,'confirmed']=0
+    daily_deaths.loc[daily_deaths['deaths']<0,'deaths']=0
+    daily_recovered.loc[daily_recovered['recovered']<0,'recovered']=0
+
     # feature engineering: weekly rolling mean for confirmed, deaths, recovered
     daily_confirmed['confirmed_rolling'] = np.log1p(daily_confirmed.groupby('Province_State')['confirmed'].apply(lambda x:x.rolling(horizon).sum()))
     daily_deaths['deaths_rolling'] = np.log1p(daily_deaths.groupby('Province_State')['deaths'].apply(lambda x:x.rolling(horizon).sum()))
@@ -138,11 +182,6 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7
     daily_confirmed['confirmed_target'] = np.log1p(daily_confirmed.groupby('Province_State')['confirmed'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
     daily_deaths['deaths_target'] = np.log1p(daily_deaths.groupby('Province_State')['deaths'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
     daily_recovered['recovered_target'] = np.log1p(daily_recovered.groupby('Province_State')['recovered'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
-
-
-    daily_confirmed.loc[daily_confirmed['confirmed']<0,'confirmed']=0
-    daily_deaths.loc[daily_deaths['deaths']<0,'deaths']=0
-    daily_recovered.loc[daily_recovered['recovered']<0,'recovered']=0
 
     daily_confirmed['confirmed'] = np.log1p(daily_confirmed['confirmed'])
     daily_deaths['deaths'] = np.log1p(daily_deaths['deaths'])
@@ -160,15 +199,22 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7
     mobility = mobility[mobility.country_region=='United States'][mobility.sub_region_1.notnull()][mobility.sub_region_2.isnull()]
     mobility = mobility[['sub_region_1','date'] + mobility_features].rename({'sub_region_1':'Country/Region'},axis=1)
 
+    mobility_US = mobility.groupby('date')[mobility_features].mean().reset_index()
+    mobility_US['Country/Region'] = 'US'
+    mobility = pd.concat([mobility, mobility_US], axis=0, ignore_index=True)
+    print(mobility.tail())
     use_countries = set(mobility['Country/Region'].unique()) & set(daily_ts['Country/Region'].unique()) 
+    # use_countries = daily_ts['Country/Region'].unique()
+    print(use_countries)
     mobility[mobility_features] = mobility[mobility_features] / 100.0
     mobility = mobility[mobility['Country/Region'].isin(use_countries)]
-    mobility['date'] = pd.to_datetime(mobility.date)
+    mobility['date'] = pd.to_datetime(mobility['date'])
 
     daily_ts = daily_ts[daily_ts['Country/Region'].isin(use_countries)]
-    daily_ts['date'] = pd.to_datetime(daily_ts.date)
+    daily_ts['date'] = pd.to_datetime(daily_ts['date'])
+    print(daily_ts['date'].unique())
 
-    df = pd.merge(mobility, daily_ts, on=['Country/Region','date'], how='left')
+    df = pd.merge(daily_ts, mobility, on=['Country/Region','date'], how='left')
     df = df.fillna(0.0)
 
     save_fp = '.'.join(data_fp.split('.')[:-1]) + '_' + str(horizon) + '.csv'
@@ -228,9 +274,9 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
         'recovered_target':-1
     }
     label_idx = label2idx.get(label, -2)
-    for day_idx in range(lookback_days, len(dates)):
+    for day_idx in range(lookback_days, len(dates) - 1):
         day_input = df[:, day_idx-lookback_days:day_idx, :-3].copy()
-        if day_idx == (len(dates) - 1):
+        if day_idx == (len(dates) - 2):
             # because we can not achieve future date label, just use the last day as placeholder.
             output = df[:, day_idx -1:day_idx, label_idx].copy()
         else:
@@ -238,7 +284,8 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
 
         day_inputs.append(day_input)
         outputs.append(output)
-        label_dates.append(dates[day_idx])
+        # forecast date
+        label_dates.append(dates[day_idx + 1])     
     
     # [num_samples, num_nodes, lookback_days, day_feature_dim]
     day_inputs = np.stack(day_inputs, axis=0)
@@ -280,5 +327,10 @@ class ExpL1Loss(nn.Module):
 
 
 if __name__ == "__main__":
-    raw_data_preprocessing(horizon=7)
-    # raw_data_preprocessing_US(horizon=7)
+    # raw_data_preprocessing(data_fp='../data/daily_mobility_china.csv', horizon=7, only_china=True)
+    #raw_data_preprocessing(data_fp='../data/daily_mobility_global.csv',horizon=7,only_china=False)
+    raw_data_preprocessing_US(horizon=7)
+    raw_data_preprocessing_US(horizon=14)
+    raw_data_preprocessing_US(horizon=21)
+    raw_data_preprocessing_US(horizon=28)
+

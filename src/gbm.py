@@ -24,7 +24,7 @@ class GBDTConfig(BaseConfig):
         self.forecast_date = '2020-06-07'
         self.horizon = 7
         self.label = 'deaths_target'
-        self.use_mobility = False
+        self.use_mobility = True
 
 
         self.exp_dir = '../gbdt'

@@ -36,7 +36,8 @@ class GCNBlock(nn.Module):
         out = t2.view(node_num, batch_size, seq_len, -1).\
             permute(1, 0, 2, 3).contiguous()
         atten_context = [self.gcn.conv1.gate, self.gcn.conv1.x_i, self.gcn.conv1.x_j,
-                        self.gcn.conv2.gate, self.gcn.conv2.x_i, self.gcn.conv2.x_j]
+                        self.gcn.conv2.gate, self.gcn.conv2.x_i, self.gcn.conv2.x_j,
+                        t2]
         return out, atten_context
 
 
@@ -106,5 +107,5 @@ class SandwichModel(nn.Module):
         day_pool, _ = day_encode.max(dim=2)
 
         out = self.out_fc(day_pool)
-
+        atten_context.append(day_pool)
         return out, atten_context
