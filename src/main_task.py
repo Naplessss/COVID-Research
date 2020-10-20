@@ -32,6 +32,7 @@ class RNNConfig(BaseConfig):
         # Reset base variables
         self.max_epochs = 1000
         self.early_stop_epochs = 30
+        self.infer = False
 
         # for data loading
         self.data_fp = '../data/gbm_dataset.npz'
@@ -42,7 +43,7 @@ class RNNConfig(BaseConfig):
         self.forecast_date = '2020-06-29'
         self.horizon = 7
         self.label = 'deaths_target'
-        self.use_mobility = True
+        self.use_mobility = False
 
         self.model_type = 'krnn'  # choices: krnn, sandwich, nbeats
         self.saint_batch_size = 500
@@ -184,17 +185,29 @@ class RNNTask(BasePytorchTask):
         self.config.day_fea_dim = self.day_inputs.shape[3]
         self.config.edge_fea_dim = self.edge_attr.shape[1]
 
-        train_dates = [pd.to_datetime(item) for item in dates if pd.to_datetime(item)<pd.to_datetime(self.config.forecast_date)]
-        test_divi = len(train_dates)
+        use_dates = [pd.to_datetime(item) for item in dates if pd.to_datetime(item)<=pd.to_datetime(self.config.forecast_date)]
+        test_divi = len(use_dates) - 1 
+        val_divi = test_divi - (self.config.horizon - 1)
+        train_divi = val_divi - self.config.horizon
+        if self.config.infer:
+            # use all achieved train data
+            train_divi = val_divi 
+
+        use_dates = [pd.to_datetime(item) for item in dates if pd.to_datetime(item)<=pd.to_datetime(self.config.forecast_date)]
+        test_divi = len(use_dates) - 1 
         val_divi = test_divi - self.config.horizon
         train_divi = val_divi - 1
+        if self.config.infer:
+            # use all achieved train data
+            train_divi = val_divi + 1 
+
         print(train_divi,val_divi,test_divi)
         print(dates[train_divi],dates[val_divi],dates[test_divi])
 
-        self.train_day_inputs = self.day_inputs[:train_divi]
-        self.train_gbm_outputs = self.gbm_outputs[:train_divi]
-        self.train_outputs = self.outputs[:train_divi]
-        self.train_dates = self.dates[:train_divi]
+        self.train_day_inputs = self.day_inputs[:train_divi+1]
+        self.train_gbm_outputs = self.gbm_outputs[:train_divi+1]
+        self.train_outputs = self.outputs[:train_divi+1]
+        self.train_dates = self.dates[:train_divi+1]
 
         self.val_day_inputs = self.day_inputs[val_divi:val_divi+1]
         self.val_gbm_outputs = self.gbm_outputs[val_divi:val_divi+1]
@@ -276,7 +289,7 @@ class RNNTask(BasePytorchTask):
         inputs, g, rows = batch
         input_day, y_gbm, y = inputs
         forecast_length = y.size()[-1]
-        y_hat, atten_context = self.model(input_day, g)
+        y_hat, _ = self.model(input_day, g)
         if self.config.use_gbm:
             y_hat += y_gbm
 
@@ -369,7 +382,7 @@ class RNNTask(BasePytorchTask):
             VAL_SCORE_KEY: -scores['total_mistakes'],
             'pred': pred,
             'label': label,
-            'sf_score': scores,
+            'scores': scores,
             'dates':align_dates,
             'countries':align_countries,
             # 'atten': atten_context
@@ -439,16 +452,51 @@ if __name__ == '__main__':
     args = parser.parse_args()
     config.update_by_dict(args.__dict__)
 
-    # build task
+    # build validation task
     task = RNNTask(config)
-
     # Set random seed before the initialization of network parameters
     # Necessary for distributed training
     task.set_random_seed()
     net = WrapperNet(task.config)
     task.init_model_and_optimizer(net)
-    task.log('Build Neural Nets')
+    task.log('Build Validation Neural Nets')
+    # select epoch with best validation accuracy
+    best_epochs = 50
+    if not task.config.skip_train:
+        task.fit()
+        best_epochs = task._best_val_epoch
+        print('Best validation epochs: {}'.format(best_epochs))
 
+    # Resume the best checkpoint for evaluation
+    task.resume_best_checkpoint()
+    val_eval_out = task.val_eval()
+    test_eval_out = task.test_eval()
+
+    task.log('Best checkpoint (epoch={}, {}, {})'.format(
+        task._passed_epoch, val_eval_out[BAR_KEY], test_eval_out[BAR_KEY]))
+
+    if task.is_master_node:
+        for tag, eval_out in [
+            ('val', val_eval_out),
+            ('test', test_eval_out),
+        ]:
+            print('-'*15, tag)
+            scores = eval_out['scores']['mistakes']
+            print('-'*5, 'mistakes')
+            print('Average:')
+            print(scores.mean().to_frame('mistakes'))
+            print('Daily:')
+            print(scores)
+
+    task.log('Training time {}s'.format(time.time() - start_time))
+
+    # build task
+    config.update_by_dict({'max_epochs':best_epochs+2, 'infer': True})
+    task = RNNTask(config)
+    task.set_random_seed()
+    net = WrapperNet(task.config)
+    task.init_model_and_optimizer(net)
+    task.log('Build Neural Nets')
     if not task.config.skip_train:
         task.fit()
 
@@ -471,11 +519,11 @@ if __name__ == '__main__':
             ('test', test_eval_out),
         ]:
             print('-'*15, tag)
-            sf_score = eval_out['sf_score']['mistakes']
+            scores = eval_out['scores']['mistakes']
             print('-'*5, 'mistakes')
             print('Average:')
-            print(sf_score.mean().to_frame('mistakes'))
+            print(scores.mean().to_frame('mistakes'))
             print('Daily:')
-            print(sf_score)
+            print(scores)
 
     task.log('Training time {}s'.format(time.time() - start_time))

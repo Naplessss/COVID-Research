@@ -178,7 +178,7 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7
     daily_deaths['deaths_rolling'] = np.log1p(daily_deaths.groupby('Province_State')['deaths'].apply(lambda x:x.rolling(horizon).sum()))
     daily_recovered['recovered_rolling'] = np.log1p(daily_recovered.groupby('Province_State')['recovered'].apply(lambda x:x.rolling(horizon).sum()))
 
-    # target, we need to forecast the cumsum of next horizon days.
+    # target, we need to forecast the cumsum of next horizon days.(including today)
     daily_confirmed['confirmed_target'] = np.log1p(daily_confirmed.groupby('Province_State')['confirmed'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
     daily_deaths['deaths_target'] = np.log1p(daily_deaths.groupby('Province_State')['deaths'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
     daily_recovered['recovered_target'] = np.log1p(daily_recovered.groupby('Province_State')['recovered'].apply(lambda x:x.rolling(horizon).sum().shift(1-horizon)))
@@ -261,9 +261,8 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
     df = pd.merge(df, data, on=['Country/Region','date'], how='left').fillna(0.0)
     df = df[use_features + target_features].values.reshape(len(countries), len(dates), len(use_features)+len(target_features))
     
-    # need to add the actually forecast day
-    dates = list(dates)
-    dates.append(datetime.timedelta(days=1) + pd.to_datetime(dates[-1]))
+    # dates = list(dates)
+    # dates.append(datetime.timedelta(days=1) + pd.to_datetime(dates[-1]))
     dates = list(map(lambda x: pd.to_datetime(x), dates))
     day_inputs = []
     outputs = []
@@ -274,18 +273,12 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
         'recovered_target':-1
     }
     label_idx = label2idx.get(label, -2)
-    for day_idx in range(lookback_days, len(dates) - 1):
-        day_input = df[:, day_idx-lookback_days:day_idx, :-3].copy()
-        if day_idx == (len(dates) - 2):
-            # because we can not achieve future date label, just use the last day as placeholder.
-            output = df[:, day_idx -1:day_idx, label_idx].copy()
-        else:
-            output = df[:, day_idx:day_idx + 1, label_idx].copy()            
-
+    for day_idx in range(lookback_days, len(dates)):
+        day_input = df[:, day_idx-lookback_days+1:day_idx+1, :-3].copy()
+        output = df[:, day_idx:day_idx + 1, label_idx].copy()            
         day_inputs.append(day_input)
         outputs.append(output)
-        # forecast date
-        label_dates.append(dates[day_idx + 1])     
+        label_dates.append(dates[day_idx])     
     
     # [num_samples, num_nodes, lookback_days, day_feature_dim]
     day_inputs = np.stack(day_inputs, axis=0)

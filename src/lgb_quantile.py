@@ -62,7 +62,7 @@ def extract_timeseries_features(single_location):
             df.ConfirmedRollingMean21.clip(0, None) + 1)
     df['ConfirmedPerK'] = 1000 * df.ConfirmedCumSum.clip(0, None) / df.Population
     df['DeathsPerK'] = 1000 * df.DeathsCumSum.clip(0, None) / df.Population
-    return df   
+    return df    
 
 def get_nearby_features(features, rank):
     closest = pd.read_csv(CLOSEST_PATH)
@@ -95,32 +95,49 @@ def get_nearby_features(features, rank):
 def w5_loss(preds, data, q=0.5):
     y_true = data.get_label()
     weights = data.get_weight()
-
     diff = (y_true - preds) * weights
     gt_is_higher = np.sum(diff[diff >= 0] * q)
     gt_is_lower = np.sum(- diff[diff < 0] * (1 - q))
-
     return 'w5', (gt_is_higher + gt_is_lower) / len(preds), False
 
+def wmae_loss(preds, data):
+    y_true = data.get_label()
+    weights = data.get_weight()
+    wmae = (np.abs(y_true - preds) * weights).mean()
+    return 'wmae', wmae, False
+
+def mae_loss(preds, data):
+    y_true = data.get_label()
+    
+    _mae = (np.abs(y_true - preds)).mean()
+    return 'mae', _mae, False
+
+def mae(y_preds, y_true):
+    try:
+        return (np.abs(y_true - y_preds)).mean()
+    except:
+        return np.nan
+
 def apply_lgb(features, target, q, params, k, num_round=1000):
+    #lb = LabelEncoder()
+    features['Date'] = pd.to_datetime(features['Date'])
+    #features['Location2id'] = LabelEncoder().fit_transform(features['Location'])
     features['TARGET'] = features.groupby('Location')[target].apply(lambda x:x.rolling(k).sum().shift(1-k))  # included today
-    features['DaysTillEnd'] = (pd.to_datetime(TRAIN_END) - pd.to_datetime(features['Date'])).map(lambda x:x.days) + 1
-    features['Weight'] = features['Population'] ** 1.0 / features['DaysTillEnd'] ** 0.2
+    features['DaysTillEnd'] = (pd.to_datetime(FORECAST_START_DATE) - pd.to_datetime(features['Date'])).map(lambda x:x.days) + 1
+    TRAIN_END_DATE = pd.to_datetime(FORECAST_START_DATE) - dt.timedelta(days=(k-1))
+    features['Weight'] = 1.0 / features['DaysTillEnd'] ** 0.5
     do_not_use = [
                      'Location', 'Date', 'TARGET', 'Weight',  'DaysTillEnd', 'DateTime', 
                  ] + ['Confirmed', 'Deaths']
     feature_names = [f for f in features.columns if f not in do_not_use]
 
-    # print(features.columns)
-    # print(len(feature_names), feature_names)
-    # print(features.TARGET.isnull().mean())
-
-    train = features.loc[(~features.TARGET.isnull()) & (features.Date > TRAIN_START)].reset_index(drop=True)
-    # test = features.loc[(features.TARGET.isnull()) & (features.Date > TRAIN_START)].reset_index(drop=True)
+    print(features[['TARGET','Date']].tail(20))
+    train = features.loc[(~features.TARGET.isnull()) & 
+                         (features.Date > TRAIN_START) &  
+                         (features.Date <= TRAIN_END_DATE)].reset_index(drop=True)
     
     ### only forecast one day(start date of epidemic week)
     test = features.loc[features.Date == FORECAST_START_DATE].reset_index(drop=True)
-    # print(train.shape, test.shape)
 
     test['PREDICTION'] = 0
     train['PREDICTION'] = 0
@@ -133,22 +150,24 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
 
         train_set = lgb.Dataset(tr[feature_names], label=tr.TARGET, weight=tr.Weight)
         valid_set = lgb.Dataset(val[feature_names], label=val.TARGET, weight=val.Weight)
+        test_set = lgb.Dataset(test[feature_names], label=test.TARGET, weight=test.Weight)
 
-        model = lgb.train(params, train_set, num_round, valid_sets=[train_set, valid_set],
-                          early_stopping_rounds=50, feval=partial(w5_loss, q=q), verbose_eval=False)
+        model = lgb.train(params, train_set, 
+                          num_round, 
+                          valid_sets=[train_set, valid_set],
+                          # early_stopping_rounds=50, 
+                          feval=partial(mae_loss), 
+                          verbose_eval=100)
 
-        # print(te_ind)
         train.loc[te_ind, 'PREDICTION'] = model.predict(val[feature_names])
         test['PREDICTION'] += model.predict(test[feature_names]) / N_FOLDS
 
         fimp = pd.DataFrame({'f': feature_names, 'imp': model.feature_importance()})
         feature_importances.append(fimp)
 
-    _, error, _ = w5_loss(
-        train.PREDICTION,
-        lgb.Dataset(train[feature_names], label=train.TARGET, weight=train.Weight),
-        q
-    )
+    cv_error = mae(train['PREDICTION'], train['TARGET'])
+    val_error = mae(test['PREDICTION'], test['TARGET'])
+    
     feature_importances = pd.concat(feature_importances)
     feature_importances = feature_importances.groupby('f').sum().reset_index().sort_values(by='imp', ascending=False)
     feature_importances['target'] = target
@@ -163,30 +182,30 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
     test_preds['k'] = k
     train_preds['quantile'] = q
     test_preds['quantile'] = q
-    return error, train_preds, test_preds, feature_importances
+    return cv_error, val_error, train_preds, test_preds, feature_importances
 
+    def get_locations():
+        location = pd.read_csv('/home/zhgao/COVID-Research/covid19-forecast-hub/data-locations/locations.csv')
+        location2id = location[['location_name','location']].set_index('location_name')['location'].to_dict()
+        return location2id
 
 if __name__=='__main__':
-    VERSION = 0
+    # newest date of labeling data
+    LABEL_END_DATE = '2020-10-18'    
+    # test start day to infer next epidemic weeks (included this day)
+    # prefer to be sunday of this epdimic week (the same as LABEL_DATE_END)
+    FORECAST_START_DATE = '2020-10-11'   
+
     DAYS = 7
     LEVEL = 'US'
     PRECISION = 2
     N_FOLDS = 5
     RELOAD_FEATURES = True
-    N_SEEDS = 1
+    N_SEEDS = 20
     TRAIN_START = '2020-03-31'
     CLOSEST_PATH = '/home/zhgao/COVID-Research/data/us_geo_closest.csv'
-    FEATURE_FILE_PATH = f'/home/zhgao/COVID-Research/data/features_{VERSION}.csv'
+    FEATURE_FILE_PATH = f'/home/zhgao/COVID-Research/data/features_{LABEL_END_DATE}.csv'
     DATA_PATH = '/home/zhgao/COVID19/COVID-19/csse_covid_19_data/csse_covid_19_time_series'
-
-    # newest date of labeling data
-    LABEL_END_DATE = '2020-10-11'    
-    # test start day to infer next epidemic weeks (included this day)
-    # prefer to be sunday of this epdimic week (the same as LABEL_DATE_END)
-    FORECAST_START_DATE = '2020-10-11'    
-
-    SAVE_PREDICT_PATH = f'/home/zhgao/COVID-Research/output/LGB_Test_{FORECAST_START_DATE}_{VERSION}.csv'
-    SAVE_CV_PATH =  f'/home/zhgao/COVID-Research/output/LGB_CV_{FORECAST_START_DATE}_{VERSION}.csv'
 
     targets = process_train() 
     if os.path.exists(FEATURE_FILE_PATH) and RELOAD_FEATURES:
@@ -223,54 +242,61 @@ if __name__=='__main__':
 
     train_results, test_results = [], []
     for target in ['Deaths', 'Confirmed']:
+    # for target in ['Confirmed']:
         for k in [7, 14, 21, 28]:
+        # for k in [7]:
             for q in [0.01,0.025,0.05,0.1,0.15,0.2,0.25,0.3,
-                        0.35,0.4,0.45,0.5,0.55,0.6,0.65,
-                        0.7,0.75,0.8,0.85,0.9,0.95,0.975,0.99]:
+                         0.35,0.4,0.45,0.5,0.55,0.6,0.65,
+                         0.7,0.75,0.8,0.85,0.9,0.95,0.975,0.99]:
+            # for q in [0.5]:
                 if q == 0.5:
                     N_SEEDS_USE = N_SEEDS
                 else:
                     N_SEEDS_USE = 1
+                train_preds = pd.DataFrame()
+                test_preds = pd.DataFrame()
+                cv_error, val_error = 0, 0
                 for seed in range(N_SEEDS_USE):
-                    error = 0
-                    train_preds = pd.DataFrame()
-                    test_preds = pd.DataFrame()
                     params = dict(
                         objective='quantile',
                         alpha=q,
-                        metric='custom',
-                        max_depth=np.random.choice([4, 6, 8, 10, 15, 20]),
-                        learning_rate=np.random.choice([0.025, 0.05, 0.1]),
+                        metric='mae',
+                        max_depth=np.random.choice([14,15,16]),
+                        learning_rate=np.random.choice([0.06,0.07,0.08,0.09]),
                         feature_fraction=np.random.choice([0.5, 0.6, 0.7, 0.8]),
                         bagging_freq=np.random.choice([2, 3, 5]),
                         bagging_fraction=np.random.choice([0.7, 0.8]),
-                        min_data_in_leaf=np.random.choice([5, 10]),
+                        min_data_in_leaf=np.random.choice([5, 15]),
                         num_leaves=np.random.choice([127, 255]),
                         verbosity=0,
                         random_seed=seed,
-                        n_jobs=20
+                        n_jobs=12
                     )
-
-                    num_round = 1000
-                    _error, _train_preds, _test_preds, feature_importances = apply_lgb(
+                    if target == 'Deaths':
+                        num_round = np.random.choice([35,40,45,50])
+                    if target == 'Confirmed':
+                        num_round = np.random.choice([50,60,70,80])
+                    _cv_error, _val_error, _train_preds, _test_preds, feature_importances = apply_lgb(
                         features, target, q, params, k, num_round=num_round)
-                    print(target,k,q,seed,_error)
+                    print(target,k,q,seed,_cv_error,_val_error)
                     if seed == 0:
                         train_preds = _train_preds.copy()
                         test_preds = _test_preds.copy()
                         train_preds['PREDICTION'] = _train_preds['PREDICTION'] / N_SEEDS_USE
                         test_preds['PREDICTION'] = _test_preds['PREDICTION'] / N_SEEDS_USE
-                        error = _error / N_SEEDS_USE
+                        cv_error = _cv_error / N_SEEDS_USE
+                        val_error = _val_error / N_SEEDS_USE
                     else:
                         train_preds['PREDICTION'] += _train_preds['PREDICTION'] / N_SEEDS_USE
                         test_preds['PREDICTION'] += _test_preds['PREDICTION'] / N_SEEDS_USE
-                        error += _error / N_SEEDS_USE
+                        cv_error += _cv_error / N_SEEDS_USE
+                        val_error += _val_error / N_SEEDS_USE
+                        
                     
                 train_results.append(train_preds)
-                test_results.append(test_preds)    
-    
-    train_results = pd.concat(train_results)
-    test_results = pd.concat(test_results)
+                test_results.append(test_preds)
 
-    train_results.to_csv(SAVE_CV_PATH)
-    test_results.to_csv(SAVE_PREDICT_PATH)
+    location2id = get_locations()
+    gbm_predict = pd.concat(test_results)
+    gbm_predict = gbm_predict[gbm_predict['quantile']==0.5]
+    gbm_predict.to_csv('../output/gbm.predict.{}.csv'.format(FORECAST_START_DATE))
