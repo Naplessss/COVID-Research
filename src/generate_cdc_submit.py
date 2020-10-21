@@ -68,7 +68,7 @@ def get_predict_list(date='2020-10-04', save=False):
     return predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label
 
 
-def get_ensemble_results(date = forecast_start_date):
+def get_ensemble_results(date = '2020-10-18'):
     predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label = get_predict_list(date)
     gbm_predict = pd.read_csv('../output/gbm.predict.{}.csv'.format(date))
     location2id = get_locations()
@@ -78,27 +78,30 @@ def get_ensemble_results(date = forecast_start_date):
         _gbm_deaths = gbm_predict[(gbm_predict['region'].isin(_deaths.index)) &\
                                   (gbm_predict['k'] == (i*7+7)) &\
                                   (gbm_predict['TYPE'] == 'Deaths')]
-        _gbm_deaths = _gbm_deaths[['region','PREDICTION']]
-        _gbm_deaths = _gbm_deaths.append({'region':'US','PREDICTION':_gbm_deaths['PREDICTION'].sum()},
-                       ignore_index=True).set_index('region')
-
-        _deaths = pd.merge(_deaths,_gbm_deaths,left_index=True, right_index=True)
-        seeds_cols = [item for item in _deaths.columns if item.startswith('seed')]
-        _deaths = _deaths[seeds_cols].add(_deaths['PREDICTION'], axis=0) / 2.0
-        predict_deaths_list[i] = _deaths
-
+    
         _confirmed = predict_confirmed_list[i]
         _gbm_confirmed = gbm_predict[(gbm_predict['region'].isin(_confirmed.index)) &\
                                   (gbm_predict['k'] == (i*7+7)) &\
                                   (gbm_predict['TYPE'] == 'Confirmed')]
-        _gbm_confirmed = _gbm_confirmed[['region','PREDICTION']]
-        _gbm_confirmed = _gbm_confirmed.append({'region':'US','PREDICTION':_gbm_confirmed['PREDICTION'].sum()},
-                       ignore_index=True).set_index('region')
+        if len(_gbm_deaths)!=0:
+            _gbm_deaths = _gbm_deaths[['region','PREDICTION']]
+            _gbm_deaths = _gbm_deaths.append({'region':'US','PREDICTION':_gbm_deaths['PREDICTION'].sum()},
+                           ignore_index=True).set_index('region')
 
-        _confirmed = pd.merge(_confirmed,_gbm_confirmed,left_index=True, right_index=True)
-        seeds_cols = [item for item in _confirmed.columns if item.startswith('seed')]
-        _confirmed = _confirmed[seeds_cols].add(_confirmed['PREDICTION'], axis=0) / 2.0
-        predict_confirmed_list[i] = _confirmed    
+            _deaths = pd.merge(_deaths,_gbm_deaths,left_index=True, right_index=True)
+            seeds_cols = [item for item in _deaths.columns if item.startswith('seed')]
+            _deaths = _deaths[seeds_cols].add(_deaths['PREDICTION'], axis=0) / 2.0
+            predict_deaths_list[i] = _deaths
+        
+        if len(_gbm_confirmed)!=0:
+            _gbm_confirmed = _gbm_confirmed[['region','PREDICTION']]
+            _gbm_confirmed = _gbm_confirmed.append({'region':'US','PREDICTION':_gbm_confirmed['PREDICTION'].sum()},
+                           ignore_index=True).set_index('region')
+
+            _confirmed = pd.merge(_confirmed,_gbm_confirmed,left_index=True, right_index=True)
+            seeds_cols = [item for item in _confirmed.columns if item.startswith('seed')]
+            _confirmed = _confirmed[seeds_cols].add(_confirmed['PREDICTION'], axis=0) / 2.0
+            predict_confirmed_list[i] = _confirmed    
     
     return predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label
 

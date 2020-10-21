@@ -131,7 +131,6 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
                  ] + ['Confirmed', 'Deaths']
     feature_names = [f for f in features.columns if f not in do_not_use]
 
-    print(features[['TARGET','Date']].tail(20))
     train = features.loc[(~features.TARGET.isnull()) & 
                          (features.Date > TRAIN_START) &  
                          (features.Date <= TRAIN_END_DATE)].reset_index(drop=True)
@@ -157,7 +156,7 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
                           valid_sets=[train_set, valid_set],
                           # early_stopping_rounds=50, 
                           feval=partial(mae_loss), 
-                          verbose_eval=100)
+                          verbose_eval=False)
 
         train.loc[te_ind, 'PREDICTION'] = model.predict(val[feature_names])
         test['PREDICTION'] += model.predict(test[feature_names]) / N_FOLDS
@@ -184,19 +183,20 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
     test_preds['quantile'] = q
     return cv_error, val_error, train_preds, test_preds, feature_importances
 
-    def get_locations():
-        location = pd.read_csv('/home/zhgao/COVID-Research/covid19-forecast-hub/data-locations/locations.csv')
-        location2id = location[['location_name','location']].set_index('location_name')['location'].to_dict()
-        return location2id
+def get_locations():
+    location = pd.read_csv('/home/zhgao/COVID-Research/covid19-forecast-hub/data-locations/locations.csv')
+    location2id = location[['location_name','location']].set_index('location_name')['location'].to_dict()
+    return location2id
 
 if __name__=='__main__':
     # newest date of labeling data
     LABEL_END_DATE = '2020-10-18'    
     # test start day to infer next epidemic weeks (included this day)
     # prefer to be sunday of this epdimic week (the same as LABEL_DATE_END)
-    FORECAST_START_DATE = '2020-10-11'   
+    FORECAST_START_DATE = '2020-10-18'   
 
     DAYS = 7
+    DEBUG = False
     LEVEL = 'US'
     PRECISION = 2
     N_FOLDS = 5
@@ -242,13 +242,16 @@ if __name__=='__main__':
 
     train_results, test_results = [], []
     for target in ['Deaths', 'Confirmed']:
-    # for target in ['Confirmed']:
         for k in [7, 14, 21, 28]:
-        # for k in [7]:
             for q in [0.01,0.025,0.05,0.1,0.15,0.2,0.25,0.3,
                          0.35,0.4,0.45,0.5,0.55,0.6,0.65,
                          0.7,0.75,0.8,0.85,0.9,0.95,0.975,0.99]:
-            # for q in [0.5]:
+                
+                if DEBUG:
+                    N_SEEDS = 1
+                    if k!=7 or q!=0.5:
+                        continue
+
                 if q == 0.5:
                     N_SEEDS_USE = N_SEEDS
                 else:
@@ -268,7 +271,7 @@ if __name__=='__main__':
                         bagging_fraction=np.random.choice([0.7, 0.8]),
                         min_data_in_leaf=np.random.choice([5, 15]),
                         num_leaves=np.random.choice([127, 255]),
-                        verbosity=0,
+                        verbosity=-1,
                         random_seed=seed,
                         n_jobs=12
                     )
