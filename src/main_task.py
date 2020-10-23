@@ -187,14 +187,6 @@ class RNNTask(BasePytorchTask):
 
         use_dates = [pd.to_datetime(item) for item in dates if pd.to_datetime(item)<=pd.to_datetime(self.config.forecast_date)]
         test_divi = len(use_dates) - 1 
-        val_divi = test_divi - (self.config.horizon - 1)
-        train_divi = val_divi - self.config.horizon
-        if self.config.infer:
-            # use all achieved train data
-            train_divi = val_divi 
-
-        use_dates = [pd.to_datetime(item) for item in dates if pd.to_datetime(item)<=pd.to_datetime(self.config.forecast_date)]
-        test_divi = len(use_dates) - 1 
         val_divi = test_divi - self.config.horizon
         train_divi = val_divi - 1
         if self.config.infer:
@@ -209,10 +201,16 @@ class RNNTask(BasePytorchTask):
         self.train_outputs = self.outputs[:train_divi+1]
         self.train_dates = self.dates[:train_divi+1]
 
-        self.val_day_inputs = self.day_inputs[val_divi:val_divi+1]
-        self.val_gbm_outputs = self.gbm_outputs[val_divi:val_divi+1]
-        self.val_outputs = self.outputs[val_divi:val_divi+1]
-        self.val_dates = self.dates[val_divi:val_divi+1]
+        if self.config.infer:
+            self.val_day_inputs = self.day_inputs[:train_divi+1]
+            self.val_gbm_outputs = self.gbm_outputs[:train_divi+1]
+            self.val_outputs = self.outputs[:train_divi+1]
+            self.val_dates = self.dates[:train_divi+1]  
+        else:          
+            self.val_day_inputs = self.day_inputs[val_divi:val_divi+1]
+            self.val_gbm_outputs = self.gbm_outputs[val_divi:val_divi+1]
+            self.val_outputs = self.outputs[val_divi:val_divi+1]
+            self.val_dates = self.dates[val_divi:val_divi+1]
 
         self.test_day_inputs = self.day_inputs[test_divi:test_divi+1]
         self.test_gbm_outputs = self.gbm_outputs[test_divi:test_divi+1]
@@ -471,39 +469,6 @@ if __name__ == '__main__':
     task.resume_best_checkpoint()
     val_eval_out = task.val_eval()
     test_eval_out = task.test_eval()
-
-    task.log('Best checkpoint (epoch={}, {}, {})'.format(
-        task._passed_epoch, val_eval_out[BAR_KEY], test_eval_out[BAR_KEY]))
-
-    if task.is_master_node:
-        for tag, eval_out in [
-            ('val', val_eval_out),
-            ('test', test_eval_out),
-        ]:
-            print('-'*15, tag)
-            scores = eval_out['scores']['mistakes']
-            print('-'*5, 'mistakes')
-            print('Average:')
-            print(scores.mean().to_frame('mistakes'))
-            print('Daily:')
-            print(scores)
-
-    task.log('Training time {}s'.format(time.time() - start_time))
-
-    # build task
-    config.update_by_dict({'max_epochs':best_epochs+2, 'infer': True})
-    task = RNNTask(config)
-    task.set_random_seed()
-    net = WrapperNet(task.config)
-    task.init_model_and_optimizer(net)
-    task.log('Build Neural Nets')
-    if not task.config.skip_train:
-        task.fit()
-
-    # Resume the best checkpoint for evaluation
-    task.resume_best_checkpoint()
-    val_eval_out = task.val_eval()
-    test_eval_out = task.test_eval()
     # dump evaluation results of the best checkpoint to val out
     task.dump(val_out=val_eval_out,
               test_out=test_eval_out,
@@ -527,3 +492,41 @@ if __name__ == '__main__':
             print(scores)
 
     task.log('Training time {}s'.format(time.time() - start_time))
+
+    # # build task
+    # config.update_by_dict({'max_epochs':best_epochs+2, 'infer': True})
+    # task = RNNTask(config)
+    # task.set_random_seed()
+    # net = WrapperNet(task.config)
+    # task.init_model_and_optimizer(net)
+    # task.log('Build Neural Nets')
+    # if not task.config.skip_train:
+    #     task.fit()
+
+    # # Resume the best checkpoint for evaluation
+    # task.resume_best_checkpoint()
+    # val_eval_out = task.val_eval()
+    # test_eval_out = task.test_eval()
+    # # dump evaluation results of the best checkpoint to val out
+    # task.dump(val_out=val_eval_out,
+    #           test_out=test_eval_out,
+    #           epoch_idx=-1,
+    #           is_best=True,
+    #           dump_option=1)
+    # task.log('Best checkpoint (epoch={}, {}, {})'.format(
+    #     task._passed_epoch, val_eval_out[BAR_KEY], test_eval_out[BAR_KEY]))
+
+    # if task.is_master_node:
+    #     for tag, eval_out in [
+    #         ('val', val_eval_out),
+    #         ('test', test_eval_out),
+    #     ]:
+    #         print('-'*15, tag)
+    #         scores = eval_out['scores']['mistakes']
+    #         print('-'*5, 'mistakes')
+    #         print('Average:')
+    #         print(scores.mean().to_frame('mistakes'))
+    #         print('Daily:')
+    #         print(scores)
+
+    # task.log('Training time {}s'.format(time.time() - start_time))

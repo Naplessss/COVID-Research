@@ -24,15 +24,16 @@ def get_label(target_date='2020-10-04'):
     return deaths, confirmed
 
 def get_predict(model_dir='/home/zhgao/COVID-Research/weights_major/', model_fp='US_08_30'):
-    fname_pattern = glob(os.path.join(model_dir, model_fp + '_seed_*'))
+    fname_pattern = sorted(glob(os.path.join(model_dir, model_fp + '_seed_*')), key=lambda x:int(x.split('_')[-1]))
     res = pd.DataFrame()
     location2id = get_locations()
-    forecast_date = model_fp.split('_')[2]
+    forecast_date = model_fp.split('_')[-2]
     deaths_label, confirmed_label = get_label(forecast_date)
     deaths_label.index = deaths_label.index.map(location2id)
     confirmed_label.index = confirmed_label.index.map(location2id)
     
     for fname in fname_pattern:
+        print(fname)
         test = torch.load(os.path.join(fname,'Output','test.out.cpt'))
         predict_value = [item if item>0 else 0 for item in np.expm1(test['pred']['val'].values)]
         res_test = pd.DataFrame({'pred':predict_value,
@@ -43,24 +44,34 @@ def get_predict(model_dir='/home/zhgao/COVID-Research/weights_major/', model_fp=
         res_test = res_test.rename({'countries':'region','dates':'target_start_date','pred':'value'},axis=1)
         res_test['region'] = res_test['region'].map(location2id)
         res_test = res_test[res_test.region!='11001']
-        res_test = res_test[['value','region']].set_index('region',drop=True).rename({'value':'_'.join(fname.split('_')[-2:])},
+        res_test = res_test[['value','region']].set_index('region',drop=True).rename({'value': fname.split('/')[-1]},
                                                                                     axis=1)
+
+        if 'US' not in res_test.index:
+            res_test = res_test.append(pd.DataFrame(res_test.sum().values, index=['US'], columns=[fname.split('/')[-1]])) 
         
         res = pd.concat([res, res_test], axis=1)
     
     return res, deaths_label, confirmed_label
 
-def get_predict_list(date='2020-10-04', save=False):
+def get_predict_list(date='2020-10-04', save=False, model_use=['GNN']):
     predict_deaths_list, predict_confirmed_list = [], []
     for type_name in ['deaths','confirmed']:
         for days in [7,14,21,28]:
-            fp = 'US_{}_{}_{}'.format(type_name, date, days)
-            print(fp)
-            predict, deaths_label, confirmed_label = get_predict(model_fp=fp)
+            predict = []
+            for model_type in model_use:
+                if model_type == 'GNN':
+                    fp = 'US_{}_{}_{}'.format(type_name, date, days)
+                else:
+                    fp = 'US_{}_{}_{}_{}'.format(model_type, type_name, date, days)
+                _predict, deaths_label, confirmed_label = get_predict(model_fp=fp)
+                predict.append(_predict)
+            predict = pd.concat(predict, axis=1)
             if type_name == 'deaths':           
                 predict_deaths_list.append(predict)
             if type_name == 'confirmed':
                 predict_confirmed_list.append(predict)
+
     
     if save:
         pd.to_pickle([predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label],
@@ -68,12 +79,14 @@ def get_predict_list(date='2020-10-04', save=False):
     return predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label
 
 
-def get_ensemble_results(date = '2020-10-18'):
-    predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label = get_predict_list(date)
+def get_ensemble_results(date = '2020-10-18', model_use=['GNN'], factor=0.5):
+    predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label = get_predict_list(date=date, model_use=model_use)
     gbm_predict = pd.read_csv('../output/gbm.predict.{}.csv'.format(date))
     location2id = get_locations()
     gbm_predict['region'] = gbm_predict['Location'].map(location2id)
-    for i in [0,1,2,3]:
+    
+    week_size = len(predict_confirmed_list)
+    for i in range(week_size):
         _deaths = predict_deaths_list[i]
         _gbm_deaths = gbm_predict[(gbm_predict['region'].isin(_deaths.index)) &\
                                   (gbm_predict['k'] == (i*7+7)) &\
@@ -89,8 +102,10 @@ def get_ensemble_results(date = '2020-10-18'):
                            ignore_index=True).set_index('region')
 
             _deaths = pd.merge(_deaths,_gbm_deaths,left_index=True, right_index=True)
-            seeds_cols = [item for item in _deaths.columns if item.startswith('seed')]
-            _deaths = _deaths[seeds_cols].add(_deaths['PREDICTION'], axis=0) / 2.0
+            seeds_cols = [item for item in _deaths.columns if 'seed' in item]
+            _deaths[seeds_cols] = factor * _deaths[seeds_cols]
+            _deaths['PREDICTION'] = _deaths['PREDICTION'] * (1 - factor)
+            _deaths = _deaths[seeds_cols].add(_deaths['PREDICTION'], axis=0)
             predict_deaths_list[i] = _deaths
         
         if len(_gbm_confirmed)!=0:
@@ -99,8 +114,10 @@ def get_ensemble_results(date = '2020-10-18'):
                            ignore_index=True).set_index('region')
 
             _confirmed = pd.merge(_confirmed,_gbm_confirmed,left_index=True, right_index=True)
-            seeds_cols = [item for item in _confirmed.columns if item.startswith('seed')]
-            _confirmed = _confirmed[seeds_cols].add(_confirmed['PREDICTION'], axis=0) / 2.0
+            seeds_cols = [item for item in _confirmed.columns if 'seed' in item]
+            _confirmed[seeds_cols] = factor * _confirmed[seeds_cols]
+            _confirmed['PREDICTION'] = _confirmed['PREDICTION'] * (1 - factor)
+            _confirmed = _confirmed[seeds_cols].add(_confirmed['PREDICTION'], axis=0)
             predict_confirmed_list[i] = _confirmed    
     
     return predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label
@@ -111,22 +128,25 @@ use_quantile_list = [0.01,0.025,0.05,0.1,0.15,0.2,0.25,0.3,
 
 def generate_gnn_cdc_format(save_dir = './',
                         model_name = 'MSRA-DeepST',
+                        model_use = ['GNN'],
                         forecast_date = '2020-10-04',
                         predict_date = '2020-10-10',
                         quantile = use_quantile_list,
-                        use_ensemble = True
+                        use_ensemble = True,
+                        factor = 0.5
                        ):
     
     forecast_start_date = dt.strftime(pd.to_datetime(predict_date) - datetime.timedelta(days=6),'%Y-%m-%d')
     if not use_ensemble:
-        predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label = get_predict_list(date=forecast_start_date)
+        predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label = get_predict_list(date=forecast_start_date, model_use=model_use)
     else:
-        predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label = get_ensemble_results(date=forecast_start_date)
+        predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label = get_ensemble_results(date=forecast_start_date, model_use=model_use, factor=factor)
         
 
     results = []
     out_fp = '-'.join([forecast_date, model_name]) + '.csv'
-    
+    week_size = len(predict_deaths_list)                
+
     for predict_list,label,type_name in [[predict_deaths_list, deaths_label,'death'],
                                     [predict_confirmed_list, confirmed_label,'case']]:
         for ahead_weeks,predict in enumerate(predict_list):
@@ -150,8 +170,8 @@ def generate_gnn_cdc_format(save_dir = './',
                                  'quantile':['NA'] + use_quantile_list,
                                  'value':_value + _cum_value})
                     results.append(tmp_cum)
-                    
-    for i in [3,2,1]:
+
+    for i in range(week_size-1, 0, -1):
         predict_deaths_list[i] = predict_deaths_list[i] - predict_deaths_list[i-1]
         predict_confirmed_list[i] = predict_confirmed_list[i] - predict_confirmed_list[i-1]
     
@@ -199,9 +219,11 @@ def generate_gnn_cdc_format(save_dir = './',
 
 if __name__=='__main__':
 
-    results = generate_gnn_cdc_format(save_dir = '../output',
+    results = generate_gnn_cdc_format(save_dir = '../CDC',
                             model_name = 'MSRA-DeepST',
-                            forecast_date = '2020-10-19',
-                            predict_date = '2020-10-24',
+                            model_use=  ['GNN'],        # ['NBEATS','GNN', 'KRNN']
+                            forecast_date = '2020-09-21',
+                            predict_date = '2020-09-26',
                             quantile = use_quantile_list,
-                            use_ensemble= True) 
+                            use_ensemble= False,
+                            factor = 0.5) 

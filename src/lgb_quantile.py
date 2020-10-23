@@ -4,12 +4,24 @@ import numpy as np
 from matplotlib import pyplot as plt
 from tqdm import tqdm_notebook as tqdm
 from sklearn.model_selection import StratifiedKFold,GroupKFold
+from sklearn.preprocessing import LabelEncoder
 from sklearn import metrics
 import datetime as dt
 from functools import partial
 import lightgbm as lgb
 import warnings
 warnings.filterwarnings(action='ignore')
+
+use_states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+       'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
+       'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas',
+       'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts',
+       'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana',
+       'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+       'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma',
+       'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
+       'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+       'Virginia', 'Washington']
 
 def process_train():
     df_deaths = pd.read_csv(os.path.join(DATA_PATH, 'time_series_covid19_deaths_{}.csv'.format(LEVEL)))
@@ -34,9 +46,9 @@ def process_train():
     df['Date'] = pd.to_datetime(df['Date'])  
     
     df['DayOfWeek'] = df.Date.dt.weekday
+    df['MonthOfDay'] = df.Date.dt.month
     df = df.merge(pop,on='Location')
-    df = df.merge(geo,on='Location')
-    
+    df = df.merge(geo,on='Location')    
     return df
 
 
@@ -45,17 +57,28 @@ def extract_timeseries_features(single_location):
     df = df.sort_values(by='Date')
     for target in ['Confirmed', 'Deaths']:
         df[f'{target}CumSum'] = df[target].cumsum()
-        for k in [3, 7, 14, 21]:
+        for k in [3, 7, 14, 21, 28, 56, 84]:
             df[f'{target}RollingMean{k}'] = df[target].rolling(k).mean()
             df[f'{target}RollingMean{k}PerK'] = df[target].rolling(k).mean() / df.Population * 10000
-        df[f'{target}RollingStd21'] = df[target].rolling(21).std().round(0)
+            if k >= 7:
+                df[f'{target}RollingMedian{k}'] = df[target].rolling(k).median()
+                df[f'{target}RollingSkew{k}'] = df[target].rolling(k).skew().round(0)
+                df[f'{target}RollingStd{k}'] = df[target].rolling(k).std().round(0)
+
+
         df[f'{target}DaysSince100'] = (df[f'{target}CumSum'] > 100).cumsum()
+        df[f'{target}DaysSince500'] = (df[f'{target}CumSum'] > 500).cumsum()
         df[f'{target}DaysSince1000'] = (df[f'{target}CumSum'] > 1000).cumsum()
-        df[f'{target}DaysSince5000'] = (df[f'{target}CumSum'] > 5000).cumsum()
 
-
+        df[f'{target}RollingMeanDiff3d'] = df[f'{target}RollingMean7'] / (df[f'{target}RollingMean3'] + 1) - 1
         df[f'{target}RollingMeanDiff2w'] = df[f'{target}RollingMean7'] / (df[f'{target}RollingMean14'] + 1) - 1
         df[f'{target}RollingMeanDiff3w'] = df[f'{target}RollingMean7'] / (df[f'{target}RollingMean21'] + 1) - 1
+
+        df[f'{target}RollingMeanSub3d'] =  df[f'{target}RollingMean7'] - df[f'{target}RollingMean3']
+        df[f'{target}RollingMeanSub2w'] =  df[f'{target}RollingMean14'] - df[f'{target}RollingMean7']
+        df[f'{target}RollingMeanSub3w'] =  df[f'{target}RollingMean21'] - df[f'{target}RollingMean7']
+
+
 
     df['DeathRate'] = 100 * df.DeathsCumSum.clip(0, None) / (df.ConfirmedCumSum.clip(0, None) + 1)
     df['DeathRateRolling3w'] = 100 * df.DeathsRollingMean7.clip(0, None) / (
@@ -68,14 +91,19 @@ def get_nearby_features(features, rank):
     closest = pd.read_csv(CLOSEST_PATH)
 
     to_aggregate = ['ConfirmedCumSum',
-                    'ConfirmedRollingMean21',
+                    #'ConfirmedRollingMean28',
                     'ConfirmedRollingMean14',
                     'ConfirmedRollingMean7',
+                    'ConfirmedRollingMean3',
+                    #'Confirmed',
 
                     'DeathsCumSum',
-                    'DeathsRollingMean21',
+                    #'DeathsRollingMean28',
                     'DeathsRollingMean14',
-                    'DeathsRollingMean7']
+                    'DeathsRollingMean7',
+                    'DeathsRollingMean3',
+                    #'Deaths'
+                    ]
 
     subset = features[['Date', 'Location','Population'] + to_aggregate].copy()
     subset = subset.rename(columns={'Location': 'Location_1'})
@@ -119,17 +147,20 @@ def mae(y_preds, y_true):
         return np.nan
 
 def apply_lgb(features, target, q, params, k, num_round=1000):
-    #lb = LabelEncoder()
+    print(params)
     features['Date'] = pd.to_datetime(features['Date'])
-    #features['Location2id'] = LabelEncoder().fit_transform(features['Location'])
+    # features['Location2id'] = LabelEncoder().fit_transform(features['Location'])
     features['TARGET'] = features.groupby('Location')[target].apply(lambda x:x.rolling(k).sum().shift(1-k))  # included today
     features['DaysTillEnd'] = (pd.to_datetime(FORECAST_START_DATE) - pd.to_datetime(features['Date'])).map(lambda x:x.days) + 1
     TRAIN_END_DATE = pd.to_datetime(FORECAST_START_DATE) - dt.timedelta(days=(k-1))
-    features['Weight'] = 1.0 / features['DaysTillEnd'] ** 0.5
+    # features['Weight'] = 1.0 / features['DaysTillEnd'] ** 0.5
+    features['Weight'] = features['DaysTillEnd'] ** 0.5 / features['DaysTillEnd'] ** 0.5
     do_not_use = [
-                     'Location', 'Date', 'TARGET', 'Weight',  'DaysTillEnd', 'DateTime', 
-                 ] + ['Confirmed', 'Deaths']
+                     'Location', 'Date', 'TARGET', 'Weight',  'DaysTillEnd', 'DateTime',
+                 ]  
+                 # + ['Confirmed', 'Deaths']
     feature_names = [f for f in features.columns if f not in do_not_use]
+    features = features[features['Location'].isin(use_states)].reset_index(drop=True)
 
     train = features.loc[(~features.TARGET.isnull()) & 
                          (features.Date > TRAIN_START) &  
@@ -153,10 +184,11 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
 
         model = lgb.train(params, train_set, 
                           num_round, 
-                          valid_sets=[train_set, valid_set],
+                          valid_sets=[train_set, valid_set, test_set],
                           # early_stopping_rounds=50, 
                           feval=partial(mae_loss), 
-                          verbose_eval=False)
+                          verbose_eval=100
+                          )
 
         train.loc[te_ind, 'PREDICTION'] = model.predict(val[feature_names])
         test['PREDICTION'] += model.predict(test[feature_names]) / N_FOLDS
@@ -193,16 +225,16 @@ if __name__=='__main__':
     LABEL_END_DATE = '2020-10-18'    
     # test start day to infer next epidemic weeks (included this day)
     # prefer to be sunday of this epdimic week (the same as LABEL_DATE_END)
-    FORECAST_START_DATE = '2020-10-18'   
+    FORECAST_START_DATE = '2020-09-20'   
 
     DAYS = 7
-    DEBUG = False
+    ONLY_POINT = True
     LEVEL = 'US'
     PRECISION = 2
     N_FOLDS = 5
     RELOAD_FEATURES = True
     N_SEEDS = 20
-    TRAIN_START = '2020-03-31'
+    TRAIN_START = '2020-04-30'
     CLOSEST_PATH = '/home/zhgao/COVID-Research/data/us_geo_closest.csv'
     FEATURE_FILE_PATH = f'/home/zhgao/COVID-Research/data/features_{LABEL_END_DATE}.csv'
     DATA_PATH = '/home/zhgao/COVID19/COVID-19/csse_covid_19_data/csse_covid_19_time_series'
@@ -227,12 +259,6 @@ if __name__=='__main__':
         features.loc[:, 'DeathRate'] = features.loc[:, 'DeathRate'].clip(0, 50)
         features.loc[:, 'DeathRateRolling3w'] = features.loc[:, 'DeathRateRolling3w'].clip(0, 50)
 
-        round_1_digit = [
-            'ConfirmedRollingMean21', 'ConfirmedRollingMean14', 'ConfirmedRollingMean7', 'ConfirmedRollingMean3',
-        ]
-        for c in round_1_digit:
-            features.loc[:, c] = features[c].round(1)
-
         features = features.round(PRECISION)
         features.to_csv(FEATURE_FILE_PATH, index=False)
 
@@ -247,8 +273,7 @@ if __name__=='__main__':
                          0.35,0.4,0.45,0.5,0.55,0.6,0.65,
                          0.7,0.75,0.8,0.85,0.9,0.95,0.975,0.99]:
                 
-                if DEBUG:
-                    N_SEEDS = 1
+                if ONLY_POINT:
                     if k!=7 or q!=0.5:
                         continue
 
@@ -266,8 +291,8 @@ if __name__=='__main__':
                         metric='mae',
                         max_depth=np.random.choice([14,15,16]),
                         learning_rate=np.random.choice([0.06,0.07,0.08,0.09]),
-                        feature_fraction=np.random.choice([0.5, 0.6, 0.7, 0.8]),
-                        bagging_freq=np.random.choice([2, 3, 5]),
+                        feature_fraction=np.random.choice([0.35, 0.45, 0.55, 0.65]),
+                        bagging_freq=np.random.choice([3, 4, 5]),
                         bagging_fraction=np.random.choice([0.7, 0.8]),
                         min_data_in_leaf=np.random.choice([5, 15]),
                         num_leaves=np.random.choice([127, 255]),
@@ -276,12 +301,13 @@ if __name__=='__main__':
                         n_jobs=12
                     )
                     if target == 'Deaths':
-                        num_round = np.random.choice([35,40,45,50])
+                        num_round = np.random.choice([35,40,50,55])
                     if target == 'Confirmed':
                         num_round = np.random.choice([50,60,70,80])
                     _cv_error, _val_error, _train_preds, _test_preds, feature_importances = apply_lgb(
                         features, target, q, params, k, num_round=num_round)
                     print(target,k,q,seed,_cv_error,_val_error)
+                    print(feature_importances.head(40))
                     if seed == 0:
                         train_preds = _train_preds.copy()
                         test_preds = _test_preds.copy()
@@ -295,7 +321,8 @@ if __name__=='__main__':
                         cv_error += _cv_error / N_SEEDS_USE
                         val_error += _val_error / N_SEEDS_USE
                         
-                    
+                print(mae(test_preds['PREDICTION'], test_preds['TARGET']))
+
                 train_results.append(train_preds)
                 test_results.append(test_preds)
 
