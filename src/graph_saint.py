@@ -128,7 +128,6 @@ class MySAINTSampler(object):
 
     def __get_data_from_sample__(self, sample):
         n_id, e_id, adj, res_n_id = sample
-
         data = self.data.__class__()
         data.num_nodes = n_id.size(0)
         row, col, value = adj.coo()

@@ -233,7 +233,8 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
     data = data[data['Country/Region'].isin(use_countries)].reset_index(drop=True)
     data['weekday'] = data['date'].map(lambda x:x.weekday())
     dates = data['date'].unique()
-    countries = data['Country/Region'].unique()
+    countries = [item for item in data['Country/Region'].unique() if item not in ['US']]
+    print(countries)
 
     use_features = [
        'retail_and_recreation_percent_change_from_baseline',

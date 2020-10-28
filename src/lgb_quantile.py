@@ -184,7 +184,8 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
 
         model = lgb.train(params, train_set, 
                           num_round, 
-                          valid_sets=[train_set, valid_set, test_set],
+                          # valid_sets=[train_set, valid_set, test_set],
+                          valid_sets=[train_set, valid_set],
                           # early_stopping_rounds=50, 
                           feval=partial(mae_loss), 
                           verbose_eval=100
@@ -222,10 +223,10 @@ def get_locations():
 
 if __name__=='__main__':
     # newest date of labeling data
-    LABEL_END_DATE = '2020-10-18'    
+    LABEL_END_DATE = '2020-10-25'    
     # test start day to infer next epidemic weeks (included this day)
     # prefer to be sunday of this epdimic week (the same as LABEL_DATE_END)
-    FORECAST_START_DATE = '2020-09-20'   
+    FORECAST_START_DATE = '2020-10-25'   
 
     DAYS = 7
     ONLY_POINT = True
@@ -233,7 +234,7 @@ if __name__=='__main__':
     PRECISION = 2
     N_FOLDS = 5
     RELOAD_FEATURES = True
-    N_SEEDS = 20
+    N_SEEDS = 50
     TRAIN_START = '2020-04-30'
     CLOSEST_PATH = '/home/zhgao/COVID-Research/data/us_geo_closest.csv'
     FEATURE_FILE_PATH = f'/home/zhgao/COVID-Research/data/features_{LABEL_END_DATE}.csv'
@@ -274,7 +275,7 @@ if __name__=='__main__':
                          0.7,0.75,0.8,0.85,0.9,0.95,0.975,0.99]:
                 
                 if ONLY_POINT:
-                    if k!=7 or q!=0.5:
+                    if q!=0.5:
                         continue
 
                 if q == 0.5:

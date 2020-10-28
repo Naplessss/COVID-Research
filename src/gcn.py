@@ -63,7 +63,6 @@ class MyGATConv(PyG.MessagePassing):
             x = torch.matmul(x, self.weight_n)
 
         edge_attr = torch.matmul(edge_attr, self.weight_e)
-
         return self.propagate(edge_index, size=size, x=x, edge_attr=edge_attr, edge_norm=edge_norm)
 
     def message(self, edge_index_i, x_i, x_j, edge_attr, edge_norm):
@@ -132,19 +131,20 @@ class GATNet(BaseGNNNet):
         return c2
 
     def subgraph_forward(self, X, g):
+        res_n_id = g['res_n_id'].clone().detach()
+        cent_n_id = g['cent_n_id'].clone().detach()
         edge_index = g['edge_index']
         edge_attr = g['edge_attr']
         if 'edge_norm' in g:
             edge_norm = g['edge_norm']
         else:
             edge_norm = None
-
         c1 = self.conv1(X, edge_index, edge_attr=edge_attr, edge_norm=edge_norm)
         c1 = F.leaky_relu(c1)
-
         c2 = self.conv2(c1, edge_index, edge_attr=edge_attr, edge_norm=edge_norm)
         c2 = F.leaky_relu(c2)
-
+        g['res_n_id'] = res_n_id
+        g['cent_n_id'] = cent_n_id
         return c2
 
 

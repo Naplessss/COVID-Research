@@ -1,11 +1,11 @@
-date=2020-10-11
+date=2020-10-25
 echo $date
 echo 'update CSSE data...'
-cd /home/zhgao/COVID19/COVID-19
-git pull
+# cd /home/zhgao/COVID19/COVID-19
+# git pull
 echo 'update features...'
-cd /home/zhgao/COVID-Research/src
-python utils.py
+# cd /home/zhgao/COVID-Research/src
+# python utils.py
 
 CUDA_VISIBLE_DEVICES=0 nohup sh forecast.epiweek.sh $date deaths 7 > deaths.7.log&
 CUDA_VISIBLE_DEVICES=0 nohup sh forecast.epiweek.sh $date deaths 14 > deaths.14.log&

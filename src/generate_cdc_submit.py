@@ -33,24 +33,26 @@ def get_predict(model_dir='/home/zhgao/COVID-Research/weights_major/', model_fp=
     confirmed_label.index = confirmed_label.index.map(location2id)
     
     for fname in fname_pattern:
-        print(fname)
-        test = torch.load(os.path.join(fname,'Output','test.out.cpt'))
-        predict_value = [item if item>0 else 0 for item in np.expm1(test['pred']['val'].values)]
-        res_test = pd.DataFrame({'pred':predict_value,
-                  'label':np.expm1(test['label']['val']).values,
-                  'forecast_idx':test['label'].reset_index()['forecast_idx'].values,
-                  'countries':test['countries'],
-                  'dates':test['dates']})   
-        res_test = res_test.rename({'countries':'region','dates':'target_start_date','pred':'value'},axis=1)
-        res_test['region'] = res_test['region'].map(location2id)
-        res_test = res_test[res_test.region!='11001']
-        res_test = res_test[['value','region']].set_index('region',drop=True).rename({'value': fname.split('/')[-1]},
-                                                                                    axis=1)
+        try:
+            test = torch.load(os.path.join(fname,'Output','test.out.cpt'))
+            predict_value = [item if item>0 else 0 for item in np.expm1(test['pred']['val'].values)]
+            res_test = pd.DataFrame({'pred':predict_value,
+                    'label':np.expm1(test['label']['val']).values,
+                    'forecast_idx':test['label'].reset_index()['forecast_idx'].values,
+                    'countries':test['countries'],
+                    'dates':test['dates']})   
+            res_test = res_test.rename({'countries':'region','dates':'target_start_date','pred':'value'},axis=1)
+            res_test['region'] = res_test['region'].map(location2id)
+            res_test = res_test[res_test.region!='11001']
+            res_test = res_test[['value','region']].set_index('region',drop=True).rename({'value': fname.split('/')[-1]},
+                                                                                        axis=1)
 
-        if 'US' not in res_test.index:
-            res_test = res_test.append(pd.DataFrame(res_test.sum().values, index=['US'], columns=[fname.split('/')[-1]])) 
-        
-        res = pd.concat([res, res_test], axis=1)
+            if 'US' not in res_test.index:
+                res_test = res_test.append(pd.DataFrame(res_test.sum().values, index=['US'], columns=[fname.split('/')[-1]])) 
+            
+            res = pd.concat([res, res_test], axis=1)
+        except:
+            continue
     
     return res, deaths_label, confirmed_label
 
@@ -172,8 +174,13 @@ def generate_gnn_cdc_format(save_dir = './',
                     results.append(tmp_cum)
 
     for i in range(week_size-1, 0, -1):
-        predict_deaths_list[i] = predict_deaths_list[i] - predict_deaths_list[i-1]
-        predict_confirmed_list[i] = predict_confirmed_list[i] - predict_confirmed_list[i-1]
+        predict_deaths_list[i] = predict_deaths_list[i] - pd.DataFrame(predict_deaths_list[i-1].values, 
+                                                                            columns=predict_deaths_list[i].columns,
+                                                                            index=predict_deaths_list[i].index)
+        predict_confirmed_list[i] = predict_confirmed_list[i] - pd.DataFrame(predict_confirmed_list[i-1].values, 
+                                                                            columns=predict_confirmed_list[i].columns,
+                                                                            index=predict_confirmed_list[i].index)
+
     
     for predict_list,label,type_name in [[predict_deaths_list, deaths_label,'death'],
                                     [predict_confirmed_list, confirmed_label,'case']]:
@@ -218,12 +225,11 @@ def generate_gnn_cdc_format(save_dir = './',
     return results
 
 if __name__=='__main__':
-
     results = generate_gnn_cdc_format(save_dir = '../CDC',
                             model_name = 'MSRA-DeepST',
-                            model_use=  ['GNN'],        # ['NBEATS','GNN', 'KRNN']
-                            forecast_date = '2020-09-21',
-                            predict_date = '2020-09-26',
+                            model_use=  ['GNN','NBEATS'],        # ['NBEATS','GNN', 'KRNN']
+                            forecast_date = '2020-10-26',
+                            predict_date = '2020-10-31',
                             quantile = use_quantile_list,
-                            use_ensemble= False,
+                            use_ensemble= True,
                             factor = 0.5) 

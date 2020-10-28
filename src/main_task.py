@@ -131,13 +131,12 @@ class WrapperNet(nn.Module):
 
     def forward(self, input_day, g):
         if config.model_type == 'sandwich':
-            out, atten_context = self.net(input_day, g)
+            out = self.net(input_day, g)
         else:
             out = self.net(input_day, g)
-            atten_context = None
         if self.config.use_lr:
             out = out + self.lr(input_day)
-        return out, atten_context
+        return out
 
 class RNNTask(BasePytorchTask):
     def __init__(self, config):
@@ -264,7 +263,7 @@ class RNNTask(BasePytorchTask):
         input_day, y_gbm, y = inputs
         if self.config.use_gbm:
             y = y - y_gbm
-        y_hat, _ = self.model(input_day, g)
+        y_hat = self.model(input_day, g)
         assert(y.size() == y_hat.size())
         loss = self.loss_func(y_hat, y)
 
@@ -282,12 +281,11 @@ class RNNTask(BasePytorchTask):
             BAR_KEY: {'train_loss': loss_i},
             SCALAR_LOG_KEY: {'train_loss': loss_i}
         }
-
     def eval_step(self, batch, batch_idx, tag):
         inputs, g, rows = batch
         input_day, y_gbm, y = inputs
         forecast_length = y.size()[-1]
-        y_hat, _ = self.model(input_day, g)
+        y_hat = self.model(input_day, g)
         if self.config.use_gbm:
             y_hat += y_gbm
 
@@ -300,10 +298,9 @@ class RNNTask(BasePytorchTask):
             # to avoid duplicated computations
             y = y[:, res_n_id]
             y_hat = y_hat[:, res_n_id]
-            cent_n_id = cent_n_id[res_n_id]
+            cent_n_id = cent_n_id[res_n_id]           
         else:
             cent_n_id = g['cent_n_id']
-
         if self.config.use_saintdataset:
             index_ptr = torch.cartesian_prod(
                 torch.arange(rows.size(0)),
@@ -324,7 +321,6 @@ class RNNTask(BasePytorchTask):
                 'forecast_idx': index_ptr[:,2].data.cpu().numpy(),
                 'val': y_hat.flatten().data.cpu().numpy()
             })
-
         else:
             index_ptr = torch.cartesian_prod(
                 torch.arange(rows.size(0)),

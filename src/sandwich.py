@@ -35,10 +35,7 @@ class GCNBlock(nn.Module):
         t2 = F.relu(self.gcn(t1, g))
         out = t2.view(node_num, batch_size, seq_len, -1).\
             permute(1, 0, 2, 3).contiguous()
-        atten_context = [self.gcn.conv1.gate, self.gcn.conv1.x_i, self.gcn.conv1.x_j,
-                        self.gcn.conv2.gate, self.gcn.conv2.x_i, self.gcn.conv2.x_j,
-                        t2]
-        return out, atten_context
+        return out
 
 
 class SandwichEncoder(nn.Module):
@@ -72,12 +69,10 @@ class SandwichEncoder(nn.Module):
             first_out = self.first_encoder(x, g['cent_n_id'])
         else:
             raise Exception('Unsupported graph type: {}'.format(g['type']))
-
-        gcn_out, atten_context = self.gcn(first_out, g)
+        gcn_out = self.gcn(first_out, g)
         second_out = self.second_encoder(gcn_out, g['cent_n_id'])
         encode_out = first_out + second_out
-
-        return encode_out, atten_context
+        return encode_out
 
 
 class SandwichModel(nn.Module):
@@ -102,10 +97,8 @@ class SandwichModel(nn.Module):
 
     def forward(self, input_day, g):
         input_day = self.add_date_embed(input_day)
-
-        day_encode, atten_context = self.day_encoder(input_day, g)
+        day_encode = self.day_encoder(input_day, g)
         day_pool, _ = day_encode.max(dim=2)
 
         out = self.out_fc(day_pool)
-        atten_context.append(day_pool)
-        return out, atten_context
+        return out
