@@ -29,7 +29,7 @@ class BaseGNNNet(nn.Module):
 
 class MyGATConv(PyG.MessagePassing):
     def __init__(self, in_channels, out_channels, edge_channels, aggr='max', normalize='none', **kwargs):
-        super().__init__(aggr=aggr, **kwargs)
+        super().__init__(aggr=aggr, node_dim=-3, **kwargs)
 
         self.in_channels = in_channels
         self.out_channels = out_channels
@@ -70,9 +70,6 @@ class MyGATConv(PyG.MessagePassing):
         x_j = torch.matmul(x_j, self.u)
         # gate = torch.sigmoid((x_i * x_j).sum(dim=-1)).unsqueeze(dim=-1)
         gate = torch.sigmoid((x_i * x_j).sum(dim=-1)).unsqueeze(dim=-1)
-        self.gate = gate
-        self.x_i = x_i
-        self.x_j = x_j
         msg = x_j * gate
         if edge_norm is None:
             return msg

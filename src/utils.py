@@ -220,6 +220,20 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7
     save_fp = '.'.join(data_fp.split('.')[:-1]) + '_' + str(horizon) + '.csv'
     df.to_csv(save_fp, index=False, header=True)
 
+def process_government_data():
+    gov_index = pd.read_csv('https://storage.googleapis.com/covid19-open-data/v2/index.csv')
+    gov_index =gov_index.loc[(gov_index['aggregation_level']==1) & (gov_index['country_code']=='US'),
+                            ['key','subregion1_name']].rename({'subregion1_name':'Country/Region'},axis=1).reset_index(drop=True)
+    gov_df = pd.read_csv('https://storage.googleapis.com/covid19-open-data/v2/oxford-government-response.csv')
+    gov = pd.merge(gov_index, gov_df, on='key', how='left').drop('key', axis=1).fillna(0.0)
+    feature_cols = [item for item in gov.columns if item not in ['Country/Region','date']]
+    for col in feature_cols:
+        gov[col] = np.log1p(gov[col])
+    # gov_df['date'] = gov_df['date'].map(lambda x: datetime.datetime.strptime(x,'%Y-%M-%d'))
+    # gov_df['date'] = pd.to_datetime(gov_df['date'])
+    # print(gov_df.dtypes)
+
+    return gov
 
 def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days, label='deaths_target', use_mobility=True, logger=print):
     logger('Load Data from ' + data_fp)
@@ -231,10 +245,156 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
     min_peak_size = max(0, min_peak_size)
     use_countries = min_confirmed[min_confirmed>=np.log1p(min_peak_size)].index.values
     data = data[data['Country/Region'].isin(use_countries)].reset_index(drop=True)
+
+    gov = process_government_data()
+    gov['date'] = pd.to_datetime(gov['date'])
+    data = pd.merge(data, gov, on=['Country/Region', 'date'], how='left').fillna(0.0)
+
     data['weekday'] = data['date'].map(lambda x:x.weekday())
     dates = data['date'].unique()
     countries = [item for item in data['Country/Region'].unique() if item not in ['US']]
     print(countries)
+
+    gov_features = ['school_closing', 'workplace_closing', 'cancel_public_events', 
+                    'restrictions_on_gatherings', 'public_transport_closing', 'stay_at_home_requirements', 
+                    'restrictions_on_internal_movement', 'international_travel_controls', 'income_support', 
+                    'debt_relief', 'fiscal_measures', 'international_support', 'public_information_campaigns',
+                    'testing_policy', 'contact_tracing', 'emergency_investment_in_healthcare', 
+                    'investment_in_vaccines', 'stringency_index']
+    use_features = [
+       'retail_and_recreation_percent_change_from_baseline',
+       'grocery_and_pharmacy_percent_change_from_baseline',
+       'parks_percent_change_from_baseline',
+       'transit_stations_percent_change_from_baseline',
+       'workplaces_percent_change_from_baseline',
+       'residential_percent_change_from_baseline', 
+       'confirmed', 'deaths','recovered',
+       'confirmed_rolling', 'deaths_rolling','recovered_rolling',
+       'weekday']
+    if not use_mobility:
+        use_features = [
+       'confirmed', 'deaths','recovered',
+       'confirmed_rolling', 'deaths_rolling','recovered_rolling',
+       'weekday']
+    
+    target_features = [
+        'confirmed_target','deaths_target','recovered_target'
+    ]
+
+    df = pd.DataFrame(index=pd.MultiIndex.from_product([countries, dates],
+                      names=['Country/Region','date'])).reset_index()
+    
+    df = pd.merge(df, data, on=['Country/Region','date'], how='left').fillna(0.0)
+
+    df_gov = df[gov_features].values.reshape(len(countries), len(dates), len(gov_features)).copy()
+    # df[gov_features].to_csv('../features/gov.csv')
+    df = df[use_features + target_features].values.reshape(len(countries), len(dates), len(use_features)+len(target_features))    
+    # dates = list(dates)
+    # dates.append(datetime.timedelta(days=1) + pd.to_datetime(dates[-1]))
+    print(df_gov.shape, df.shape)
+    dates = list(map(lambda x: pd.to_datetime(x), dates))
+    day_inputs = []
+    day_gov_inputs = []
+    outputs = []
+    label_dates = []
+    label2idx = {
+        'confirmed_target':-3,
+        'deaths_target':-2,
+        'recovered_target':-1
+    }
+    label_idx = label2idx.get(label, -2)
+    for day_idx in range(lookback_days, len(dates)):
+        day_input = df[:, day_idx-lookback_days+1:day_idx+1, :-3].copy()
+        day_gov_input = df_gov[:, day_idx-lookback_days+1:day_idx+1, :].copy()
+        if day_idx + lookahead_days > len(dates):
+            tmp = df[:, day_idx:day_idx + lookahead_days, label_idx].copy()
+            sz = tmp.shape
+            tmp_empty = np.zeros((sz[0], lookahead_days - sz[1]))
+            output = np.concatenate([tmp, tmp_empty], axis=1)
+        else:
+            output = df[:, day_idx:day_idx + lookahead_days, label_idx].copy() 
+
+        day_inputs.append(day_input)
+        day_gov_inputs.append(day_gov_input)
+        outputs.append(output)
+        label_dates.append(dates[day_idx])     
+    
+    # [num_samples, num_nodes, lookback_days, day_feature_dim]
+    day_inputs = np.stack(day_inputs, axis=0)
+    # [num_samples, num_nodes, lookback_days, day_gov_feature_dim]
+    day_gov_inputs = np.stack(day_gov_inputs, axis=0)
+    # [num_samples, num_nodes, lookahead_days]
+    outputs = np.stack(outputs, axis=0)
+
+    day_inputs = torch.from_numpy(day_inputs).float()
+    day_gov_inputs = torch.from_numpy(day_gov_inputs).float()
+    outputs = torch.from_numpy(outputs).float()
+    A = torch.ones(len(countries),len(countries)).to_sparse()
+    edge_index = A._indices().long()
+
+    logger("Input size: {}; {},Output size: {}, Edge size: {}".format(
+        day_inputs.size(), day_gov_inputs.size(), outputs.size(), edge_index.size()))
+
+
+    return day_inputs, day_gov_inputs, outputs, edge_index, label_dates, countries
+
+def load_npz_data(data_fp):
+
+    data = np.load(data_fp, allow_pickle=True)
+    day_inputs = torch.from_numpy(data['day_inputs']).float()
+    countries = data['countries'].copy()
+    dates = data['label_date'].copy()
+    outputs = torch.from_numpy(data['outputs']).float()
+    edge_index = torch.from_numpy(data['edge_index']).long()
+    gbm_outputs = torch.from_numpy(data['gbm_outputs']).float()
+
+    return day_inputs, gbm_outputs, outputs, edge_index, dates, countries
+
+class ExpL1Loss(nn.Module):
+    def __init__(self, reduction='mean'):
+        super(ExpL1Loss, self).__init__()
+        self.reduction = reduction
+
+    def forward(self, input, target):
+        input = torch.expm1(input)
+        target = torch.expm1(target)
+        return F.l1_loss(input, target, reduction=self.reduction) 
+
+def load_data_ahead(data_fp, start_date, min_peak_size, lookback_days, lookahead_days, label='deaths_target', 
+        use_mobility=True,select_features=[], set_values=[], logger=print):
+    logger('Load Data from ' + data_fp)
+    logger('lookback_days={}, lookahead_days={}, '.format(
+        lookback_days, lookahead_days))
+    data = pd.read_csv(data_fp, parse_dates=['date'])
+    data = data[data.date>=pd.to_datetime(start_date)].reset_index(drop=True)
+    min_confirmed = data.groupby('Country/Region')['confirmed'].max()
+    min_peak_size = max(0, min_peak_size)
+    use_countries = min_confirmed[min_confirmed>=np.log1p(min_peak_size)].index.values
+    data = data[data['Country/Region'].isin(use_countries)].reset_index(drop=True)
+
+    gov = process_government_data()
+    gov['date'] = pd.to_datetime(gov['date'])
+    data = pd.merge(data, gov, on=['Country/Region', 'date'], how='left').fillna(0.0)
+
+    data['weekday'] = data['date'].map(lambda x:x.weekday())
+    dates = data['date'].unique()
+    countries = [item for item in data['Country/Region'].unique() if item not in ['US']]
+    print(countries)
+
+    gov_features = ['school_closing', 'workplace_closing', 'cancel_public_events', 
+                    'restrictions_on_gatherings', 'public_transport_closing', 'stay_at_home_requirements', 
+                    'restrictions_on_internal_movement', 'international_travel_controls', 'income_support', 
+                    'debt_relief', 'fiscal_measures', 'international_support', 'public_information_campaigns',
+                    'testing_policy', 'contact_tracing', 'emergency_investment_in_healthcare', 
+                    'investment_in_vaccines', 'stringency_index']
+    #### no intervention
+    # gov[gov_features] = 0.0
+    print('###change####')
+    print(select_features, set_values)
+    for col,val in zip(select_features, set_values):
+        print(col, val)
+        data[col] = val
+    print(data[select_features].head())
 
     use_features = [
        'retail_and_recreation_percent_change_from_baseline',
@@ -260,71 +420,79 @@ def load_data(data_fp, start_date, min_peak_size, lookback_days, lookahead_days,
                       names=['Country/Region','date'])).reset_index()
     
     df = pd.merge(df, data, on=['Country/Region','date'], how='left').fillna(0.0)
-    df = df[use_features + target_features].values.reshape(len(countries), len(dates), len(use_features)+len(target_features))
-    
+
+    df_gov = df[gov_features].values.reshape(len(countries), len(dates), len(gov_features)).copy()
+    # df[gov_features].to_csv('../features/gov.csv')
+    df = df[use_features + target_features].values.reshape(len(countries), len(dates), len(use_features)+len(target_features))    
     # dates = list(dates)
     # dates.append(datetime.timedelta(days=1) + pd.to_datetime(dates[-1]))
+    print(df_gov.shape, df.shape)
     dates = list(map(lambda x: pd.to_datetime(x), dates))
     day_inputs = []
+    day_gov_inputs = []
     outputs = []
     label_dates = []
     label2idx = {
         'confirmed_target':-3,
         'deaths_target':-2,
-        'recovered_target':-1
+        'recovered_target':-1,
+        'confirmed':0,
+        'deaths':1,
     }
     label_idx = label2idx.get(label, -2)
     for day_idx in range(lookback_days, len(dates)):
         day_input = df[:, day_idx-lookback_days+1:day_idx+1, :-3].copy()
-        output = df[:, day_idx:day_idx + 1, label_idx].copy()            
+        # day_gov_input = df_gov[:, day_idx-lookback_days+1:day_idx+1, :].copy()
+        day_gov_input = df_gov[:, day_idx: day_idx + lookahead_days, :].copy()
+        if day_idx + lookahead_days > len(dates):
+            tmp = df_gov[:, day_idx: day_idx + lookahead_days, :].copy()
+            mean_val = tmp.mean(axis=1)
+            sz = tmp.shape
+            tmp_empty = np.zeros((sz[0], lookahead_days - sz[1], sz[2]))
+            day_gov_input = np.concatenate([tmp, tmp_empty], axis=1)
+            day_gov_input = np.expand_dims(mean_val, axis=1).repeat(lookahead_days, axis=1)
+
+            tmp = df[:, day_idx:day_idx + lookahead_days, label_idx].copy()
+            sz = tmp.shape
+            tmp_empty = np.zeros((sz[0], lookahead_days - sz[1]))
+            output = np.concatenate([tmp, tmp_empty], axis=1)
+        else:
+            output = df[:, day_idx:day_idx + lookahead_days, label_idx].copy()
+            day_gov_input = df_gov[:, day_idx: day_idx + lookahead_days, :].copy()
+            mean_val = day_gov_input.mean(axis=1)
+            day_gov_input = np.expand_dims(mean_val, axis=1).repeat(lookahead_days, axis=1)
+
+
         day_inputs.append(day_input)
+        day_gov_inputs.append(day_gov_input)
         outputs.append(output)
         label_dates.append(dates[day_idx])     
     
     # [num_samples, num_nodes, lookback_days, day_feature_dim]
     day_inputs = np.stack(day_inputs, axis=0)
+    # [num_samples, num_nodes, lookback_days, day_gov_feature_dim]
+    day_gov_inputs = np.stack(day_gov_inputs, axis=0)
     # [num_samples, num_nodes, lookahead_days]
     outputs = np.stack(outputs, axis=0)
 
     day_inputs = torch.from_numpy(day_inputs).float()
+    day_gov_inputs = torch.from_numpy(day_gov_inputs).float()
     outputs = torch.from_numpy(outputs).float()
     A = torch.ones(len(countries),len(countries)).to_sparse()
     edge_index = A._indices().long()
 
-    logger("Input size: {}, Output size: {}, Edge size: {}".format(
-        day_inputs.size(), outputs.size(), edge_index.size()))
+    logger("Input size: {}; {},Output size: {}, Edge size: {}".format(
+        day_inputs.size(), day_gov_inputs.size(), outputs.size(), edge_index.size()))
 
 
-    return day_inputs, outputs, edge_index, label_dates, countries
-
-def load_npz_data(data_fp):
-
-    data = np.load(data_fp, allow_pickle=True)
-    day_inputs = torch.from_numpy(data['day_inputs']).float()
-    countries = data['countries'].copy()
-    dates = data['label_date'].copy()
-    outputs = torch.from_numpy(data['outputs']).float()
-    edge_index = torch.from_numpy(data['edge_index']).long()
-    gbm_outputs = torch.from_numpy(data['gbm_outputs']).float()
-
-    return day_inputs, gbm_outputs, outputs, edge_index, dates, countries
-
-class ExpL1Loss(nn.Module):
-    def __init__(self, reduction='mean'):
-        super(ExpL1Loss, self).__init__()
-        self.reduction = reduction
-
-    def forward(self, input, target):
-        input = torch.expm1(input)
-        target = torch.expm1(target)
-        return F.l1_loss(input, target, reduction=self.reduction) 
-
+    return day_inputs, day_gov_inputs, outputs, edge_index, label_dates, countries
 
 if __name__ == "__main__":
     # raw_data_preprocessing(data_fp='../data/daily_mobility_china.csv', horizon=7, only_china=True)
     #raw_data_preprocessing(data_fp='../data/daily_mobility_global.csv',horizon=7,only_china=False)
-    raw_data_preprocessing_US(horizon=7)
-    raw_data_preprocessing_US(horizon=14)
-    raw_data_preprocessing_US(horizon=21)
-    raw_data_preprocessing_US(horizon=28)
+    # raw_data_preprocessing_US(horizon=7)
+    # raw_data_preprocessing_US(horizon=14)
+    # raw_data_preprocessing_US(horizon=21)
+    # raw_data_preprocessing_US(horizon=28)
 
+    process_government_data()

@@ -223,17 +223,17 @@ def get_locations():
 
 if __name__=='__main__':
     # newest date of labeling data
-    LABEL_END_DATE = '2020-10-25'    
+    LABEL_END_DATE = '2020-11-01'    
     # test start day to infer next epidemic weeks (included this day)
     # prefer to be sunday of this epdimic week (the same as LABEL_DATE_END)
-    FORECAST_START_DATE = '2020-10-25'   
+    FORECAST_START_DATE = '2020-11-01'   
 
     DAYS = 7
     ONLY_POINT = True
     LEVEL = 'US'
     PRECISION = 2
     N_FOLDS = 5
-    RELOAD_FEATURES = True
+    RELOAD_FEATURES = False
     N_SEEDS = 50
     TRAIN_START = '2020-04-30'
     CLOSEST_PATH = '/home/zhgao/COVID-Research/data/us_geo_closest.csv'

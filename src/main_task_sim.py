@@ -21,7 +21,7 @@ from base_task import add_config_to_argparse, BaseConfig, BasePytorchTask, \
     LOSS_KEY, BAR_KEY, SCALAR_LOG_KEY, VAL_SCORE_KEY
 
 from dataset import SAINTDataset, SimpleDataset
-from utils import load_data, load_npz_data, ExpL1Loss
+from utils import load_data, load_npz_data, ExpL1Loss, load_data_ahead
 from n_beats import NBeatsModel
 from sandwich import SandwichModel
 from krnn import KRNNModel
@@ -93,6 +93,10 @@ class RNNConfig(BaseConfig):
         # batch sample type
         self.use_saintdataset = True
         self.use_lr = True
+
+        # select features
+        self.select_features = ''
+        self.set_values = ''
 
 class WrapperNet(nn.Module):
     def __init__(self, config):
@@ -207,15 +211,25 @@ class RNNTask(BasePytorchTask):
         if self.config.data_fp.endswith('.npz'):
             day_inputs, gbm_outputs, outputs, edge_index, dates, countries = load_npz_data(data_fp)
         else:
+            if self.config.select_features!='':
+                select_features = self.config.select_features.split('#')
+            else:
+                select_features = []
+            if self.config.set_values!='':
+                set_values = [int(item) for item in self.config.set_values.split('#')]
+            else:
+                set_values = []
             day_inputs, day_gov_inputs, outputs, edge_index, dates, countries = \
-                load_data(data_fp, 
+                load_data_ahead(data_fp, 
                 self.config.start_date, 
                 self.config.min_peak_size, 
                 self.config.lookback_days, 
                 self.config.lookahead_days,
                 self.config.label,
                 self.config.use_mobility, 
-                logger=self.log)
+                select_features,
+                set_values,
+                logger=self.log,)
             gbm_outputs = outputs
         # numpy default dtype is float64, but torch default dtype is float32
         self.day_inputs = day_inputs
@@ -490,94 +504,129 @@ class RNNTask(BasePytorchTask):
 
 
 if __name__ == '__main__':
+    TRAIN_TAG = True
     start_time = time.time()
+    if not TRAIN_TAG:
+        for select_features, set_values in zip([['school_closing', 'workplace_closing'],
+                                                ['stay_at_home_requirements'],
+                                                ['public_information_campaigns'],
+                                                ['restrictions_on_gatherings']],
+                                                [[0, 0],
+                                                [0],
+                                                [0],
+                                                [0]]):
+            out_fname = '.'.join(select_features) + '.' + '.'.join([str(item) for item in set_values]) + '.out.cpt'
+            print(out_fname)
+            # build argument parser and config
+            config = RNNConfig()
+            config.update_by_dict({'out_fname':out_fname,
+                                    'select_features':'#'.join(select_features),
+                                    'set_values':'#'.join([str(item) for item in set_values]),
+                                    'skip_train':'true'})
+            parser = argparse.ArgumentParser(description='RNN-Task')
+            add_config_to_argparse(config, parser)
 
-    # build argument parser and config
-    config = RNNConfig()
-    parser = argparse.ArgumentParser(description='RNN-Task')
-    add_config_to_argparse(config, parser)
+            # parse arguments to config
+            args = parser.parse_args()
+            config.update_by_dict(args.__dict__)
 
-    # parse arguments to config
-    args = parser.parse_args()
-    config.update_by_dict(args.__dict__)
+            # build validation task
+            task = RNNTask(config)
+            # Set random seed before the initialization of network parameters
+            # Necessary for distributed training
+            task.set_random_seed()
+            net = WrapperNet(task.config)
+            task.init_model_and_optimizer(net)
+            task.log('Build Validation Neural Nets')
 
-    # build validation task
-    task = RNNTask(config)
-    # Set random seed before the initialization of network parameters
-    # Necessary for distributed training
-    task.set_random_seed()
-    net = WrapperNet(task.config)
-    task.init_model_and_optimizer(net)
-    task.log('Build Validation Neural Nets')
-    # select epoch with best validation accuracy
-    best_epochs = 50
-    if not task.config.skip_train:
-        task.fit()
-        best_epochs = task._best_val_epoch
-        print('Best validation epochs: {}'.format(best_epochs))
+            # select epoch with best validation accuracy
+            best_epochs = 50
+            if not task.config.skip_train:
+                task.fit()
+                best_epochs = task._best_val_epoch
+                print('Best validation epochs: {}'.format(best_epochs))
 
-    # Resume the best checkpoint for evaluation
-    task.resume_best_checkpoint()
-    val_eval_out = task.val_eval()
-    test_eval_out = task.test_eval()
-    # dump evaluation results of the best checkpoint to val out
-    task.dump(val_out=val_eval_out,
-              test_out=test_eval_out,
-              epoch_idx=-1,
-              is_best=True,
-              dump_option=1)
-    task.log('Best checkpoint (epoch={}, {}, {})'.format(
-        task._passed_epoch, val_eval_out[BAR_KEY], test_eval_out[BAR_KEY]))
+            # Resume the best checkpoint for evaluation
+            task.resume_best_checkpoint()
+            val_eval_out = task.val_eval()
+            test_eval_out = task.test_eval()
+            # dump evaluation results of the best checkpoint to val out
+            task.dump(val_out=val_eval_out,
+                    test_out=test_eval_out,
+                    epoch_idx=-1,
+                    is_best=True,
+                    dump_option=1)
+            task.log('Best checkpoint (epoch={}, {}, {})'.format(
+                task._passed_epoch, val_eval_out[BAR_KEY], test_eval_out[BAR_KEY]))
 
-    if task.is_master_node:
-        for tag, eval_out in [
-            ('val', val_eval_out),
-            ('test', test_eval_out),
-        ]:
-            print('-'*15, tag)
-            scores = eval_out['scores']['mistakes']
-            print('-'*5, 'mistakes')
-            print('Average:')
-            print(scores.mean().to_frame('mistakes'))
-            print('Daily:')
-            print(scores)
+            if task.is_master_node:
+                for tag, eval_out in [
+                    ('val', val_eval_out),
+                    ('test', test_eval_out),
+                ]:
+                    print('-'*15, tag)
+                    scores = eval_out['scores']['mistakes']
+                    print('-'*5, 'mistakes')
+                    print('Average:')
+                    print(scores.mean().to_frame('mistakes'))
+                    print('Daily:')
+                    print(scores)
 
-    task.log('Training time {}s'.format(time.time() - start_time))
+            task.log('Training time {}s'.format(time.time() - start_time))
 
-    # # build task
-    # config.update_by_dict({'max_epochs':best_epochs+2, 'infer': True})
-    # task = RNNTask(config)
-    # task.set_random_seed()
-    # net = WrapperNet(task.config)
-    # task.init_model_and_optimizer(net)
-    # task.log('Build Neural Nets')
-    # if not task.config.skip_train:
-    #     task.fit()
+    else:
 
-    # # Resume the best checkpoint for evaluation
-    # task.resume_best_checkpoint()
-    # val_eval_out = task.val_eval()
-    # test_eval_out = task.test_eval()
-    # # dump evaluation results of the best checkpoint to val out
-    # task.dump(val_out=val_eval_out,
-    #           test_out=test_eval_out,
-    #           epoch_idx=-1,
-    #           is_best=True,
-    #           dump_option=1)
-    # task.log('Best checkpoint (epoch={}, {}, {})'.format(
-    #     task._passed_epoch, val_eval_out[BAR_KEY], test_eval_out[BAR_KEY]))
+        # build argument parser and config
+        config = RNNConfig()
+        parser = argparse.ArgumentParser(description='RNN-Task')
+        add_config_to_argparse(config, parser)
 
-    # if task.is_master_node:
-    #     for tag, eval_out in [
-    #         ('val', val_eval_out),
-    #         ('test', test_eval_out),
-    #     ]:
-    #         print('-'*15, tag)
-    #         scores = eval_out['scores']['mistakes']
-    #         print('-'*5, 'mistakes')
-    #         print('Average:')
-    #         print(scores.mean().to_frame('mistakes'))
-    #         print('Daily:')
-    #         print(scores)
+        # parse arguments to config
+        args = parser.parse_args()
+        config.update_by_dict(args.__dict__)
 
-    # task.log('Training time {}s'.format(time.time() - start_time))
+        # build validation task
+        task = RNNTask(config)
+        # Set random seed before the initialization of network parameters
+        # Necessary for distributed training
+        task.set_random_seed()
+        net = WrapperNet(task.config)
+        task.init_model_and_optimizer(net)
+        task.log('Build Validation Neural Nets')
+
+        # select epoch with best validation accuracy
+        best_epochs = 50
+        if not task.config.skip_train:
+            task.fit()
+            best_epochs = task._best_val_epoch
+            print('Best validation epochs: {}'.format(best_epochs))
+
+        # Resume the best checkpoint for evaluation
+        task.resume_best_checkpoint()
+        val_eval_out = task.val_eval()
+        test_eval_out = task.test_eval()
+        # dump evaluation results of the best checkpoint to val out
+        task.dump(val_out=val_eval_out,
+                test_out=test_eval_out,
+                epoch_idx=-1,
+                is_best=True,
+                dump_option=1)
+        task.log('Best checkpoint (epoch={}, {}, {})'.format(
+            task._passed_epoch, val_eval_out[BAR_KEY], test_eval_out[BAR_KEY]))
+
+        if task.is_master_node:
+            for tag, eval_out in [
+                ('val', val_eval_out),
+                ('test', test_eval_out),
+            ]:
+                print('-'*15, tag)
+                scores = eval_out['scores']['mistakes']
+                print('-'*5, 'mistakes')
+                print('Average:')
+                print(scores.mean().to_frame('mistakes'))
+                print('Daily:')
+                print(scores)
+
+        task.log('Training time {}s'.format(time.time() - start_time))
+
+

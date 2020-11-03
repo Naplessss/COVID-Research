@@ -51,7 +51,9 @@ def get_predict(model_dir='/home/zhgao/COVID-Research/weights_major/', model_fp=
                 res_test = res_test.append(pd.DataFrame(res_test.sum().values, index=['US'], columns=[fname.split('/')[-1]])) 
             
             res = pd.concat([res, res_test], axis=1)
+            print(fname)
         except:
+            # print(fname)
             continue
     
     return res, deaths_label, confirmed_label
@@ -227,9 +229,9 @@ def generate_gnn_cdc_format(save_dir = './',
 if __name__=='__main__':
     results = generate_gnn_cdc_format(save_dir = '../CDC',
                             model_name = 'MSRA-DeepST',
-                            model_use=  ['GNN','NBEATS'],        # ['NBEATS','GNN', 'KRNN']
-                            forecast_date = '2020-10-26',
-                            predict_date = '2020-10-31',
+                            model_use=  ['NBEATS','GNN'],        # ['NBEATS','GNN', 'KRNN']
+                            forecast_date = '2020-11-02',
+                            predict_date = '2020-11-07',
                             quantile = use_quantile_list,
                             use_ensemble= True,
                             factor = 0.5) 

@@ -86,7 +86,7 @@ class SandwichModel(nn.Module):
         day_fea_dim = config.day_fea_dim +  config.date_emb_dim - 1
         self.day_encoder = SandwichEncoder(config, day_fea_dim)
 
-        self.out_fc = nn.Linear(config.rnn_dim, 1)
+        self.out_fc = nn.Linear(config.rnn_dim, config.lookahead_days)
 
     def add_date_embed(self, input_day):
         # last 3 dims correspond to month, day, weekday
