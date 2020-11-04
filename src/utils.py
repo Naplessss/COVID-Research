@@ -229,6 +229,7 @@ def process_government_data():
     feature_cols = [item for item in gov.columns if item not in ['Country/Region','date']]
     for col in feature_cols:
         gov[col] = np.log1p(gov[col])
+    print(gov[col].max())
     # gov_df['date'] = gov_df['date'].map(lambda x: datetime.datetime.strptime(x,'%Y-%M-%d'))
     # gov_df['date'] = pd.to_datetime(gov_df['date'])
     # print(gov_df.dtypes)
@@ -450,7 +451,7 @@ def load_data_ahead(data_fp, start_date, min_peak_size, lookback_days, lookahead
             sz = tmp.shape
             tmp_empty = np.zeros((sz[0], lookahead_days - sz[1], sz[2]))
             day_gov_input = np.concatenate([tmp, tmp_empty], axis=1)
-            day_gov_input = np.expand_dims(mean_val, axis=1).repeat(lookahead_days, axis=1)
+            # day_gov_input = np.expand_dims(mean_val, axis=1).repeat(lookahead_days, axis=1)
 
             tmp = df[:, day_idx:day_idx + lookahead_days, label_idx].copy()
             sz = tmp.shape
@@ -460,7 +461,7 @@ def load_data_ahead(data_fp, start_date, min_peak_size, lookback_days, lookahead
             output = df[:, day_idx:day_idx + lookahead_days, label_idx].copy()
             day_gov_input = df_gov[:, day_idx: day_idx + lookahead_days, :].copy()
             mean_val = day_gov_input.mean(axis=1)
-            day_gov_input = np.expand_dims(mean_val, axis=1).repeat(lookahead_days, axis=1)
+            # day_gov_input = np.expand_dims(mean_val, axis=1).repeat(lookahead_days, axis=1)
 
 
         day_inputs.append(day_input)

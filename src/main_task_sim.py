@@ -127,21 +127,25 @@ class WrapperNet(nn.Module):
         
         if config.use_gov_gate:
             self.state_emb = nn.Embedding(self.config.num_nodes, self.config.gov_id_dim)
-            self.gov_gru = nn.GRU(input_size = self.config.day_gov_fea_dim, 
-                                  hidden_size = self.config.gov_hid_dim, 
-                                  batch_first = True)
-            
-            self.state_weight = nn.Parameter(torch.Tensor(self.config.gov_hid_dim, self.config.lookahead_days))
-            self.gov_weight = nn.Parameter(torch.Tensor(self.config.gov_id_dim, self.config.lookahead_days))
+            # self.gov_gru = nn.GRU(input_size = self.config.day_gov_fea_dim, 
+            #                       hidden_size = self.config.gov_hid_dim, 
+            #                       batch_first = True)
+            # self.gov_gru = nn.Linear(in_features = self.config.day_gov_fea_dim,
+            #                             out_features= self.config.gov_hid_dim)
+            self.state_weight = nn.Parameter(torch.Tensor(self.config.gov_hid_dim, 1))
+            # self.gov_weight = nn.Parameter(torch.Tensor(self.config.gov_id_dim, self.config.lookahead_days))
+            self.gov_weight = nn.Parameter(torch.Tensor(self.config.day_gov_fea_dim, 1))
+
 
         self.reset_parameters()
 
     def gov_map(self, input_day_gov):
         sz = input_day_gov.size()
-        x = input_day_gov.view(-1, sz[2], sz[3])
-        _, h = self.gov_gru(x)
+        # x = input_day_gov.view(-1, sz[2], sz[3])
+        # _, h = self.gov_gru(x)
         
-        h = h[0,:,:].view(sz[0],sz[1],-1)
+        # h = h[0,:,:].view(sz[0],sz[1],-1)
+        h = torch.mean(input_day_gov, dim=2)
         return h
 
     def state_map(self, input_day, g):
@@ -179,10 +183,12 @@ class WrapperNet(nn.Module):
     def forward(self, input_day, input_day_gov, g):
         ori_out = self.forward_ori(input_day, g)
         if self.config.use_gov_gate:
+            sz = ori_out.size()
             gov_hid = self.gov_map(input_day_gov)
             state_hid = self.state_map(input_day, g)
-            state_gate = torch.sigmoid(torch.matmul(state_hid, self.state_weight))
-            gov_gate = torch.tanh(torch.matmul(gov_hid, self.gov_weight))
+            # print(gov_hid.size(), self.state_weight.size())
+            state_gate = torch.sigmoid(torch.matmul(state_hid, self.state_weight)).expand(sz[0],sz[1],sz[2])
+            gov_gate = torch.tanh(torch.matmul(gov_hid, self.gov_weight)).expand(sz[0],sz[1],sz[2])
 
             out = ori_out * (1 + state_gate * gov_gate)
         else:
@@ -216,7 +222,7 @@ class RNNTask(BasePytorchTask):
             else:
                 select_features = []
             if self.config.set_values!='':
-                set_values = [int(item) for item in self.config.set_values.split('#')]
+                set_values = [np.log1p(int(item)) for item in self.config.set_values.split('#')]
             else:
                 set_values = []
             day_inputs, day_gov_inputs, outputs, edge_index, dates, countries = \
@@ -504,17 +510,17 @@ class RNNTask(BasePytorchTask):
 
 
 if __name__ == '__main__':
-    TRAIN_TAG = True
+    TRAIN_TAG = False
     start_time = time.time()
     if not TRAIN_TAG:
         for select_features, set_values in zip([['school_closing', 'workplace_closing'],
                                                 ['stay_at_home_requirements'],
                                                 ['public_information_campaigns'],
                                                 ['restrictions_on_gatherings']],
-                                                [[0, 0],
-                                                [0],
-                                                [0],
-                                                [0]]):
+                                                [[5, 5],
+                                                [5],
+                                                [5],
+                                                [5]]):
             out_fname = '.'.join(select_features) + '.' + '.'.join([str(item) for item in set_values]) + '.out.cpt'
             print(out_fname)
             # build argument parser and config
