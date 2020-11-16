@@ -123,10 +123,10 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7
     mobility_dir = '/home/zhgao/COVID19/mobility'
     ts_dir = '/home/zhgao/COVID19/COVID-19'
     mobility = pd.read_csv(os.path.join(mobility_dir, 'Global_Mobility_Report_20201006.csv'))
-    daily_confirmed = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv'))
-    daily_deaths = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv'))
+    daily_confirmed = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv')
+    daily_deaths = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv')
     # placeholder for daily_recovered, because no recovered data for US.
-    daily_recovered = pd.read_csv(os.path.join(ts_dir, 'csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv'))
+    daily_recovered = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv')
     daily_features = [item for item in daily_confirmed.columns if item not in ['UID', 'iso2', 'iso3', 'code3', 'FIPS', 'Admin2', 'Province_State',
         'Country_Region', 'Lat', 'Long_', 'Combined_Key']]
 

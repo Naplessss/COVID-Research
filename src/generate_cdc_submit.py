@@ -8,7 +8,7 @@ import pandas as pd
 
 
 def get_locations():
-    location = pd.read_csv('/home/zhgao/COVID-Research/covid19-forecast-hub/data-locations/locations.csv')
+    location = pd.read_csv('../data/locations.csv')
     location2id = location[['location_name','location']].set_index('location_name')['location'].to_dict()
     return location2id
 
@@ -61,7 +61,7 @@ def get_predict(model_dir='/home/zhgao/COVID-Research/weights_major/', model_fp=
 def get_predict_list(date='2020-10-04', save=False, model_use=['GNN']):
     predict_deaths_list, predict_confirmed_list = [], []
     for type_name in ['deaths','confirmed']:
-        for days in [7,14,21,28]:
+        for days in [7,14]:        ## 21,28
             predict = []
             for model_type in model_use:
                 if model_type == 'GNN':
@@ -148,32 +148,63 @@ def generate_gnn_cdc_format(save_dir = './',
     else:
         predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label = get_ensemble_results(date=forecast_start_date, model_use=model_use, factor=factor)
 
+    prophet = pd.read_csv('../output/prophet.predict.{}.csv'.format(forecast_start_date))
+    date_list = sorted(prophet['ds'].unique())
 
     ### weighted average for week3 and week4  
-    # print(predict_deaths_list[0].shape)
-    # print(predict_deaths_list[0].index)
-    # print(predict_deaths_list[1].shape) 
-    # print(predict_deaths_list[1].index)
     predict_deaths_list[1] = predict_deaths_list[1] - pd.DataFrame(predict_deaths_list[0].values, 
                                                                         columns=predict_deaths_list[1].columns,
                                                                         index=predict_deaths_list[1].index)
+    _idx = predict_deaths_list[1].index
+    print(_idx)
+    tmp = prophet[prophet['TYPE']=='deaths'][prophet['ds']==date_list[1]][['region','predict_week']].set_index('region').loc[_idx]
+    print(tmp)
+    predict_deaths_list[1] = (0.5 * predict_deaths_list[1]).add(np.abs(tmp['predict_week'].values) * 0.5, axis='index')
+
+
     predict_confirmed_list[1] = predict_confirmed_list[1] - pd.DataFrame(predict_confirmed_list[0].values, 
                                                                         columns=predict_confirmed_list[1].columns,
-                                                                        index=predict_confirmed_list[1].index)  
+                                                                        index=predict_confirmed_list[1].index) 
+    _idx = predict_confirmed_list[1].index
+    tmp = prophet[prophet['TYPE']=='confirmed'][prophet['ds']==date_list[1]][['region','predict_week']].set_index('region').loc[_idx]
+    predict_confirmed_list[1] = (0.5 * predict_confirmed_list[1]).add(np.abs(tmp['predict_week'].values) * 0.5, axis='index') 
 
-    predict_deaths_list[2] = pd.DataFrame(predict_deaths_list[1].values*0.7 + predict_deaths_list[0].values*0.3,
-                                                                        columns=predict_deaths_list[2].columns,
-                                                                        index=predict_deaths_list[2].index)              
-    predict_confirmed_list[2] = pd.DataFrame(predict_confirmed_list[1].values*0.7 + predict_confirmed_list[0].values*0.3,    
-                                                                      columns=predict_confirmed_list[2].columns,
-                                                                        index=predict_confirmed_list[2].index) 
+    predict_deaths_list.append(pd.DataFrame(predict_deaths_list[1].values*0.7 + predict_deaths_list[0].values*0.3,
+                                                                        columns=predict_deaths_list[1].columns,
+                                                                        index=predict_deaths_list[1].index)
+                                )
 
-    predict_deaths_list[3] = pd.DataFrame(predict_deaths_list[1].values*0.5 + predict_deaths_list[0].values*0.5,
-                                                                        columns=predict_deaths_list[3].columns,
-                                                                        index=predict_deaths_list[3].index)              
-    predict_confirmed_list[3] = pd.DataFrame(predict_confirmed_list[1].values*0.5 + predict_confirmed_list[0].values*0.5,    
-                                                                      columns=predict_confirmed_list[3].columns,
-                                                                        index=predict_confirmed_list[3].index) 
+    _idx = predict_deaths_list[2].index
+    tmp = prophet[prophet['TYPE']=='deaths'][prophet['ds']==date_list[2]][['region','predict_week']].set_index('region').loc[_idx]
+    predict_deaths_list[2] = (0.3 * predict_deaths_list[2]).add(np.abs(tmp['predict_week'].values) * 0.7, axis='index')
+
+
+    predict_confirmed_list.append(pd.DataFrame(predict_confirmed_list[1].values*0.7 + predict_confirmed_list[0].values*0.3,    
+                                                                      columns=predict_confirmed_list[1].columns,
+                                                                        index=predict_confirmed_list[1].index)
+                                    )
+    _idx = predict_confirmed_list[2].index
+    tmp = prophet[prophet['TYPE']=='confirmed'][prophet['ds']==date_list[2]][['region','predict_week']].set_index('region').loc[_idx]
+    predict_confirmed_list[2] = (0.3 * predict_confirmed_list[2]).add(np.abs(tmp['predict_week'].values) * 0.7, axis='index') 
+
+    predict_deaths_list.append(pd.DataFrame(predict_deaths_list[1].values*0.5 + predict_deaths_list[0].values*0.5,
+                                                                        columns=predict_deaths_list[1].columns,
+                                                                        index=predict_deaths_list[1].index)
+                                    )  
+
+    _idx = predict_deaths_list[3].index
+    tmp = prophet[prophet['TYPE']=='deaths'][prophet['ds']==date_list[3]][['region','predict_week']].set_index('region').loc[_idx]
+    predict_deaths_list[3] = (0.2 * predict_deaths_list[3]).add(np.abs(tmp['predict_week'].values) * 0.8, axis='index')
+
+
+    predict_confirmed_list.append(pd.DataFrame(predict_confirmed_list[1].values*0.5 + predict_confirmed_list[0].values*0.5,    
+                                                                      columns=predict_confirmed_list[1].columns,
+                                                                        index=predict_confirmed_list[1].index) 
+                                    )
+    _idx = predict_confirmed_list[3].index
+    tmp = prophet[prophet['TYPE']=='confirmed'][prophet['ds']==date_list[3]][['region','predict_week']].set_index('region').loc[_idx]
+    predict_confirmed_list[3] = (0.2 * predict_confirmed_list[3]).add(np.abs(tmp['predict_week'].values) * 0.8, axis='index') 
+
     for i in range(1,4):
         predict_deaths_list[i] = predict_deaths_list[i] + pd.DataFrame(predict_deaths_list[i-1].values, 
                                                                             columns=predict_deaths_list[i].columns,
@@ -266,8 +297,8 @@ if __name__=='__main__':
     results = generate_gnn_cdc_format(save_dir = '../CDC',
                             model_name = 'MSRA-DeepST',
                             model_use=  ['NBEATS','GNN'],        # ['NBEATS','GNN', 'KRNN']
-                            forecast_date = '2020-10-12',
-                            predict_date = '2020-10-17',
+                            forecast_date = '2020-11-16',
+                            predict_date = '2020-11-21',
                             quantile = use_quantile_list,
                             use_ensemble= True,
                             factor = 0.5)   # weight for NN models
