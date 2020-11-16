@@ -1,4 +1,4 @@
-date=2020-11-01
+date=2020-11-08
 echo $date
 echo 'update CSSE data...'
 #cd /home/zhgao/COVID19/COVID-19

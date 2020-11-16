@@ -14,8 +14,8 @@ def get_locations():
 
 def get_label(target_date='2020-10-04'):
     target_date = dt.strftime(pd.to_datetime(target_date) - datetime.timedelta(days=1), '%-m/%-d/%y')
-    deaths = pd.read_csv('/home/zhgao/COVID19/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv')
-    confirmed = pd.read_csv('/home/zhgao/COVID19/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv')
+    deaths = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv')
+    confirmed = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv')
     deaths = deaths.groupby('Province_State').sum()[target_date]
     confirmed = confirmed.groupby('Province_State').sum()[target_date]
     deaths = deaths.append(pd.Series({'US':deaths.sum()}))
@@ -40,7 +40,7 @@ def get_predict(model_dir='/home/zhgao/COVID-Research/weights_major/', model_fp=
                     'label':np.expm1(test['label']['val']).values,
                     'forecast_idx':test['label'].reset_index()['forecast_idx'].values,
                     'countries':test['countries'],
-                    'dates':test['dates']})   
+                    'dates':test['dates']})  
             res_test = res_test.rename({'countries':'region','dates':'target_start_date','pred':'value'},axis=1)
             res_test['region'] = res_test['region'].map(location2id)
             res_test = res_test[res_test.region!='11001']
@@ -51,7 +51,7 @@ def get_predict(model_dir='/home/zhgao/COVID-Research/weights_major/', model_fp=
                 res_test = res_test.append(pd.DataFrame(res_test.sum().values, index=['US'], columns=[fname.split('/')[-1]])) 
             
             res = pd.concat([res, res_test], axis=1)
-            print(fname)
+            print(fname, res.shape)
         except:
             # print(fname)
             continue
@@ -106,6 +106,7 @@ def get_ensemble_results(date = '2020-10-18', model_use=['GNN'], factor=0.5):
                            ignore_index=True).set_index('region')
 
             _deaths = pd.merge(_deaths,_gbm_deaths,left_index=True, right_index=True)
+            print(_deaths.head())
             seeds_cols = [item for item in _deaths.columns if 'seed' in item]
             _deaths[seeds_cols] = factor * _deaths[seeds_cols]
             _deaths['PREDICTION'] = _deaths['PREDICTION'] * (1 - factor)
@@ -118,6 +119,7 @@ def get_ensemble_results(date = '2020-10-18', model_use=['GNN'], factor=0.5):
                            ignore_index=True).set_index('region')
 
             _confirmed = pd.merge(_confirmed,_gbm_confirmed,left_index=True, right_index=True)
+            print(_confirmed.shape)
             seeds_cols = [item for item in _confirmed.columns if 'seed' in item]
             _confirmed[seeds_cols] = factor * _confirmed[seeds_cols]
             _confirmed['PREDICTION'] = _confirmed['PREDICTION'] * (1 - factor)
@@ -145,7 +147,42 @@ def generate_gnn_cdc_format(save_dir = './',
         predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label = get_predict_list(date=forecast_start_date, model_use=model_use)
     else:
         predict_deaths_list, predict_confirmed_list, deaths_label, confirmed_label = get_ensemble_results(date=forecast_start_date, model_use=model_use, factor=factor)
-        
+
+
+    ### weighted average for week3 and week4  
+    # print(predict_deaths_list[0].shape)
+    # print(predict_deaths_list[0].index)
+    # print(predict_deaths_list[1].shape) 
+    # print(predict_deaths_list[1].index)
+    predict_deaths_list[1] = predict_deaths_list[1] - pd.DataFrame(predict_deaths_list[0].values, 
+                                                                        columns=predict_deaths_list[1].columns,
+                                                                        index=predict_deaths_list[1].index)
+    predict_confirmed_list[1] = predict_confirmed_list[1] - pd.DataFrame(predict_confirmed_list[0].values, 
+                                                                        columns=predict_confirmed_list[1].columns,
+                                                                        index=predict_confirmed_list[1].index)  
+
+    predict_deaths_list[2] = pd.DataFrame(predict_deaths_list[1].values*0.7 + predict_deaths_list[0].values*0.3,
+                                                                        columns=predict_deaths_list[2].columns,
+                                                                        index=predict_deaths_list[2].index)              
+    predict_confirmed_list[2] = pd.DataFrame(predict_confirmed_list[1].values*0.7 + predict_confirmed_list[0].values*0.3,    
+                                                                      columns=predict_confirmed_list[2].columns,
+                                                                        index=predict_confirmed_list[2].index) 
+
+    predict_deaths_list[3] = pd.DataFrame(predict_deaths_list[1].values*0.5 + predict_deaths_list[0].values*0.5,
+                                                                        columns=predict_deaths_list[3].columns,
+                                                                        index=predict_deaths_list[3].index)              
+    predict_confirmed_list[3] = pd.DataFrame(predict_confirmed_list[1].values*0.5 + predict_confirmed_list[0].values*0.5,    
+                                                                      columns=predict_confirmed_list[3].columns,
+                                                                        index=predict_confirmed_list[3].index) 
+    for i in range(1,4):
+        predict_deaths_list[i] = predict_deaths_list[i] + pd.DataFrame(predict_deaths_list[i-1].values, 
+                                                                            columns=predict_deaths_list[i].columns,
+                                                                            index=predict_deaths_list[i].index)
+
+        predict_confirmed_list[i] = predict_confirmed_list[i] + pd.DataFrame(predict_confirmed_list[i-1].values, 
+                                                                            columns=predict_confirmed_list[i].columns,
+                                                                            index=predict_confirmed_list[i].index)
+
 
     results = []
     out_fp = '-'.join([forecast_date, model_name]) + '.csv'
@@ -181,9 +218,8 @@ def generate_gnn_cdc_format(save_dir = './',
                                                                             index=predict_deaths_list[i].index)
         predict_confirmed_list[i] = predict_confirmed_list[i] - pd.DataFrame(predict_confirmed_list[i-1].values, 
                                                                             columns=predict_confirmed_list[i].columns,
-                                                                            index=predict_confirmed_list[i].index)
+                                                                            index=predict_confirmed_list[i].index) 
 
-    
     for predict_list,label,type_name in [[predict_deaths_list, deaths_label,'death'],
                                     [predict_confirmed_list, confirmed_label,'case']]:
         for ahead_weeks,predict in enumerate(predict_list):
@@ -230,8 +266,8 @@ if __name__=='__main__':
     results = generate_gnn_cdc_format(save_dir = '../CDC',
                             model_name = 'MSRA-DeepST',
                             model_use=  ['NBEATS','GNN'],        # ['NBEATS','GNN', 'KRNN']
-                            forecast_date = '2020-11-02',
-                            predict_date = '2020-11-07',
+                            forecast_date = '2020-10-12',
+                            predict_date = '2020-10-17',
                             quantile = use_quantile_list,
                             use_ensemble= True,
-                            factor = 0.5) 
+                            factor = 0.5)   # weight for NN models

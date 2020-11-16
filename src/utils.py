@@ -491,9 +491,9 @@ def load_data_ahead(data_fp, start_date, min_peak_size, lookback_days, lookahead
 if __name__ == "__main__":
     # raw_data_preprocessing(data_fp='../data/daily_mobility_china.csv', horizon=7, only_china=True)
     #raw_data_preprocessing(data_fp='../data/daily_mobility_global.csv',horizon=7,only_china=False)
-    # raw_data_preprocessing_US(horizon=7)
-    # raw_data_preprocessing_US(horizon=14)
-    # raw_data_preprocessing_US(horizon=21)
-    # raw_data_preprocessing_US(horizon=28)
+    raw_data_preprocessing_US(horizon=7)
+    raw_data_preprocessing_US(horizon=14)
+    raw_data_preprocessing_US(horizon=21)
+    raw_data_preprocessing_US(horizon=28)
 
-    process_government_data()
+    # process_government_data()

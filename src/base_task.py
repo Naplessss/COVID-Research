@@ -460,6 +460,41 @@ class BasePytorchTask(ABC):
 
         return 3
 
+    def dump_cumstom(self, val_out=None, test_out=None, epoch_idx=None, is_best=False, dump_option=1, name=''):
+        # only the master node can dump outputs
+        if not self.is_master_node or dump_option <= 0:
+            return 0
+
+        val_ftemp = 'val.{}'
+        test_ftemp = 'test.{}'
+
+        # dump the latest checkpoints and outputs with default names
+        cpt_fpath = self.dump_checkpoint(epoch=epoch_idx+1)  # the number of epochs passed
+        val_fpath = self.dump_output(val_out, val_ftemp.format(self.config.out_fname))
+        test_fpath = self.dump_output(test_out, test_ftemp.format(self.config.out_fname))
+
+        if dump_option <= 1:
+            return 1
+
+        # update the best checkpoints and outputs, name: '{}.{}'.format(default_name, 'best')
+        if is_best:
+            for fpath in [cpt_fpath, val_fpath, test_fpath]:
+                if fpath is not None:
+                    new_fpath = '{}.{}'.format(fpath, 'best')
+                    shutil.copyfile(fpath, new_fpath)
+
+        if dump_option <= 2:
+            return 2
+
+        # dump per each epoch, name: '{}.{}'.format(default_name, epoch_idx+1)
+        assert isinstance(epoch_idx, int)
+        for fpath in [cpt_fpath, val_fpath, test_fpath]:
+            if fpath is not None:
+                new_fpath = '{}.{}'.format(fpath, epoch_idx+1)
+                shutil.copyfile(fpath, new_fpath)
+
+        return 3
+
     def try_recover_before_train(self):
         cpt_fpath = os.path.join(self.config.exp_dir, CPT_DIR_NAME, self.config.cpt_fname)
         if os.path.exists(cpt_fpath):

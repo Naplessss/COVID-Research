@@ -21,7 +21,7 @@ use_states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
        'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma',
        'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina',
        'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-       'Virginia', 'Washington']
+       'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',]
 
 def process_train():
     df_deaths = pd.read_csv(os.path.join(DATA_PATH, 'time_series_covid19_deaths_{}.csv'.format(LEVEL)))
@@ -161,7 +161,6 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
                  # + ['Confirmed', 'Deaths']
     feature_names = [f for f in features.columns if f not in do_not_use]
     features = features[features['Location'].isin(use_states)].reset_index(drop=True)
-
     train = features.loc[(~features.TARGET.isnull()) & 
                          (features.Date > TRAIN_START) &  
                          (features.Date <= TRAIN_END_DATE)].reset_index(drop=True)
@@ -184,11 +183,11 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
 
         model = lgb.train(params, train_set, 
                           num_round, 
-                          # valid_sets=[train_set, valid_set, test_set],
-                          valid_sets=[train_set, valid_set],
+                          valid_sets=[train_set, valid_set, test_set],
+                          # valid_sets=[train_set, valid_set],
                           # early_stopping_rounds=50, 
                           feval=partial(mae_loss), 
-                          verbose_eval=100
+                          verbose_eval=20
                           )
 
         train.loc[te_ind, 'PREDICTION'] = model.predict(val[feature_names])
@@ -225,8 +224,8 @@ if __name__=='__main__':
     # newest date of labeling data
     LABEL_END_DATE = '2020-11-01'    
     # test start day to infer next epidemic weeks (included this day)
-    # prefer to be sunday of this epdimic week (the same as LABEL_DATE_END)
-    FORECAST_START_DATE = '2020-11-01'   
+    # prefer to be sunday of this epidemic week (the same as LABEL_DATE_END)
+    FORECAST_START_DATE = '2020-10-25'   
 
     DAYS = 7
     ONLY_POINT = True
@@ -234,13 +233,13 @@ if __name__=='__main__':
     PRECISION = 2
     N_FOLDS = 5
     RELOAD_FEATURES = False
-    N_SEEDS = 50
+    N_SEEDS = 10
     TRAIN_START = '2020-04-30'
     CLOSEST_PATH = '/home/zhgao/COVID-Research/data/us_geo_closest.csv'
     FEATURE_FILE_PATH = f'/home/zhgao/COVID-Research/data/features_{LABEL_END_DATE}.csv'
     DATA_PATH = '/home/zhgao/COVID19/COVID-19/csse_covid_19_data/csse_covid_19_time_series'
-
-    targets = process_train() 
+    print(LABEL_END_DATE, FORECAST_START_DATE)
+    targets = process_train()
     if os.path.exists(FEATURE_FILE_PATH) and RELOAD_FEATURES:
         features = pd.read_csv(FEATURE_FILE_PATH)
     else:
@@ -250,8 +249,9 @@ if __name__=='__main__':
             features.append(df)
         features = pd.concat(features)
         for rank in [5, 10, 20]:
+            print(features['Location'].unique())
             nearby_features = get_nearby_features(features, rank)
-            features = features.merge(nearby_features, on=['Date', 'Location'])
+            features = features.merge(nearby_features, on=['Date', 'Location'], how='left')
 
         to_log = ['ConfirmedCumSum', 'Population', 'DeathsCumSum']
         for c in to_log:
@@ -264,6 +264,7 @@ if __name__=='__main__':
         features.to_csv(FEATURE_FILE_PATH, index=False)
 
     features = features[features.Date <= LABEL_END_DATE]
+    print(features['Location'].unique())
     print(f'Features: {features.shape}')
     print(f'Features: {features.count()}')
 
@@ -330,4 +331,5 @@ if __name__=='__main__':
     location2id = get_locations()
     gbm_predict = pd.concat(test_results)
     gbm_predict = gbm_predict[gbm_predict['quantile']==0.5]
+    print(gbm_predict)
     gbm_predict.to_csv('../output/gbm.predict.{}.csv'.format(FORECAST_START_DATE))
