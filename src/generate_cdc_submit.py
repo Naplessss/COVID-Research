@@ -156,9 +156,7 @@ def generate_gnn_cdc_format(save_dir = './',
                                                                         columns=predict_deaths_list[1].columns,
                                                                         index=predict_deaths_list[1].index)
     _idx = predict_deaths_list[1].index
-    print(_idx)
     tmp = prophet[prophet['TYPE']=='deaths'][prophet['ds']==date_list[1]][['region','predict_week']].set_index('region').loc[_idx]
-    print(tmp)
     predict_deaths_list[1] = (0.5 * predict_deaths_list[1]).add(np.abs(tmp['predict_week'].values) * 0.5, axis='index')
 
 

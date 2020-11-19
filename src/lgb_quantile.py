@@ -89,6 +89,8 @@ def extract_timeseries_features(single_location):
 
 def get_nearby_features(features, rank):
     closest = pd.read_csv(CLOSEST_PATH)
+    islands = ['Alaska', 'Hawaii']
+    closest = closest[~closest['Location'].isin(islands)][~closest['Location_1'].isin(islands)]
 
     to_aggregate = ['ConfirmedCumSum',
                     #'ConfirmedRollingMean28',
