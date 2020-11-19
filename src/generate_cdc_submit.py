@@ -297,8 +297,8 @@ if __name__=='__main__':
     results = generate_gnn_cdc_format(save_dir = '../CDC',
                             model_name = 'MSRA-DeepST',
                             model_use=  ['NBEATS','GNN'],        # ['NBEATS','GNN', 'KRNN']
-                            forecast_date = '2020-11-16',
-                            predict_date = '2020-11-21',
+                            forecast_date = '2020-10-12',
+                            predict_date = '2020-10-17',
                             quantile = use_quantile_list,
                             use_ensemble= True,
                             factor = 0.5)   # weight for NN models

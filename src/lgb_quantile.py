@@ -24,8 +24,8 @@ use_states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
        'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',]
 
 def process_train():
-    df_deaths = pd.read_csv(os.path.join(DATA_PATH, 'time_series_covid19_deaths_{}.csv'.format(LEVEL)))
-    df_confirmed = pd.read_csv(os.path.join(DATA_PATH, 'time_series_covid19_confirmed_{}.csv'.format(LEVEL)))    
+    df_deaths = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv')
+    df_confirmed = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv')    
     
     df_deaths['Location'] = df_deaths['Province_State']
     df_confirmed['Location'] = df_confirmed['Province_State']
@@ -216,16 +216,16 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
     return cv_error, val_error, train_preds, test_preds, feature_importances
 
 def get_locations():
-    location = pd.read_csv('/home/zhgao/COVID-Research/covid19-forecast-hub/data-locations/locations.csv')
+    location = pd.read_csv('../data/locations.csv')
     location2id = location[['location_name','location']].set_index('location_name')['location'].to_dict()
     return location2id
 
 if __name__=='__main__':
     # newest date of labeling data
-    LABEL_END_DATE = '2020-11-01'    
+    LABEL_END_DATE = '2020-11-15'    
     # test start day to infer next epidemic weeks (included this day)
     # prefer to be sunday of this epidemic week (the same as LABEL_DATE_END)
-    FORECAST_START_DATE = '2020-10-25'   
+    FORECAST_START_DATE = '2020-11-15'   
 
     DAYS = 7
     ONLY_POINT = True
@@ -235,7 +235,7 @@ if __name__=='__main__':
     RELOAD_FEATURES = False
     N_SEEDS = 10
     TRAIN_START = '2020-04-30'
-    CLOSEST_PATH = '/home/zhgao/COVID-Research/data/us_geo_closest.csv'
+    CLOSEST_PATH = '/home/zhgao/COVID-Research/data/us_geo_closest.v2.csv'
     FEATURE_FILE_PATH = f'/home/zhgao/COVID-Research/data/features_{LABEL_END_DATE}.csv'
     DATA_PATH = '/home/zhgao/COVID19/COVID-19/csse_covid_19_data/csse_covid_19_time_series'
     print(LABEL_END_DATE, FORECAST_START_DATE)

@@ -1,0 +1,3307 @@
+,Location,Location_1,distance,rank
+0,Alabama,Alaska,3348.46,50.0
+1,Alabama,American Samoa,6380.29,55.0
+2,Alabama,Arizona,1401.62,40.0
+3,Alabama,Arkansas,361.71,8.0
+4,Alabama,California,1948.19,47.0
+5,Alabama,Colorado,1130.24,36.0
+6,Alabama,Connecticut,982.38,29.0
+7,Alabama,Delaware,748.12,20.0
+8,Alabama,Diamond Princess,6027.57,53.0
+9,Alabama,District of Columbia,6027.57,53.0
+10,Alabama,Florida,355.25,7.0
+11,Alabama,Georgia,173.78,2.0
+12,Alabama,Grand Princess,6027.57,53.0
+13,Alabama,Guam,7785.12,57.0
+14,Alabama,Hawaii,4320.79,51.0
+15,Alabama,Idaho,1677.64,44.0
+16,Alabama,Illinois,495.42,11.0
+17,Alabama,Indiana,478.48,10.0
+18,Alabama,Iowa,731.58,19.0
+19,Alabama,Kansas,749.98,21.0
+20,Alabama,Kentucky,339.92,6.0
+21,Alabama,Louisiana,332.88,4.0
+22,Alabama,Maine,1223.91,38.0
+23,Alabama,Maryland,706.53,18.0
+24,Alabama,Massachusetts,1065.89,32.0
+25,Alabama,Michigan,754.82,23.0
+26,Alabama,Minnesota,943.98,28.0
+27,Alabama,Mississippi,167.7,1.0
+28,Alabama,Missouri,506.85,12.0
+29,Alabama,Montana,1560.37,42.0
+30,Alabama,Nebraska,872.7,26.0
+31,Alabama,Nevada,1779.8,46.0
+32,Alabama,New Hampshire,1098.54,34.0
+33,Alabama,New Jersey,841.62,25.0
+34,Alabama,New Mexico,1104.36,35.0
+35,Alabama,New York,927.49,27.0
+36,Alabama,North Carolina,465.58,9.0
+37,Alabama,North Dakota,1216.81,37.0
+38,Alabama,Northern Mariana Islands,7663.2,56.0
+39,Alabama,Ohio,554.19,14.0
+40,Alabama,Oklahoma,623.6,16.0
+41,Alabama,Oregon,2038.8,49.0
+42,Alabama,Pennsylvania,753.61,22.0
+43,Alabama,Puerto Rico,1613.4,43.0
+44,Alabama,Rhode Island,1036.34,31.0
+45,Alabama,South Carolina,338.24,5.0
+46,Alabama,South Dakota,1014.72,30.0
+47,Alabama,Tennessee,215.29,3.0
+48,Alabama,Texas,698.3,17.0
+49,Alabama,Utah,1463.06,41.0
+50,Alabama,Vermont,1085.74,33.0
+51,Alabama,Virgin Islands,1679.79,45.0
+52,Alabama,Virginia,572.94,15.0
+53,Alabama,Washington,2036.91,48.0
+54,Alabama,West Virginia,532.26,13.0
+55,Alabama,Wisconsin,811.72,24.0
+56,Alabama,Wyoming,1298.29,39.0
+57,Alaska,American Samoa,5219.55,54.0
+58,Alaska,Arizona,2517.7,14.0
+59,Alaska,Arkansas,3032.23,26.0
+60,Alaska,California,1944.64,5.0
+61,Alaska,Colorado,2373.86,11.0
+62,Alaska,Connecticut,3383.09,41.0
+63,Alaska,Delaware,3429.38,45.0
+64,Alaska,Diamond Princess,8003.38,56.0
+65,Alaska,District of Columbia,8003.38,56.0
+66,Alaska,Florida,3697.75,49.0
+67,Alaska,Georgia,3459.31,47.0
+68,Alaska,Grand Princess,8003.38,56.0
+69,Alaska,Guam,4588.8,51.0
+70,Alaska,Hawaii,2695.36,19.0
+71,Alaska,Idaho,1815.33,4.0
+72,Alaska,Illinois,2893.15,23.0
+73,Alaska,Indiana,2996.11,24.0
+74,Alaska,Iowa,2627.56,16.0
+75,Alaska,Kansas,2645.89,18.0
+76,Alaska,Kentucky,3157.0,28.0
+77,Alaska,Louisiana,3285.84,35.0
+78,Alaska,Maine,3331.0,37.0
+79,Alaska,Maryland,3368.24,39.0
+80,Alaska,Massachusetts,3394.66,42.0
+81,Alaska,Michigan,2839.96,20.0
+82,Alaska,Minnesota,2437.97,12.0
+83,Alaska,Mississippi,3253.15,33.0
+84,Alaska,Missouri,2842.02,22.0
+85,Alaska,Montana,1811.63,3.0
+86,Alaska,Nebraska,2486.94,13.0
+87,Alaska,Nevada,1968.08,6.0
+88,Alaska,New Hampshire,3325.12,36.0
+89,Alaska,New Jersey,3370.77,40.0
+90,Alaska,New Mexico,2597.74,15.0
+91,Alaska,New York,3237.73,31.0
+92,Alaska,North Carolina,3455.91,46.0
+93,Alaska,North Dakota,2141.85,9.0
+94,Alaska,Northern Mariana Islands,4460.9,50.0
+95,Alaska,Ohio,3079.36,27.0
+96,Alaska,Oklahoma,2841.63,21.0
+97,Alaska,Oregon,1538.14,2.0
+98,Alaska,Pennsylvania,3253.91,34.0
+99,Alaska,Puerto Rico,4891.39,52.0
+100,Alaska,Rhode Island,3417.35,44.0
+101,Alaska,South Carolina,3484.48,48.0
+102,Alaska,South Dakota,2333.75,10.0
+103,Alaska,Tennessee,3203.63,29.0
+104,Alaska,Texas,2999.16,25.0
+105,Alaska,Utah,2129.19,8.0
+106,Alaska,Vermont,3238.56,32.0
+107,Alaska,Virgin Islands,4936.38,53.0
+108,Alaska,Virginia,3401.56,43.0
+109,Alaska,Washington,1438.23,1.0
+110,Alaska,West Virginia,3236.18,30.0
+111,Alaska,Wisconsin,2642.73,17.0
+112,Alaska,Wyoming,2111.99,7.0
+113,American Samoa,Arizona,5092.6,7.0
+114,American Samoa,Arkansas,6104.85,23.0
+115,American Samoa,California,4810.08,4.0
+116,American Samoa,Colorado,5544.68,13.0
+117,American Samoa,Connecticut,7260.49,47.0
+118,American Samoa,Delaware,7081.41,44.0
+119,American Samoa,Diamond Princess,11245.44,56.0
+120,American Samoa,District of Columbia,11245.44,56.0
+121,American Samoa,Florida,6571.05,35.0
+122,American Samoa,Georgia,6546.39,33.0
+123,American Samoa,Grand Princess,11245.44,56.0
+124,American Samoa,Guam,3627.23,2.0
+125,American Samoa,Hawaii,2584.77,1.0
+126,American Samoa,Idaho,5312.36,11.0
+127,American Samoa,Illinois,6380.42,29.0
+128,American Samoa,Indiana,6532.09,32.0
+129,American Samoa,Iowa,6216.47,25.0
+130,American Samoa,Kansas,5895.09,18.0
+131,American Samoa,Kentucky,6560.62,34.0
+132,American Samoa,Louisiana,6051.27,21.0
+133,American Samoa,Maine,7428.42,53.0
+134,American Samoa,Maryland,7021.46,43.0
+135,American Samoa,Massachusetts,7334.3,51.0
+136,American Samoa,Michigan,6659.75,36.0
+137,American Samoa,Minnesota,6241.58,27.0
+138,American Samoa,Mississippi,6217.45,26.0
+139,American Samoa,Missouri,6174.73,24.0
+140,American Samoa,Montana,5618.85,15.0
+141,American Samoa,Nebraska,5945.38,19.0
+142,American Samoa,Nevada,4995.68,5.0
+143,American Samoa,New Hampshire,7326.29,50.0
+144,American Samoa,New Jersey,7137.53,45.0
+145,American Samoa,New Mexico,5397.6,12.0
+146,American Samoa,New York,7139.87,46.0
+147,American Samoa,North Carolina,6836.88,40.0
+148,American Samoa,North Dakota,6052.44,22.0
+149,American Samoa,Northern Mariana Islands,3634.79,3.0
+150,American Samoa,Ohio,6704.28,37.0
+151,American Samoa,Oklahoma,5870.64,17.0
+152,American Samoa,Oregon,5069.63,6.0
+153,American Samoa,Pennsylvania,7004.41,42.0
+154,American Samoa,Puerto Rico,7415.53,52.0
+155,American Samoa,Rhode Island,7320.32,49.0
+156,American Samoa,South Carolina,6718.53,38.0
+157,American Samoa,South Dakota,6007.68,20.0
+158,American Samoa,Tennessee,6470.95,31.0
+159,American Samoa,Texas,5698.37,16.0
+160,American Samoa,Utah,5283.81,10.0
+161,American Samoa,Vermont,7267.96,48.0
+162,American Samoa,Virgin Islands,7509.64,54.0
+163,American Samoa,Virginia,6918.17,41.0
+164,American Samoa,Washington,5213.1,8.0
+165,American Samoa,West Virginia,6802.76,39.0
+166,American Samoa,Wisconsin,6447.46,30.0
+167,American Samoa,Wyoming,5613.93,14.0
+168,Arizona,Arkansas,1061.86,15.0
+169,Arizona,California,649.16,5.0
+170,Arizona,Colorado,493.77,3.0
+171,Arizona,Connecticut,2171.0,42.0
+172,Arizona,Delaware,2010.31,39.0
+173,Arizona,Diamond Princess,7421.33,56.0
+174,Arizona,District of Columbia,7421.33,56.0
+175,Arizona,Florida,1706.07,32.0
+176,Arizona,Georgia,1574.58,30.0
+177,Arizona,Grand Princess,7421.33,56.0
+178,Arizona,Guam,6522.12,54.0
+179,Arizona,Hawaii,2919.24,49.0
+180,Arizona,Idaho,751.92,8.0
+181,Arizona,Illinois,1289.39,23.0
+182,Arizona,Indiana,1443.27,27.0
+183,Arizona,Iowa,1133.97,20.0
+184,Arizona,Kansas,802.58,10.0
+185,Arizona,Kentucky,1492.37,28.0
+186,Arizona,Louisiana,1131.56,18.0
+187,Arizona,Maine,2337.27,47.0
+188,Arizona,Maryland,1946.02,38.0
+189,Arizona,Massachusetts,2242.99,46.0
+190,Arizona,Michigan,1573.56,29.0
+191,Arizona,Minnesota,1206.77,21.0
+192,Arizona,Mississippi,1236.34,22.0
+193,Arizona,Missouri,1086.32,16.0
+194,Arizona,Montana,946.21,12.0
+195,Arizona,Nebraska,874.46,11.0
+196,Arizona,Nevada,557.79,4.0
+197,Arizona,New Hampshire,2233.7,45.0
+198,Arizona,New Jersey,2053.42,41.0
+199,Arizona,New Mexico,309.34,1.0
+200,Arizona,New York,2047.38,40.0
+201,Arizona,North Carolina,1804.9,35.0
+202,Arizona,North Dakota,1133.2,19.0
+203,Arizona,Northern Mariana Islands,6408.02,53.0
+204,Arizona,Ohio,1615.28,31.0
+205,Arizona,Oklahoma,802.52,9.0
+206,Arizona,Oregon,979.81,13.0
+207,Arizona,Pennsylvania,1916.42,37.0
+208,Arizona,Puerto Rico,2935.01,50.0
+209,Arizona,Rhode Island,2230.71,44.0
+210,Arizona,South Carolina,1717.98,33.0
+211,Arizona,South Dakota,989.98,14.0
+212,Arizona,Tennessee,1424.72,26.0
+213,Arizona,Texas,726.11,7.0
+214,Arizona,Utah,445.44,2.0
+215,Arizona,Vermont,2176.59,43.0
+216,Arizona,Virgin Islands,3014.17,51.0
+217,Arizona,Virginia,1860.28,36.0
+218,Arizona,Washington,1091.16,17.0
+219,Arizona,West Virginia,1725.87,34.0
+220,Arizona,Wisconsin,1377.19,24.0
+221,Arizona,Wyoming,708.04,6.0
+222,Arkansas,California,1588.09,45.0
+223,Arkansas,Colorado,768.77,25.0
+224,Arkansas,Connecticut,1173.8,36.0
+225,Arkansas,Delaware,976.99,31.0
+226,Arkansas,Diamond Princess,6359.48,54.0
+227,Arkansas,District of Columbia,6359.48,54.0
+228,Arkansas,Florida,709.1,19.0
+229,Arkansas,Georgia,525.78,13.0
+230,Arkansas,Grand Princess,6359.48,54.0
+231,Arkansas,Guam,7428.29,57.0
+232,Arkansas,Hawaii,3975.58,51.0
+233,Arkansas,Idaho,1322.24,42.0
+234,Arkansas,Illinois,379.76,7.0
+235,Arkansas,Indiana,480.53,11.0
+236,Arkansas,Iowa,491.5,12.0
+237,Arkansas,Kansas,397.21,8.0
+238,Arkansas,Kentucky,458.99,10.0
+239,Arkansas,Louisiana,289.91,4.0
+240,Arkansas,Maine,1383.65,43.0
+241,Arkansas,Maryland,918.87,27.0
+242,Arkansas,Massachusetts,1253.71,40.0
+243,Arkansas,Michigan,725.99,22.0
+244,Arkansas,Minnesota,712.73,20.0
+245,Arkansas,Mississippi,224.66,1.0
+246,Arkansas,Missouri,239.28,2.0
+247,Arkansas,Montana,1226.76,37.0
+248,Arkansas,Nebraska,545.74,14.0
+249,Arkansas,Nevada,1418.39,44.0
+250,Arkansas,New Hampshire,1264.91,41.0
+251,Arkansas,New Jersey,1041.57,32.0
+252,Arkansas,New Mexico,757.11,24.0
+253,Arkansas,New York,1077.97,34.0
+254,Arkansas,North Carolina,745.76,23.0
+255,Arkansas,North Dakota,938.55,29.0
+256,Arkansas,Northern Mariana Islands,7307.02,56.0
+257,Arkansas,Ohio,637.27,15.0
+258,Arkansas,Oklahoma,265.46,3.0
+259,Arkansas,Oregon,1682.13,46.0
+260,Arkansas,Pennsylvania,919.48,28.0
+261,Arkansas,Puerto Rico,1971.86,48.0
+262,Arkansas,Rhode Island,1232.83,39.0
+263,Arkansas,South Carolina,656.9,16.0
+264,Arkansas,South Dakota,715.74,21.0
+265,Arkansas,Tennessee,368.17,6.0
+266,Arkansas,Texas,414.98,9.0
+267,Arkansas,Utah,1101.38,35.0
+268,Arkansas,Vermont,1228.45,38.0
+269,Arkansas,Virgin Islands,2039.83,49.0
+270,Arkansas,Virginia,814.1,26.0
+271,Arkansas,Washington,1687.82,47.0
+272,Arkansas,West Virginia,703.77,18.0
+273,Arkansas,Wisconsin,669.53,17.0
+274,Arkansas,Wyoming,949.63,30.0
+275,California,Colorado,835.07,9.0
+276,California,Connecticut,2554.21,45.0
+277,California,Delaware,2442.15,42.0
+278,California,Diamond Princess,7869.25,56.0
+279,California,District of Columbia,7869.25,56.0
+280,California,Florida,2281.38,35.0
+281,California,Georgia,2113.71,32.0
+282,California,Grand Princess,7869.25,56.0
+283,California,Guam,5892.19,54.0
+284,California,Hawaii,2436.35,41.0
+285,California,Idaho,516.93,4.0
+286,California,Illinois,1706.1,22.0
+287,California,Indiana,1862.04,25.0
+288,California,Iowa,1477.48,18.0
+289,California,Kansas,1233.69,13.0
+290,California,Kentucky,1955.5,30.0
+291,California,Louisiana,1724.22,23.0
+292,California,Maine,2669.88,49.0
+293,California,Maryland,2373.53,39.0
+294,California,Massachusetts,2614.32,48.0
+295,California,Michigan,1907.1,26.0
+296,California,Minnesota,1450.95,17.0
+297,California,Mississippi,1793.34,24.0
+298,California,Missouri,1532.25,19.0
+299,California,Montana,829.39,8.0
+300,California,Nebraska,1206.36,11.0
+301,California,Nevada,189.7,1.0
+302,California,New Hampshire,2586.23,46.0
+303,California,New Jersey,2458.23,43.0
+304,California,New Mexico,870.27,10.0
+305,California,New York,2412.7,40.0
+306,California,North Carolina,2290.39,36.0
+307,California,North Dakota,1242.37,14.0
+308,California,Northern Mariana Islands,5775.92,53.0
+309,California,Ohio,2023.78,31.0
+310,California,Oklahoma,1324.6,15.0
+311,California,Oregon,464.0,2.0
+312,California,Pennsylvania,2315.05,37.0
+313,California,Puerto Rico,3535.86,50.0
+314,California,Rhode Island,2611.38,47.0
+315,California,South Carolina,2231.63,34.0
+316,California,South Dakota,1218.73,12.0
+317,California,Tennessee,1919.54,27.0
+318,California,Texas,1332.05,16.0
+319,California,Utah,510.69,3.0
+320,California,Vermont,2514.86,44.0
+321,California,Virgin Islands,3610.25,51.0
+322,California,Virginia,2316.96,38.0
+323,California,Washington,631.06,5.0
+324,California,West Virginia,2161.18,33.0
+325,California,Wisconsin,1676.3,21.0
+326,California,Wyoming,812.83,7.0
+327,Colorado,Connecticut,1745.14,43.0
+328,Colorado,Delaware,1615.12,40.0
+329,Colorado,Diamond Princess,7049.31,56.0
+330,Colorado,District of Columbia,7049.31,56.0
+331,Colorado,Florida,1475.89,35.0
+332,Colorado,Georgia,1289.68,31.0
+333,Colorado,Grand Princess,7049.31,56.0
+334,Colorado,Guam,6664.58,54.0
+335,Colorado,Hawaii,3262.11,51.0
+336,Colorado,Idaho,577.61,9.0
+337,Colorado,Illinois,877.39,19.0
+338,Colorado,Indiana,1034.4,25.0
+339,Colorado,Iowa,673.69,14.0
+340,Colorado,Kansas,398.66,4.0
+341,Colorado,Kentucky,1120.87,28.0
+342,Colorado,Louisiana,954.99,22.0
+343,Colorado,Maine,1887.48,47.0
+344,Colorado,Maryland,1547.29,38.0
+345,Colorado,Massachusetts,1811.09,46.0
+346,Colorado,Michigan,1116.7,27.0
+347,Colorado,Minnesota,717.15,16.0
+348,Colorado,Mississippi,985.77,24.0
+349,Colorado,Missouri,697.43,15.0
+350,Colorado,Montana,599.0,10.0
+351,Colorado,Nebraska,400.76,5.0
+352,Colorado,Nevada,656.27,13.0
+353,Colorado,New Hampshire,1792.21,44.0
+354,Colorado,New Jersey,1639.83,41.0
+355,Colorado,New Mexico,292.28,2.0
+356,Colorado,New York,1610.85,39.0
+357,Colorado,North Carolina,1455.32,34.0
+358,Colorado,North Dakota,649.85,12.0
+359,Colorado,Northern Mariana Islands,6544.33,53.0
+360,Colorado,Ohio,1200.71,30.0
+361,Colorado,Oklahoma,516.72,8.0
+362,Colorado,Oregon,926.5,21.0
+363,Colorado,Pennsylvania,1497.92,37.0
+364,Colorado,Puerto Rico,2738.89,49.0
+365,Colorado,Rhode Island,1803.83,45.0
+366,Colorado,South Carolina,1399.16,33.0
+367,Colorado,South Dakota,496.38,7.0
+368,Colorado,Tennessee,1085.71,26.0
+369,Colorado,Texas,625.66,11.0
+370,Colorado,Utah,333.65,3.0
+371,Colorado,Vermont,1728.07,42.0
+372,Colorado,Virgin Islands,2808.04,50.0
+373,Colorado,Virginia,1484.18,36.0
+374,Colorado,Washington,959.41,23.0
+375,Colorado,West Virginia,1331.72,32.0
+376,Colorado,Wisconsin,903.93,20.0
+377,Colorado,Wyoming,291.83,1.0
+378,Connecticut,Delaware,249.4,7.0
+379,Connecticut,Diamond Princess,5315.23,53.0
+380,Connecticut,District of Columbia,5315.23,53.0
+381,Connecticut,Florida,1004.16,24.0
+382,Connecticut,Georgia,863.48,20.0
+383,Connecticut,Grand Princess,5315.23,53.0
+384,Connecticut,Guam,7971.77,57.0
+385,Connecticut,Hawaii,4989.32,51.0
+386,Connecticut,Idaho,2126.37,44.0
+387,Connecticut,Illinois,881.64,21.0
+388,Connecticut,Indiana,728.5,18.0
+389,Connecticut,Iowa,1077.76,25.0
+390,Connecticut,Kansas,1371.45,33.0
+391,Connecticut,Kentucky,715.98,17.0
+392,Connecticut,Louisiana,1303.95,30.0
+393,Connecticut,Maine,255.97,8.0
+394,Connecticut,Maryland,276.55,10.0
+395,Connecticut,Massachusetts,83.52,2.0
+396,Connecticut,Michigan,653.05,15.0
+397,Connecticut,Minnesota,1128.74,28.0
+398,Connecticut,Mississippi,1116.25,27.0
+399,Connecticut,Missouri,1085.96,26.0
+400,Connecticut,Montana,1879.64,42.0
+401,Connecticut,Nebraska,1351.52,32.0
+402,Connecticut,Nevada,2365.33,46.0
+403,Connecticut,New Hampshire,137.08,3.0
+404,Connecticut,New Jersey,140.91,4.0
+405,Connecticut,New Mexico,1863.98,41.0
+406,Connecticut,New York,152.22,5.0
+407,Connecticut,North Carolina,545.0,13.0
+408,Connecticut,North Dakota,1407.47,35.0
+409,Connecticut,Northern Mariana Islands,7843.82,56.0
+410,Connecticut,Ohio,556.28,14.0
+411,Connecticut,Oklahoma,1392.27,34.0
+412,Connecticut,Oregon,2462.47,48.0
+413,Connecticut,Pennsylvania,256.58,9.0
+414,Connecticut,Puerto Rico,1640.44,37.0
+415,Connecticut,Rhode Island,59.84,1.0
+416,Connecticut,South Carolina,694.26,16.0
+417,Connecticut,South Dakota,1347.7,31.0
+418,Connecticut,Tennessee,826.12,19.0
+419,Connecticut,Texas,1588.67,36.0
+420,Connecticut,Utah,2046.05,43.0
+421,Connecticut,Vermont,185.16,6.0
+422,Connecticut,Virgin Islands,1655.11,38.0
+423,Connecticut,Virginia,416.74,11.0
+424,Connecticut,Washington,2387.79,47.0
+425,Connecticut,West Virginia,471.83,12.0
+426,Connecticut,Wisconsin,890.0,22.0
+427,Connecticut,Wyoming,1753.62,40.0
+428,Delaware,Diamond Princess,5434.41,53.0
+429,Delaware,District of Columbia,5434.41,53.0
+430,Delaware,Florida,755.31,23.0
+431,Delaware,Georgia,618.83,20.0
+432,Delaware,Grand Princess,5434.41,53.0
+433,Delaware,Guam,8010.02,57.0
+434,Delaware,Hawaii,4876.46,51.0
+435,Delaware,Idaho,2047.65,45.0
+436,Delaware,Illinois,737.74,21.0
+437,Delaware,Indiana,580.83,17.0
+438,Delaware,Iowa,973.13,27.0
+439,Delaware,Kansas,1225.35,32.0
+440,Delaware,Kentucky,521.38,16.0
+441,Delaware,Louisiana,1076.36,30.0
+442,Delaware,Maine,505.04,15.0
+443,Delaware,Maryland,69.42,1.0
+444,Delaware,Massachusetts,330.3,10.0
+445,Delaware,Michigan,604.78,18.0
+446,Delaware,Minnesota,1071.13,29.0
+447,Delaware,Mississippi,891.96,25.0
+448,Delaware,Missouri,928.1,26.0
+449,Delaware,Montana,1827.35,42.0
+450,Delaware,Nebraska,1237.31,33.0
+451,Delaware,Nevada,2255.95,46.0
+452,Delaware,New Hampshire,382.76,11.0
+453,Delaware,New Jersey,119.1,2.0
+454,Delaware,New Mexico,1701.03,41.0
+455,Delaware,New York,273.91,6.0
+456,Delaware,North Carolina,297.24,9.0
+457,Delaware,North Dakota,1368.53,35.0
+458,Delaware,Northern Mariana Islands,7882.78,56.0
+459,Delaware,Ohio,419.99,13.0
+460,Delaware,Oklahoma,1214.53,31.0
+461,Delaware,Oregon,2396.69,48.0
+462,Delaware,Pennsylvania,176.46,4.0
+463,Delaware,Puerto Rico,1508.25,37.0
+464,Delaware,Rhode Island,295.52,8.0
+465,Delaware,South Carolina,446.36,14.0
+466,Delaware,South Dakota,1268.83,34.0
+467,Delaware,Tennessee,614.16,19.0
+468,Delaware,Texas,1387.59,36.0
+469,Delaware,Utah,1931.47,43.0
+470,Delaware,Vermont,405.13,12.0
+471,Delaware,Virgin Islands,1535.79,38.0
+472,Delaware,Virginia,175.2,3.0
+473,Delaware,Washington,2339.44,47.0
+474,Delaware,West Virginia,285.19,7.0
+475,Delaware,Wisconsin,833.06,24.0
+476,Delaware,Wyoming,1663.1,40.0
+477,Diamond Princess,District of Columbia,0.0,1.5
+478,Diamond Princess,Florida,5757.49,20.0
+479,Diamond Princess,Georgia,5853.79,22.0
+480,Diamond Princess,Grand Princess,0.0,1.5
+481,Diamond Princess,Guam,9864.52,54.0
+482,Diamond Princess,Hawaii,10303.93,56.0
+483,Diamond Princess,Idaho,7426.68,48.0
+484,Diamond Princess,Illinois,6172.01,28.0
+485,Diamond Princess,Indiana,6014.93,26.0
+486,Diamond Princess,Iowa,6391.87,34.0
+487,Diamond Princess,Kansas,6658.58,38.0
+488,Diamond Princess,Kentucky,5939.4,23.0
+489,Diamond Princess,Louisiana,6327.48,31.0
+490,Diamond Princess,Maine,5212.69,5.0
+491,Diamond Princess,Maryland,5502.05,14.0
+492,Diamond Princess,Massachusetts,5256.48,6.0
+493,Diamond Princess,Michigan,5964.66,24.0
+494,Diamond Princess,Minnesota,6431.33,35.0
+495,Diamond Princess,Mississippi,6195.01,29.0
+496,Diamond Princess,Missouri,6359.38,32.0
+497,Diamond Princess,Montana,7150.98,45.0
+498,Diamond Princess,Nebraska,6664.04,39.0
+499,Diamond Princess,Nevada,7680.54,50.0
+500,Diamond Princess,New Hampshire,5288.31,8.0
+501,Diamond Princess,New Jersey,5412.08,11.0
+502,Diamond Princess,New Mexico,7114.93,44.0
+503,Diamond Princess,New York,5457.98,13.0
+504,Diamond Princess,North Carolina,5617.83,17.0
+505,Diamond Princess,North Dakota,6680.42,40.0
+506,Diamond Princess,Northern Mariana Islands,9881.55,55.0
+507,Diamond Princess,Ohio,5849.26,21.0
+508,Diamond Princess,Oklahoma,6620.0,36.0
+509,Diamond Princess,Oregon,7737.46,51.0
+510,Diamond Princess,Pennsylvania,5555.0,15.0
+511,Diamond Princess,Puerto Rico,4673.48,4.0
+512,Diamond Princess,Rhode Island,5258.33,7.0
+513,Diamond Princess,South Carolina,5704.09,18.0
+514,Diamond Princess,South Dakota,6658.31,37.0
+515,Diamond Princess,Tennessee,5997.97,25.0
+516,Diamond Princess,Texas,6723.63,41.0
+517,Diamond Princess,Utah,7360.03,46.0
+518,Diamond Princess,Vermont,5363.14,10.0
+519,Diamond Princess,Virgin Islands,4580.92,3.0
+520,Diamond Princess,Virginia,5571.42,16.0
+521,Diamond Princess,Washington,7629.18,49.0
+522,Diamond Princess,West Virginia,5718.56,19.0
+523,Diamond Princess,Wisconsin,6198.54,30.0
+524,Diamond Princess,Wyoming,7066.02,43.0
+525,District of Columbia,Florida,5757.49,20.0
+526,District of Columbia,Georgia,5853.79,22.0
+527,District of Columbia,Grand Princess,0.0,1.5
+528,District of Columbia,Guam,9864.52,54.0
+529,District of Columbia,Hawaii,10303.93,56.0
+530,District of Columbia,Idaho,7426.68,48.0
+531,District of Columbia,Illinois,6172.01,28.0
+532,District of Columbia,Indiana,6014.93,26.0
+533,District of Columbia,Iowa,6391.87,34.0
+534,District of Columbia,Kansas,6658.58,38.0
+535,District of Columbia,Kentucky,5939.4,23.0
+536,District of Columbia,Louisiana,6327.48,31.0
+537,District of Columbia,Maine,5212.69,5.0
+538,District of Columbia,Maryland,5502.05,14.0
+539,District of Columbia,Massachusetts,5256.48,6.0
+540,District of Columbia,Michigan,5964.66,24.0
+541,District of Columbia,Minnesota,6431.33,35.0
+542,District of Columbia,Mississippi,6195.01,29.0
+543,District of Columbia,Missouri,6359.38,32.0
+544,District of Columbia,Montana,7150.98,45.0
+545,District of Columbia,Nebraska,6664.04,39.0
+546,District of Columbia,Nevada,7680.54,50.0
+547,District of Columbia,New Hampshire,5288.31,8.0
+548,District of Columbia,New Jersey,5412.08,11.0
+549,District of Columbia,New Mexico,7114.93,44.0
+550,District of Columbia,New York,5457.98,13.0
+551,District of Columbia,North Carolina,5617.83,17.0
+552,District of Columbia,North Dakota,6680.42,40.0
+553,District of Columbia,Northern Mariana Islands,9881.55,55.0
+554,District of Columbia,Ohio,5849.26,21.0
+555,District of Columbia,Oklahoma,6620.0,36.0
+556,District of Columbia,Oregon,7737.46,51.0
+557,District of Columbia,Pennsylvania,5555.0,15.0
+558,District of Columbia,Puerto Rico,4673.48,4.0
+559,District of Columbia,Rhode Island,5258.33,7.0
+560,District of Columbia,South Carolina,5704.09,18.0
+561,District of Columbia,South Dakota,6658.31,37.0
+562,District of Columbia,Tennessee,5997.97,25.0
+563,District of Columbia,Texas,6723.63,41.0
+564,District of Columbia,Utah,7360.03,46.0
+565,District of Columbia,Vermont,5363.14,10.0
+566,District of Columbia,Virgin Islands,4580.92,3.0
+567,District of Columbia,Virginia,5571.42,16.0
+568,District of Columbia,Washington,7629.18,49.0
+569,District of Columbia,West Virginia,5718.56,19.0
+570,District of Columbia,Wisconsin,6198.54,30.0
+571,District of Columbia,Wyoming,7066.02,43.0
+572,Florida,Georgia,249.42,1.0
+573,Florida,Grand Princess,5757.49,53.0
+574,Florida,Guam,8137.31,57.0
+575,Florida,Hawaii,4618.03,51.0
+576,Florida,Idaho,2030.42,45.0
+577,Florida,Illinois,816.95,16.0
+578,Florida,Indiana,753.25,13.0
+579,Florida,Iowa,1072.5,26.0
+580,Florida,Kansas,1103.04,28.0
+581,Florida,Kentucky,586.9,8.0
+582,Florida,Louisiana,576.58,7.0
+583,Florida,Maine,1260.11,33.0
+584,Florida,Maryland,744.6,12.0
+585,Florida,Massachusetts,1083.03,27.0
+586,Florida,Michigan,1002.51,22.0
+587,Florida,Minnesota,1275.87,35.0
+588,Florida,Mississippi,490.53,5.0
+589,Florida,Missouri,859.64,18.0
+590,Florida,Montana,1915.16,44.0
+591,Florida,Nebraska,1227.65,32.0
+592,Florida,Nevada,2118.48,46.0
+593,Florida,New Hampshire,1137.98,30.0
+594,Florida,New Jersey,871.56,19.0
+595,Florida,New Mexico,1421.89,38.0
+596,Florida,New York,1003.56,23.0
+597,Florida,North Carolina,471.01,4.0
+598,Florida,North Dakota,1559.74,40.0
+599,Florida,Northern Mariana Islands,8015.88,56.0
+600,Florida,Ohio,759.08,15.0
+601,Florida,Oklahoma,961.83,20.0
+602,Florida,Oregon,2390.9,48.0
+603,Florida,Pennsylvania,838.88,17.0
+604,Florida,Puerto Rico,1263.09,34.0
+605,Florida,Rhode Island,1045.78,25.0
+606,Florida,South Carolina,332.68,2.0
+607,Florida,South Dakota,1364.96,37.0
+608,Florida,Tennessee,504.44,6.0
+609,Florida,Texas,981.89,21.0
+610,Florida,Utah,1806.66,43.0
+611,Florida,Vermont,1152.81,31.0
+612,Florida,Virgin Islands,1332.57,36.0
+613,Florida,Virginia,604.11,9.0
+614,Florida,Washington,2391.71,49.0
+615,Florida,West Virginia,663.0,10.0
+616,Florida,Wisconsin,1114.06,29.0
+617,Florida,Wyoming,1652.93,41.0
+618,Georgia,Grand Princess,5853.79,53.0
+619,Georgia,Guam,7930.49,57.0
+620,Georgia,Hawaii,4493.51,51.0
+621,Georgia,Idaho,1825.81,45.0
+622,Georgia,Illinois,570.62,14.0
+623,Georgia,Indiana,504.35,11.0
+624,Georgia,Iowa,831.75,23.0
+625,Georgia,Kansas,901.19,27.0
+626,Georgia,Kentucky,339.04,6.0
+627,Georgia,Louisiana,495.11,10.0
+628,Georgia,Maine,1113.83,34.0
+629,Georgia,Maryland,588.18,15.0
+630,Georgia,Massachusetts,946.41,29.0
+631,Georgia,Michigan,759.48,20.0
+632,Georgia,Minnesota,1030.13,33.0
+633,Georgia,Mississippi,341.34,7.0
+634,Georgia,Missouri,634.35,17.0
+635,Georgia,Montana,1690.47,44.0
+636,Georgia,Nebraska,1006.58,32.0
+637,Georgia,Nevada,1942.74,46.0
+638,Georgia,New Hampshire,988.36,31.0
+639,Georgia,New Jersey,723.37,19.0
+640,Georgia,New Mexico,1275.89,36.0
+641,Georgia,New York,830.83,22.0
+642,Georgia,North Carolina,323.21,5.0
+643,Georgia,North Dakota,1318.31,38.0
+644,Georgia,Northern Mariana Islands,7807.57,56.0
+645,Georgia,Ohio,524.11,12.0
+646,Georgia,Oklahoma,790.61,21.0
+647,Georgia,Oregon,2187.78,49.0
+648,Georgia,Pennsylvania,657.77,18.0
+649,Georgia,Puerto Rico,1468.41,40.0
+650,Georgia,Rhode Island,913.52,28.0
+651,Georgia,South Carolina,179.42,2.0
+652,Georgia,South Dakota,1131.04,35.0
+653,Georgia,Tennessee,257.38,4.0
+654,Georgia,Texas,871.62,26.0
+655,Georgia,Utah,1623.27,43.0
+656,Georgia,Vermont,987.28,30.0
+657,Georgia,Virgin Islands,1530.6,41.0
+658,Georgia,Virginia,446.74,8.0
+659,Georgia,Washington,2177.55,48.0
+660,Georgia,West Virginia,453.44,9.0
+661,Georgia,Wisconsin,864.64,25.0
+662,Georgia,Wyoming,1441.45,39.0
+663,Grand Princess,Guam,9864.52,54.0
+664,Grand Princess,Hawaii,10303.93,56.0
+665,Grand Princess,Idaho,7426.68,48.0
+666,Grand Princess,Illinois,6172.01,28.0
+667,Grand Princess,Indiana,6014.93,26.0
+668,Grand Princess,Iowa,6391.87,34.0
+669,Grand Princess,Kansas,6658.58,38.0
+670,Grand Princess,Kentucky,5939.4,23.0
+671,Grand Princess,Louisiana,6327.48,31.0
+672,Grand Princess,Maine,5212.69,5.0
+673,Grand Princess,Maryland,5502.05,14.0
+674,Grand Princess,Massachusetts,5256.48,6.0
+675,Grand Princess,Michigan,5964.66,24.0
+676,Grand Princess,Minnesota,6431.33,35.0
+677,Grand Princess,Mississippi,6195.01,29.0
+678,Grand Princess,Missouri,6359.38,32.0
+679,Grand Princess,Montana,7150.98,45.0
+680,Grand Princess,Nebraska,6664.04,39.0
+681,Grand Princess,Nevada,7680.54,50.0
+682,Grand Princess,New Hampshire,5288.31,8.0
+683,Grand Princess,New Jersey,5412.08,11.0
+684,Grand Princess,New Mexico,7114.93,44.0
+685,Grand Princess,New York,5457.98,13.0
+686,Grand Princess,North Carolina,5617.83,17.0
+687,Grand Princess,North Dakota,6680.42,40.0
+688,Grand Princess,Northern Mariana Islands,9881.55,55.0
+689,Grand Princess,Ohio,5849.26,21.0
+690,Grand Princess,Oklahoma,6620.0,36.0
+691,Grand Princess,Oregon,7737.46,51.0
+692,Grand Princess,Pennsylvania,5555.0,15.0
+693,Grand Princess,Puerto Rico,4673.48,4.0
+694,Grand Princess,Rhode Island,5258.33,7.0
+695,Grand Princess,South Carolina,5704.09,18.0
+696,Grand Princess,South Dakota,6658.31,37.0
+697,Grand Princess,Tennessee,5997.97,25.0
+698,Grand Princess,Texas,6723.63,41.0
+699,Grand Princess,Utah,7360.03,46.0
+700,Grand Princess,Vermont,5363.14,10.0
+701,Grand Princess,Virgin Islands,4580.92,3.0
+702,Grand Princess,Virginia,5571.42,16.0
+703,Grand Princess,Washington,7629.18,49.0
+704,Grand Princess,West Virginia,5718.56,19.0
+705,Grand Princess,Wisconsin,6198.54,30.0
+706,Grand Princess,Wyoming,7066.02,43.0
+707,Guam,Hawaii,3890.46,3.0
+708,Guam,Idaho,6107.49,9.0
+709,Guam,Illinois,7401.67,26.0
+710,Guam,Indiana,7528.15,29.0
+711,Guam,Iowa,7129.58,21.0
+712,Guam,Kansas,7035.16,20.0
+713,Guam,Kentucky,7675.56,33.0
+714,Guam,Louisiana,7608.45,30.0
+715,Guam,Maine,7906.97,40.0
+716,Guam,Maryland,7946.46,43.0
+717,Guam,Massachusetts,7981.46,47.0
+718,Guam,Michigan,7410.47,27.0
+719,Guam,Minnesota,6972.22,19.0
+720,Guam,Mississippi,7649.28,32.0
+721,Guam,Missouri,7297.35,25.0
+722,Guam,Montana,6248.49,10.0
+723,Guam,Nebraska,6925.06,18.0
+724,Guam,Nevada,6038.44,8.0
+725,Guam,New Hampshire,7910.14,41.0
+726,Guam,New Jersey,7957.35,44.0
+727,Guam,New Mexico,6761.54,16.0
+728,Guam,New York,7826.46,38.0
+729,Guam,North Carolina,7999.77,49.0
+730,Guam,North Dakota,6668.2,15.0
+731,Guam,Northern Mariana Islands,128.09,1.0
+732,Guam,Ohio,7636.39,31.0
+733,Guam,Oklahoma,7181.2,22.0
+734,Guam,Oregon,5746.51,5.0
+735,Guam,Pennsylvania,7836.3,39.0
+736,Guam,Puerto Rico,9398.12,53.0
+737,Guam,Rhode Island,8005.19,50.0
+738,Guam,South Carolina,7998.97,48.0
+739,Guam,South Dakota,6818.87,17.0
+740,Guam,Tennessee,7692.05,34.0
+741,Guam,Texas,7223.85,24.0
+742,Guam,Utah,6338.04,11.0
+743,Guam,Vermont,7824.03,37.0
+744,Guam,Virgin Islands,9460.7,54.0
+745,Guam,Virginia,7964.57,45.0
+746,Guam,Washington,5753.35,6.0
+747,Guam,West Virginia,7795.28,36.0
+748,Guam,Wisconsin,7196.79,23.0
+749,Guam,Wyoming,6489.21,12.0
+750,Hawaii,Idaho,2879.58,7.0
+751,Hawaii,Illinois,4138.96,28.0
+752,Hawaii,Indiana,4295.66,30.0
+753,Hawaii,Iowa,3913.71,23.0
+754,Hawaii,Kansas,3656.68,18.0
+755,Hawaii,Kentucky,4379.28,34.0
+756,Hawaii,Louisiana,4041.48,26.0
+757,Hawaii,Maine,5092.61,52.0
+758,Hawaii,Maryland,4808.2,43.0
+759,Hawaii,Massachusetts,5047.53,51.0
+760,Hawaii,Michigan,4339.32,33.0
+761,Hawaii,Minnesota,3873.02,21.0
+762,Hawaii,Mississippi,4155.53,29.0
+763,Hawaii,Missouri,3956.71,24.0
+764,Hawaii,Montana,3161.48,10.0
+765,Hawaii,Nebraska,3642.58,16.0
+766,Hawaii,Nevada,2624.51,4.0
+767,Hawaii,New Hampshire,5015.73,49.0
+768,Hawaii,New Jersey,4894.57,46.0
+769,Hawaii,New Mexico,3218.92,11.0
+770,Hawaii,New York,4846.07,44.0
+771,Hawaii,North Carolina,4707.6,40.0
+772,Hawaii,North Dakota,3628.52,14.0
+773,Hawaii,Northern Mariana Islands,3802.89,20.0
+774,Hawaii,Ohio,4459.3,35.0
+775,Hawaii,Oklahoma,3711.39,19.0
+776,Hawaii,Oregon,2579.04,2.0
+777,Hawaii,Pennsylvania,4751.4,42.0
+778,Hawaii,Puerto Rico,5799.16,53.0
+779,Hawaii,Rhode Island,5045.99,50.0
+780,Hawaii,South Carolina,4632.21,39.0
+781,Hawaii,South Dakota,3645.64,17.0
+782,Hawaii,Tennessee,4329.38,32.0
+783,Hawaii,Texas,3636.98,15.0
+784,Hawaii,Utah,2946.52,9.0
+785,Hawaii,Vermont,4941.3,47.0
+786,Hawaii,Virgin Islands,5885.55,54.0
+787,Hawaii,Virginia,4745.3,41.0
+788,Hawaii,Washington,2699.21,6.0
+789,Hawaii,West Virginia,4593.74,37.0
+790,Hawaii,Wisconsin,4105.4,27.0
+791,Hawaii,Wyoming,3237.91,12.0
+792,Idaho,Illinois,1335.46,22.0
+793,Idaho,Indiana,1482.79,24.0
+794,Idaho,Iowa,1076.97,16.0
+795,Idaho,Kansas,927.68,14.0
+796,Idaho,Kentucky,1604.42,28.0
+797,Idaho,Louisiana,1530.01,25.0
+798,Idaho,Maine,2214.02,48.0
+799,Idaho,Maryland,1978.22,38.0
+800,Idaho,Massachusetts,2178.59,46.0
+801,Idaho,Michigan,1473.4,23.0
+802,Idaho,Minnesota,998.84,15.0
+803,Idaho,Mississippi,1545.25,26.0
+804,Idaho,Missouri,1198.62,19.0
+805,Idaho,Montana,312.58,1.0
+806,Idaho,Nebraska,832.0,13.0
+807,Idaho,Nevada,356.2,3.0
+808,Idaho,New Hampshire,2141.46,45.0
+809,Idaho,New Jersey,2045.64,41.0
+810,Idaho,New Mexico,782.52,12.0
+811,Idaho,New York,1978.65,39.0
+812,Idaho,North Carolina,1942.42,36.0
+813,Idaho,North Dakota,751.42,9.0
+814,Idaho,Northern Mariana Islands,5985.65,53.0
+815,Idaho,Ohio,1629.18,29.0
+816,Idaho,Oklahoma,1085.86,17.0
+817,Idaho,Oregon,362.05,4.0
+818,Idaho,Pennsylvania,1902.97,34.0
+819,Idaho,Puerto Rico,3290.87,50.0
+820,Idaho,Rhode Island,2180.77,47.0
+821,Idaho,South Carolina,1911.84,35.0
+822,Idaho,South Dakota,780.87,11.0
+823,Idaho,Tennessee,1597.78,27.0
+824,Idaho,Texas,1197.78,18.0
+825,Idaho,Utah,319.7,2.0
+826,Idaho,Vermont,2064.74,43.0
+827,Idaho,Virgin Islands,3355.73,51.0
+828,Idaho,Virginia,1944.64,37.0
+829,Idaho,Washington,383.65,5.0
+830,Idaho,West Virginia,1779.09,31.0
+831,Idaho,Wisconsin,1236.38,20.0
+832,Idaho,Wyoming,390.29,6.0
+833,Illinois,Indiana,157.15,1.0
+834,Illinois,Iowa,272.2,3.0
+835,Illinois,Kansas,491.31,13.0
+836,Illinois,Kentucky,274.17,4.0
+837,Illinois,Louisiana,637.79,23.0
+838,Illinois,Maine,1058.01,39.0
+839,Illinois,Maryland,669.96,24.0
+840,Illinois,Massachusetts,953.96,37.0
+841,Illinois,Michigan,347.62,8.0
+842,Illinois,Minnesota,459.52,11.0
+843,Illinois,Mississippi,483.92,12.0
+844,Illinois,Missouri,208.24,2.0
+845,Illinois,Montana,1154.45,40.0
+846,Illinois,Nebraska,507.34,15.0
+847,Illinois,Nevada,1521.1,44.0
+848,Illinois,New Hampshire,948.48,36.0
+849,Illinois,New Jersey,767.05,29.0
+850,Illinois,New Mexico,982.88,38.0
+851,Illinois,New York,760.6,27.0
+852,Illinois,North Carolina,608.29,20.0
+853,Illinois,North Dakota,751.44,26.0
+854,Illinois,Northern Mariana Islands,7276.9,56.0
+855,Illinois,Ohio,326.89,7.0
+856,Illinois,Oklahoma,527.63,16.0
+857,Illinois,Oregon,1693.39,46.0
+858,Illinois,Pennsylvania,627.83,22.0
+859,Illinois,Puerto Rico,2010.92,48.0
+860,Illinois,Rhode Island,941.33,34.0
+861,Illinois,South Carolina,598.86,19.0
+862,Illinois,South Dakota,582.9,18.0
+863,Illinois,Tennessee,313.24,5.0
+864,Illinois,Texas,764.1,28.0
+865,Illinois,Utah,1195.75,41.0
+866,Illinois,Vermont,897.95,33.0
+867,Illinois,Virgin Islands,2064.79,49.0
+868,Illinois,Virginia,613.4,21.0
+869,Illinois,Washington,1658.54,45.0
+870,Illinois,West Virginia,455.11,10.0
+871,Illinois,Wisconsin,320.8,6.0
+872,Illinois,Wyoming,945.52,35.0
+873,Indiana,Iowa,407.83,9.0
+874,Indiana,Kansas,647.75,23.0
+875,Indiana,Kentucky,167.72,2.0
+876,Indiana,Louisiana,697.15,26.0
+877,Indiana,Maine,915.26,36.0
+878,Indiana,Maryland,512.89,17.0
+879,Indiana,Massachusetts,802.69,33.0
+880,Indiana,Michigan,278.6,5.0
+881,Indiana,Minnesota,560.08,19.0
+882,Indiana,Mississippi,520.09,18.0
+883,Indiana,Missouri,357.47,7.0
+884,Indiana,Montana,1288.44,40.0
+885,Indiana,Nebraska,659.92,24.0
+886,Indiana,Nevada,1676.51,44.0
+887,Indiana,New Hampshire,801.87,32.0
+888,Indiana,New Jersey,610.99,21.0
+889,Indiana,New Mexico,1135.68,39.0
+890,Indiana,New York,613.36,22.0
+891,Indiana,North Carolina,472.03,11.0
+892,Indiana,North Dakota,862.57,34.0
+893,Indiana,Northern Mariana Islands,7402.7,56.0
+894,Indiana,Ohio,172.22,3.0
+895,Indiana,Oklahoma,668.22,25.0
+896,Indiana,Oregon,1838.43,46.0
+897,Indiana,Pennsylvania,473.18,12.0
+898,Indiana,Puerto Rico,1897.15,48.0
+899,Indiana,Rhode Island,788.32,31.0
+900,Indiana,South Carolina,489.4,15.0
+901,Indiana,South Dakota,717.11,27.0
+902,Indiana,Tennessee,265.53,4.0
+903,Indiana,Texas,887.19,35.0
+904,Indiana,Utah,1351.48,41.0
+905,Indiana,Vermont,756.75,30.0
+906,Indiana,Virgin Islands,1946.59,49.0
+907,Indiana,Virginia,461.96,10.0
+908,Indiana,Washington,1796.74,45.0
+909,Indiana,West Virginia,299.56,6.0
+910,Indiana,Wisconsin,364.43,8.0
+911,Indiana,Wyoming,1094.0,38.0
+912,Iowa,Kansas,350.84,7.0
+913,Iowa,Kentucky,546.0,13.0
+914,Iowa,Louisiana,781.26,22.0
+915,Iowa,Maine,1213.87,43.0
+916,Iowa,Maryland,903.78,30.0
+917,Iowa,Massachusetts,1140.65,42.0
+918,Iowa,Michigan,443.39,9.0
+919,Iowa,Minnesota,222.26,1.0
+920,Iowa,Mississippi,673.15,16.0
+921,Iowa,Missouri,253.28,3.0
+922,Iowa,Montana,883.3,29.0
+923,Iowa,Nebraska,274.6,5.0
+924,Iowa,Nevada,1289.23,44.0
+925,Iowa,New Hampshire,1119.11,39.0
+926,Iowa,New Jersey,981.34,34.0
+927,Iowa,New Mexico,844.1,25.0
+928,Iowa,New York,939.53,31.0
+929,Iowa,North Carolina,876.44,28.0
+930,Iowa,North Dakota,487.24,10.0
+931,Iowa,Northern Mariana Islands,7004.76,56.0
+932,Iowa,Ohio,553.35,14.0
+933,Iowa,Oklahoma,494.26,12.0
+934,Iowa,Oregon,1431.07,46.0
+935,Iowa,Pennsylvania,838.01,24.0
+936,Iowa,Puerto Rico,2282.43,48.0
+937,Iowa,Rhode Island,1135.57,41.0
+938,Iowa,South Carolina,870.9,27.0
+939,Iowa,South Dakota,311.27,6.0
+940,Iowa,Tennessee,576.5,15.0
+941,Iowa,Texas,763.64,21.0
+942,Iowa,Utah,968.42,32.0
+943,Iowa,Vermont,1054.38,35.0
+944,Iowa,Virgin Islands,2336.84,49.0
+945,Iowa,Virginia,868.48,26.0
+946,Iowa,Washington,1389.66,45.0
+947,Iowa,West Virginia,702.14,19.0
+948,Iowa,Wisconsin,250.41,2.0
+949,Iowa,Wyoming,690.23,18.0
+950,Kansas,Kentucky,723.29,19.0
+951,Kansas,Louisiana,641.06,16.0
+952,Kansas,Maine,1534.95,47.0
+953,Kansas,Maryland,1158.61,35.0
+954,Kansas,Massachusetts,1441.91,46.0
+955,Kansas,Michigan,775.78,22.0
+956,Kansas,Minnesota,500.63,10.0
+957,Kansas,Mississippi,621.79,15.0
+958,Kansas,Missouri,300.06,3.0
+959,Kansas,Montana,835.3,25.0
+960,Kansas,Nebraska,190.94,1.0
+961,Kansas,Nevada,1054.33,30.0
+962,Kansas,New Hampshire,1431.21,45.0
+963,Kansas,New Jersey,1258.35,39.0
+964,Kansas,New Mexico,501.68,11.0
+965,Kansas,New York,1245.24,38.0
+966,Kansas,North Carolina,1056.74,31.0
+967,Kansas,North Dakota,618.99,14.0
+968,Kansas,Northern Mariana Islands,6913.31,56.0
+969,Kansas,Ohio,818.15,24.0
+970,Kansas,Oklahoma,213.34,2.0
+971,Kansas,Oregon,1288.87,40.0
+972,Kansas,Pennsylvania,1118.84,34.0
+973,Kansas,Puerto Rico,2363.33,48.0
+974,Kansas,Rhode Island,1430.95,44.0
+975,Kansas,South Carolina,1002.34,29.0
+976,Kansas,South Dakota,387.73,5.0
+977,Kansas,Tennessee,687.99,18.0
+978,Kansas,Texas,463.17,8.0
+979,Kansas,Utah,729.76,20.0
+980,Kansas,Vermont,1374.23,43.0
+981,Kansas,Virgin Islands,2428.93,49.0
+982,Kansas,Virginia,1088.65,32.0
+983,Kansas,Washington,1290.68,41.0
+984,Kansas,West Virginia,940.47,28.0
+985,Kansas,Wisconsin,601.24,13.0
+986,Kansas,Wyoming,552.44,12.0
+987,Kentucky,Louisiana,611.87,22.0
+988,Kentucky,Maine,934.73,35.0
+989,Kentucky,Maryland,460.95,15.0
+990,Kentucky,Massachusetts,796.8,31.0
+991,Kentucky,Michigan,424.31,13.0
+992,Kentucky,Minnesota,719.03,26.0
+993,Kentucky,Mississippi,423.63,12.0
+994,Kentucky,Missouri,423.48,11.0
+995,Kentucky,Montana,1428.61,40.0
+996,Kentucky,Nebraska,772.87,28.0
+997,Kentucky,Nevada,1773.66,45.0
+998,Kentucky,New Hampshire,812.99,32.0
+999,Kentucky,New Jersey,582.64,20.0
+1000,Kentucky,New Mexico,1183.09,38.0
+1001,Kentucky,New York,629.32,23.0
+1002,Kentucky,North Carolina,338.56,7.0
+1003,Kentucky,North Dakota,1018.37,36.0
+1004,Kentucky,Northern Mariana Islands,7550.69,56.0
+1005,Kentucky,Ohio,216.22,3.0
+1006,Kentucky,Oklahoma,693.61,24.0
+1007,Kentucky,Oregon,1963.86,49.0
+1008,Kentucky,Pennsylvania,464.07,16.0
+1009,Kentucky,Puerto Rico,1740.21,44.0
+1010,Kentucky,Rhode Island,774.66,29.0
+1011,Kentucky,South Carolina,327.97,6.0
+1012,Kentucky,South Dakota,857.01,33.0
+1013,Kentucky,Tennessee,129.16,1.0
+1014,Kentucky,Texas,873.2,34.0
+1015,Kentucky,Utah,1447.87,41.0
+1016,Kentucky,Vermont,784.59,30.0
+1017,Kentucky,Virgin Islands,1792.47,46.0
+1018,Kentucky,Virginia,368.51,10.0
+1019,Kentucky,Washington,1932.11,47.0
+1020,Kentucky,West Virginia,244.85,4.0
+1021,Kentucky,Wisconsin,531.96,18.0
+1022,Kentucky,Wyoming,1214.14,39.0
+1023,Louisiana,Maine,1537.91,43.0
+1024,Louisiana,Maryland,1030.69,27.0
+1025,Louisiana,Massachusetts,1387.14,38.0
+1026,Louisiana,Michigan,967.96,24.0
+1027,Louisiana,Minnesota,1002.64,26.0
+1028,Louisiana,Mississippi,189.28,1.0
+1029,Louisiana,Missouri,528.42,8.0
+1030,Louisiana,Montana,1474.28,41.0
+1031,Louisiana,Nebraska,813.34,17.0
+1032,Louisiana,Nevada,1570.69,44.0
+1033,Louisiana,New Hampshire,1413.7,40.0
+1034,Louisiana,New Jersey,1164.16,31.0
+1035,Louisiana,New Mexico,855.96,20.0
+1036,Louisiana,New York,1235.44,34.0
+1037,Louisiana,North Carolina,798.28,16.0
+1038,Louisiana,North Dakota,1221.7,33.0
+1039,Louisiana,Northern Mariana Islands,7489.88,56.0
+1040,Louisiana,Ohio,822.98,18.0
+1041,Louisiana,Oklahoma,447.47,5.0
+1042,Louisiana,Oregon,1881.44,47.0
+1043,Louisiana,Pennsylvania,1064.43,28.0
+1044,Louisiana,Puerto Rico,1812.32,46.0
+1045,Louisiana,Rhode Island,1359.64,37.0
+1046,Louisiana,South Carolina,669.14,13.0
+1047,Louisiana,South Dakota,994.65,25.0
+1048,Louisiana,Tennessee,486.46,6.0
+1049,Louisiana,Texas,405.85,4.0
+1050,Louisiana,Utah,1272.88,35.0
+1051,Louisiana,Vermont,1392.64,39.0
+1052,Louisiana,Virgin Islands,1888.37,48.0
+1053,Louisiana,Virginia,901.73,21.0
+1054,Louisiana,Washington,1907.32,49.0
+1055,Louisiana,West Virginia,839.8,19.0
+1056,Louisiana,Wisconsin,947.03,22.0
+1057,Louisiana,Wyoming,1180.12,32.0
+1058,Maine,Maryland,525.85,10.0
+1059,Maine,Massachusetts,180.34,3.0
+1060,Maine,Michigan,770.87,14.0
+1061,Maine,Minnesota,1220.71,24.0
+1062,Maine,Mississippi,1348.84,28.0
+1063,Maine,Missouri,1266.21,27.0
+1064,Maine,Montana,1945.23,41.0
+1065,Maine,Nebraska,1487.24,32.0
+1066,Maine,Nevada,2480.18,47.0
+1067,Maine,New Hampshire,125.66,1.0
+1068,Maine,New Jersey,391.77,7.0
+1069,Maine,New Mexico,2035.31,42.0
+1070,Maine,New York,305.94,6.0
+1071,Maine,North Carolina,798.81,15.0
+1072,Maine,North Dakota,1471.28,31.0
+1073,Maine,Northern Mariana Islands,7778.91,56.0
+1074,Maine,Ohio,748.08,13.0
+1075,Maine,Oklahoma,1582.84,35.0
+1076,Maine,Oregon,2533.18,48.0
+1077,Maine,Pennsylvania,473.5,8.0
+1078,Maine,Puerto Rico,1814.19,37.0
+1079,Maine,Rhode Island,220.42,4.0
+1080,Maine,South Carolina,947.81,18.0
+1081,Maine,South Dakota,1451.3,30.0
+1082,Maine,Tennessee,1053.45,20.0
+1083,Maine,Texas,1797.35,36.0
+1084,Maine,Utah,2169.58,43.0
+1085,Maine,Vermont,160.73,2.0
+1086,Maine,Virgin Islands,1818.04,38.0
+1087,Maine,Virginia,668.36,11.0
+1088,Maine,Washington,2441.91,46.0
+1089,Maine,West Virginia,698.15,12.0
+1090,Maine,Wisconsin,994.41,19.0
+1091,Maine,Wyoming,1858.6,39.0
+1092,Maryland,Massachusetts,360.0,11.0
+1093,Maryland,Michigan,538.4,18.0
+1094,Maryland,Minnesota,1002.57,29.0
+1095,Maryland,Mississippi,844.24,25.0
+1096,Maryland,Missouri,862.25,26.0
+1097,Maryland,Montana,1758.51,42.0
+1098,Maryland,Nebraska,1168.36,33.0
+1099,Maryland,Nevada,2187.16,46.0
+1100,Maryland,New Hampshire,400.63,12.0
+1101,Maryland,New Jersey,135.69,3.0
+1102,Maryland,New Mexico,1636.87,41.0
+1103,Maryland,New York,261.45,6.0
+1104,Maryland,North Carolina,275.45,7.0
+1105,Maryland,North Dakota,1300.64,35.0
+1106,Maryland,Northern Mariana Islands,7819.34,56.0
+1107,Maryland,Ohio,350.77,10.0
+1108,Maryland,Oklahoma,1152.38,31.0
+1109,Maryland,Oregon,2327.36,48.0
+1110,Maryland,Pennsylvania,125.12,2.0
+1111,Maryland,Puerto Rico,1558.79,38.0
+1112,Maryland,Rhode Island,329.82,9.0
+1113,Maryland,South Carolina,423.24,14.0
+1114,Maryland,South Dakota,1199.47,34.0
+1115,Maryland,Tennessee,560.03,19.0
+1116,Maryland,Texas,1331.34,36.0
+1117,Maryland,Utah,1862.84,43.0
+1118,Maryland,Vermont,408.26,13.0
+1119,Maryland,Virgin Islands,1589.08,39.0
+1120,Maryland,Virginia,142.97,4.0
+1121,Maryland,Washington,2270.6,47.0
+1122,Maryland,West Virginia,220.19,5.0
+1123,Maryland,Wisconsin,764.97,24.0
+1124,Maryland,Wyoming,1593.71,40.0
+1125,Massachusetts,Michigan,708.23,15.0
+1126,Massachusetts,Minnesota,1179.77,27.0
+1127,Massachusetts,Mississippi,1199.28,28.0
+1128,Massachusetts,Missouri,1159.73,26.0
+1129,Massachusetts,Montana,1925.32,41.0
+1130,Massachusetts,Nebraska,1415.1,32.0
+1131,Massachusetts,Nevada,2425.06,46.0
+1132,Massachusetts,New Hampshire,81.34,2.0
+1133,Massachusetts,New Jersey,224.4,7.0
+1134,Massachusetts,New Mexico,1936.84,42.0
+1135,Massachusetts,New York,201.62,6.0
+1136,Massachusetts,North Carolina,627.0,13.0
+1137,Massachusetts,North Dakota,1451.49,34.0
+1138,Massachusetts,Northern Mariana Islands,7853.4,56.0
+1139,Massachusetts,Ohio,630.78,14.0
+1140,Massachusetts,Oklahoma,1468.74,35.0
+1141,Massachusetts,Oregon,2510.42,48.0
+1142,Massachusetts,Pennsylvania,334.5,9.0
+1143,Massachusetts,Puerto Rico,1669.35,37.0
+1144,Massachusetts,Rhode Island,40.79,1.0
+1145,Massachusetts,South Carolina,776.26,16.0
+1146,Massachusetts,South Dakota,1402.75,31.0
+1147,Massachusetts,Tennessee,908.39,19.0
+1148,Massachusetts,Texas,1668.68,36.0
+1149,Massachusetts,Utah,2107.67,43.0
+1150,Massachusetts,Vermont,159.88,4.0
+1151,Massachusetts,Virgin Islands,1679.42,38.0
+1152,Massachusetts,Virginia,499.68,11.0
+1153,Massachusetts,Washington,2430.95,47.0
+1154,Massachusetts,West Virginia,553.35,12.0
+1155,Massachusetts,Wisconsin,943.3,20.0
+1156,Massachusetts,Wyoming,1809.96,39.0
+1157,Michigan,Minnesota,477.3,9.0
+1158,Michigan,Mississippi,796.12,32.0
+1159,Michigan,Missouri,540.97,13.0
+1160,Michigan,Montana,1232.86,39.0
+1161,Michigan,Nebraska,716.37,25.0
+1162,Michigan,Nevada,1717.65,44.0
+1163,Michigan,New Hampshire,679.74,20.0
+1164,Michigan,New Jersey,578.87,15.0
+1165,Michigan,New Mexico,1277.2,40.0
+1166,Michigan,New York,506.91,10.0
+1167,Michigan,North Carolina,631.59,18.0
+1168,Michigan,North Dakota,766.68,29.0
+1169,Michigan,Northern Mariana Islands,7283.58,56.0
+1170,Michigan,Ohio,254.3,2.0
+1171,Michigan,Oklahoma,860.51,33.0
+1172,Michigan,Oregon,1811.87,46.0
+1173,Michigan,Pennsylvania,440.31,7.0
+1174,Michigan,Puerto Rico,2060.59,48.0
+1175,Michigan,Rhode Island,708.07,23.0
+1176,Michigan,South Carolina,701.17,22.0
+1177,Michigan,South Dakota,694.96,21.0
+1178,Michigan,Tennessee,539.92,12.0
+1179,Michigan,Texas,1108.3,37.0
+1180,Michigan,Utah,1402.38,41.0
+1181,Michigan,Vermont,611.99,17.0
+1182,Michigan,Virgin Islands,2100.06,49.0
+1183,Michigan,Virginia,562.2,14.0
+1184,Michigan,Washington,1743.84,45.0
+1185,Michigan,West Virginia,401.13,5.0
+1186,Michigan,Wisconsin,237.35,1.0
+1187,Michigan,Wyoming,1101.79,36.0
+1188,Minnesota,Mississippi,894.31,20.0
+1189,Minnesota,Missouri,475.38,7.0
+1190,Minnesota,Montana,757.05,17.0
+1191,Minnesota,Nebraska,344.99,5.0
+1192,Minnesota,Nevada,1261.41,43.0
+1193,Minnesota,New Hampshire,1143.44,38.0
+1194,Minnesota,New Jersey,1055.15,34.0
+1195,Minnesota,New Mexico,944.58,23.0
+1196,Minnesota,New York,980.12,26.0
+1197,Minnesota,North Carolina,1028.61,31.0
+1198,Minnesota,North Dakota,304.02,4.0
+1199,Minnesota,Northern Mariana Islands,6846.35,56.0
+1200,Minnesota,Ohio,667.74,12.0
+1201,Minnesota,Oklahoma,683.2,13.0
+1202,Minnesota,Oregon,1334.59,46.0
+1203,Minnesota,Pennsylvania,914.61,21.0
+1204,Minnesota,Puerto Rico,2457.11,49.0
+1205,Minnesota,Rhode Island,1182.46,40.0
+1206,Minnesota,South Carolina,1046.7,33.0
+1207,Minnesota,South Dakota,234.11,2.0
+1208,Minnesota,Tennessee,772.75,18.0
+1209,Minnesota,Texas,951.59,24.0
+1210,Minnesota,Utah,958.68,25.0
+1211,Minnesota,Vermont,1068.27,35.0
+1212,Minnesota,Virgin Islands,2506.59,50.0
+1213,Minnesota,Virginia,996.25,27.0
+1214,Minnesota,Washington,1268.91,44.0
+1215,Minnesota,West Virginia,826.13,19.0
+1216,Minnesota,Wisconsin,240.34,3.0
+1217,Minnesota,Wyoming,638.41,11.0
+1218,Mississippi,Missouri,425.47,7.0
+1219,Mississippi,Montana,1450.32,42.0
+1220,Mississippi,Nebraska,766.36,20.0
+1221,Mississippi,Nevada,1628.55,44.0
+1222,Mississippi,New Hampshire,1224.79,38.0
+1223,Mississippi,New Jersey,976.9,29.0
+1224,Mississippi,New Mexico,941.83,28.0
+1225,Mississippi,New York,1046.17,31.0
+1226,Mississippi,North Carolina,621.55,14.0
+1227,Mississippi,North Dakota,1143.73,33.0
+1228,Mississippi,Northern Mariana Islands,7528.45,56.0
+1229,Mississippi,Ohio,636.58,16.0
+1230,Mississippi,Oklahoma,471.35,8.0
+1231,Mississippi,Oregon,1904.3,48.0
+1232,Mississippi,Pennsylvania,875.34,24.0
+1233,Mississippi,Puerto Rico,1753.18,45.0
+1234,Mississippi,Rhode Island,1172.4,34.0
+1235,Mississippi,South Carolina,502.7,11.0
+1236,Mississippi,South Dakota,927.74,27.0
+1237,Mississippi,Tennessee,297.33,4.0
+1238,Mississippi,Texas,530.67,13.0
+1239,Mississippi,Utah,1316.14,40.0
+1240,Mississippi,Vermont,1203.36,37.0
+1241,Mississippi,Virgin Islands,1823.11,47.0
+1242,Mississippi,Virginia,718.27,19.0
+1243,Mississippi,Washington,1912.22,49.0
+1244,Mississippi,West Virginia,650.69,17.0
+1245,Mississippi,Wisconsin,803.1,22.0
+1246,Mississippi,Wyoming,1174.23,35.0
+1247,Missouri,Montana,1057.02,35.0
+1248,Missouri,Nebraska,372.39,7.0
+1249,Missouri,Nevada,1351.15,44.0
+1250,Missouri,New Hampshire,1156.12,40.0
+1251,Missouri,New Jersey,967.11,32.0
+1252,Missouri,New Mexico,778.33,25.0
+1253,Missouri,New York,967.99,33.0
+1254,Missouri,North Carolina,758.71,24.0
+1255,Missouri,North Dakota,718.97,23.0
+1256,Missouri,Northern Mariana Islands,7174.09,56.0
+1257,Missouri,Ohio,529.69,16.0
+1258,Missouri,Oklahoma,321.25,5.0
+1259,Missouri,Oregon,1560.41,47.0
+1260,Missouri,Pennsylvania,830.52,28.0
+1261,Missouri,Puerto Rico,2102.48,48.0
+1262,Missouri,Rhode Island,1145.77,39.0
+1263,Missouri,South Carolina,713.94,22.0
+1264,Missouri,South Dakota,508.73,14.0
+1265,Missouri,Tennessee,399.25,8.0
+1266,Missouri,Texas,569.33,18.0
+1267,Missouri,Utah,1025.58,34.0
+1268,Missouri,Vermont,1106.19,38.0
+1269,Missouri,Virgin Islands,2163.34,49.0
+1270,Missouri,Virginia,788.7,26.0
+1271,Missouri,Washington,1544.0,46.0
+1272,Missouri,West Virginia,642.91,20.0
+1273,Missouri,Wisconsin,440.89,11.0
+1274,Missouri,Wyoming,810.67,27.0
+1275,Montana,Nebraska,687.72,10.0
+1276,Montana,Nevada,662.67,9.0
+1277,Montana,New Hampshire,1881.69,44.0
+1278,Montana,New Jersey,1811.6,40.0
+1279,Montana,New Mexico,873.86,14.0
+1280,Montana,New York,1728.94,34.0
+1281,Montana,North Carolina,1759.33,38.0
+1282,Montana,North Dakota,474.61,3.0
+1283,Montana,Northern Mariana Islands,6124.17,53.0
+1284,Montana,Ohio,1417.62,25.0
+1285,Montana,Oklahoma,1030.41,18.0
+1286,Montana,Oregon,588.0,7.0
+1287,Montana,Pennsylvania,1671.56,32.0
+1288,Montana,Puerto Rico,3156.36,49.0
+1289,Montana,Rhode Island,1931.35,47.0
+1290,Montana,South Carolina,1750.5,36.0
+1291,Montana,South Dakota,572.06,6.0
+1292,Montana,Tennessee,1445.15,27.0
+1293,Montana,Texas,1206.05,21.0
+1294,Montana,Utah,508.37,4.0
+1295,Montana,Vermont,1801.6,39.0
+1296,Montana,Virgin Islands,3214.26,51.0
+1297,Montana,Virginia,1743.12,35.0
+1298,Montana,Washington,512.09,5.0
+1299,Montana,West Virginia,1573.72,31.0
+1300,Montana,Wisconsin,997.05,17.0
+1301,Montana,Wyoming,311.35,1.0
+1302,Nebraska,Nevada,1019.13,29.0
+1303,Nebraska,New Hampshire,1393.6,44.0
+1304,Nebraska,New Jersey,1252.1,41.0
+1305,Nebraska,New Mexico,601.13,13.0
+1306,Nebraska,New York,1214.07,38.0
+1307,Nebraska,North Carolina,1111.25,32.0
+1308,Nebraska,North Dakota,428.07,8.0
+1309,Nebraska,Northern Mariana Islands,6801.74,56.0
+1310,Nebraska,Ohio,817.95,23.0
+1311,Nebraska,Oklahoma,403.18,7.0
+1312,Nebraska,Oregon,1192.54,36.0
+1313,Nebraska,Pennsylvania,1109.07,31.0
+1314,Nebraska,Puerto Rico,2474.85,48.0
+1315,Nebraska,Rhode Island,1409.57,45.0
+1316,Nebraska,South Carolina,1081.24,30.0
+1317,Nebraska,South Dakota,196.91,2.0
+1318,Nebraska,Tennessee,768.79,20.0
+1319,Nebraska,Texas,651.95,14.0
+1320,Nebraska,Utah,696.12,17.0
+1321,Nebraska,Vermont,1328.16,42.0
+1322,Nebraska,Virgin Islands,2535.65,50.0
+1323,Nebraska,Virginia,1120.49,33.0
+1324,Nebraska,Washington,1171.73,35.0
+1325,Nebraska,West Virginia,959.35,27.0
+1326,Nebraska,Wisconsin,504.85,10.0
+1327,Nebraska,Wyoming,441.93,9.0
+1328,Nevada,New Hampshire,2396.65,45.0
+1329,Nevada,New Jersey,2270.36,42.0
+1330,Nevada,New Mexico,727.6,10.0
+1331,Nevada,New York,2223.45,40.0
+1332,Nevada,North Carolina,2109.85,35.0
+1333,Nevada,North Dakota,1057.41,14.0
+1334,Nevada,Northern Mariana Islands,5920.58,53.0
+1335,Nevada,Ohio,1837.01,30.0
+1336,Nevada,Oklahoma,1157.59,15.0
+1337,Nevada,Oregon,433.6,4.0
+1338,Nevada,Pennsylvania,2127.1,37.0
+1339,Nevada,Puerto Rico,3377.83,50.0
+1340,Nevada,Rhode Island,2422.37,46.0
+1341,Nevada,South Carolina,2055.39,34.0
+1342,Nevada,South Dakota,1029.06,12.0
+1343,Nevada,Tennessee,1741.93,27.0
+1344,Nevada,Texas,1188.65,16.0
+1345,Nevada,Utah,325.85,2.0
+1346,Nevada,Vermont,2325.18,43.0
+1347,Nevada,Virgin Islands,3450.21,51.0
+1348,Nevada,Virginia,2133.14,38.0
+1349,Nevada,Washington,572.03,6.0
+1350,Nevada,West Virginia,1975.92,33.0
+1351,Nevada,Wisconsin,1486.63,21.0
+1352,Nevada,Wyoming,623.53,7.0
+1353,New Hampshire,New Jersey,267.41,7.0
+1354,New Hampshire,New Mexico,1929.61,42.0
+1355,New Hampshire,New York,188.53,6.0
+1356,New Hampshire,North Carolina,674.4,14.0
+1357,New Hampshire,North Dakota,1407.13,32.0
+1358,New Hampshire,Northern Mariana Islands,7782.06,56.0
+1359,New Hampshire,Ohio,632.28,13.0
+1360,New Hampshire,Oklahoma,1470.08,35.0
+1361,New Hampshire,Oregon,2468.41,48.0
+1362,New Hampshire,Pennsylvania,349.91,8.0
+1363,New Hampshire,Puerto Rico,1750.68,37.0
+1364,New Hampshire,Rhode Island,119.47,3.0
+1365,New Hampshire,South Carolina,823.19,18.0
+1366,New Hampshire,South Dakota,1370.24,30.0
+1367,New Hampshire,Tennessee,930.13,20.0
+1368,New Hampshire,Texas,1679.37,36.0
+1369,New Hampshire,Utah,2082.12,43.0
+1370,New Hampshire,Vermont,86.86,2.0
+1371,New Hampshire,Virgin Islands,1760.54,38.0
+1372,New Hampshire,Virginia,543.36,11.0
+1373,New Hampshire,Washington,2384.36,46.0
+1374,New Hampshire,West Virginia,574.32,12.0
+1375,New Hampshire,Wisconsin,910.66,19.0
+1376,New Hampshire,Wyoming,1778.1,39.0
+1377,New Jersey,New Mexico,1745.12,41.0
+1378,New Jersey,New York,162.3,5.0
+1379,New Jersey,North Carolina,407.09,13.0
+1380,New Jersey,North Dakota,1344.82,35.0
+1381,New Jersey,Northern Mariana Islands,7829.73,56.0
+1382,New Jersey,Ohio,440.32,14.0
+1383,New Jersey,Oklahoma,1266.95,34.0
+1384,New Jersey,Oregon,2388.67,48.0
+1385,New Jersey,Pennsylvania,143.38,4.0
+1386,New Jersey,Puerto Rico,1596.21,37.0
+1387,New Jersey,Rhode Island,195.51,6.0
+1388,New Jersey,South Carolina,556.04,15.0
+1389,New Jersey,South Dakota,1264.77,33.0
+1390,New Jersey,Tennessee,688.84,19.0
+1391,New Jersey,Texas,1455.77,36.0
+1392,New Jersey,Utah,1948.22,43.0
+1393,New Jersey,Vermont,286.03,10.0
+1394,New Jersey,Virgin Islands,1618.79,38.0
+1395,New Jersey,Virginia,276.93,9.0
+1396,New Jersey,Washington,2322.71,47.0
+1397,New Jersey,West Virginia,337.81,11.0
+1398,New Jersey,Wisconsin,814.83,22.0
+1399,New Jersey,Wyoming,1666.42,40.0
+1400,New Mexico,New York,1742.55,40.0
+1401,New Mexico,North Carolina,1497.36,35.0
+1402,New Mexico,North Dakota,929.28,18.0
+1403,New Mexico,Northern Mariana Islands,6644.66,53.0
+1404,New Mexico,Ohio,1307.85,31.0
+1405,New Mexico,Oklahoma,494.94,5.0
+1406,New Mexico,Oregon,1091.62,22.0
+1407,New Mexico,Pennsylvania,1608.83,37.0
+1408,New Mexico,Puerto Rico,2668.25,49.0
+1409,New Mexico,Rhode Island,1923.76,44.0
+1410,New Mexico,South Carolina,1414.01,32.0
+1411,New Mexico,South Dakota,748.22,10.0
+1412,New Mexico,Tennessee,1117.12,25.0
+1413,New Mexico,Texas,462.37,3.0
+1414,New Mexico,Utah,471.99,4.0
+1415,New Mexico,Vermont,1874.6,43.0
+1416,New Mexico,Virgin Islands,2744.21,50.0
+1417,New Mexico,Virginia,1551.11,36.0
+1418,New Mexico,Washington,1161.69,27.0
+1419,New Mexico,West Virginia,1416.7,33.0
+1420,New Mexico,Wisconsin,1092.25,23.0
+1421,New Mexico,Wyoming,577.56,7.0
+1422,New York,North Carolina,532.61,15.0
+1423,New York,North Dakota,1256.19,34.0
+1424,New York,Northern Mariana Islands,7698.6,56.0
+1425,New York,Ohio,443.9,13.0
+1426,New York,Oklahoma,1281.56,35.0
+1427,New York,Oregon,2312.67,48.0
+1428,New York,Pennsylvania,174.28,4.0
+1429,New York,Puerto Rico,1754.0,41.0
+1430,New York,Rhode Island,202.54,7.0
+1431,New York,South Carolina,676.71,18.0
+1432,New York,South Dakota,1201.72,30.0
+1433,New York,Tennessee,749.66,20.0
+1434,New York,Texas,1492.01,36.0
+1435,New York,Utah,1906.14,43.0
+1436,New York,Vermont,158.24,2.0
+1437,New York,Virgin Islands,1774.19,42.0
+1438,New York,Virginia,399.45,12.0
+1439,New York,Washington,2236.44,47.0
+1440,New York,West Virginia,396.58,11.0
+1441,New York,Wisconsin,742.63,19.0
+1442,New York,Wyoming,1608.69,37.0
+1443,North Carolina,North Dakota,1332.35,36.0
+1444,North Carolina,Northern Mariana Islands,7874.18,56.0
+1445,North Carolina,Ohio,380.06,9.0
+1446,North Carolina,Oklahoma,1002.53,30.0
+1447,North Carolina,Oregon,2301.27,49.0
+1448,North Carolina,Pennsylvania,369.24,8.0
+1449,North Carolina,Puerto Rico,1435.98,37.0
+1450,North Carolina,Rhode Island,592.74,17.0
+1451,North Carolina,South Carolina,149.28,2.0
+1452,North Carolina,South Dakota,1187.37,35.0
+1453,North Carolina,Tennessee,380.24,10.0
+1454,North Carolina,Texas,1140.04,34.0
+1455,North Carolina,Utah,1784.29,43.0
+1456,North Carolina,Vermont,683.29,23.0
+1457,North Carolina,Virgin Islands,1480.94,39.0
+1458,North Carolina,Virginia,133.32,1.0
+1459,North Carolina,Washington,2265.91,47.0
+1460,North Carolina,West Virginia,233.62,3.0
+1461,North Carolina,Wisconsin,813.22,28.0
+1462,North Carolina,Wyoming,1552.16,41.0
+1463,North Dakota,Northern Mariana Islands,6542.34,53.0
+1464,North Dakota,Ohio,970.79,19.0
+1465,North Dakota,Oklahoma,830.88,15.0
+1466,North Dakota,Oregon,1062.1,24.0
+1467,North Dakota,Pennsylvania,1206.98,29.0
+1468,North Dakota,Puerto Rico,2758.32,49.0
+1469,North Dakota,Rhode Island,1458.34,45.0
+1470,North Dakota,South Carolina,1346.31,40.0
+1471,North Dakota,South Dakota,232.06,1.0
+1472,North Dakota,Tennessee,1062.0,23.0
+1473,North Dakota,Texas,1077.26,25.0
+1474,North Dakota,Utah,792.62,14.0
+1475,North Dakota,Vermont,1327.0,37.0
+1476,North Dakota,Virgin Islands,2808.99,50.0
+1477,North Dakota,Virginia,1299.51,34.0
+1478,North Dakota,Washington,980.32,20.0
+1479,North Dakota,West Virginia,1129.45,26.0
+1480,North Dakota,Wisconsin,535.8,7.0
+1481,North Dakota,Wyoming,454.71,4.0
+1482,Northern Mariana Islands,Ohio,7510.1,31.0
+1483,Northern Mariana Islands,Oklahoma,7061.03,22.0
+1484,Northern Mariana Islands,Oregon,5624.98,5.0
+1485,Northern Mariana Islands,Pennsylvania,7708.93,39.0
+1486,Northern Mariana Islands,Puerto Rico,9275.65,53.0
+1487,Northern Mariana Islands,Rhode Island,7877.17,50.0
+1488,Northern Mariana Islands,South Carolina,7874.53,49.0
+1489,Northern Mariana Islands,South Dakota,6694.19,17.0
+1490,Northern Mariana Islands,Tennessee,7568.24,34.0
+1491,Northern Mariana Islands,Texas,7107.03,24.0
+1492,Northern Mariana Islands,Utah,6218.59,11.0
+1493,Northern Mariana Islands,Vermont,7695.96,37.0
+1494,Northern Mariana Islands,Virgin Islands,9337.31,54.0
+1495,Northern Mariana Islands,Virginia,7838.16,45.0
+1496,Northern Mariana Islands,Washington,5630.14,6.0
+1497,Northern Mariana Islands,West Virginia,7668.97,36.0
+1498,Northern Mariana Islands,Wisconsin,7070.42,23.0
+1499,Northern Mariana Islands,Wyoming,6366.57,12.0
+1500,Ohio,Oklahoma,838.64,33.0
+1501,Ohio,Oregon,1980.43,48.0
+1502,Ohio,Pennsylvania,301.18,5.0
+1503,Ohio,Puerto Rico,1814.51,44.0
+1504,Ohio,Rhode Island,616.1,22.0
+1505,Ohio,South Carolina,448.31,15.0
+1506,Ohio,South Dakota,852.78,34.0
+1507,Ohio,Tennessee,345.32,8.0
+1508,Ohio,Texas,1049.65,36.0
+1509,Ohio,Utah,1513.14,41.0
+1510,Ohio,Vermont,591.48,21.0
+1511,Ohio,Virgin Islands,1857.15,46.0
+1512,Ohio,Virginia,328.76,7.0
+1513,Ohio,Washington,1929.09,47.0
+1514,Ohio,West Virginia,158.91,1.0
+1515,Ohio,Wisconsin,439.87,12.0
+1516,Ohio,Wyoming,1243.54,38.0
+1517,Oklahoma,Oregon,1440.98,42.0
+1518,Oklahoma,Pennsylvania,1135.69,33.0
+1519,Oklahoma,Puerto Rico,2223.88,48.0
+1520,Oklahoma,Rhode Island,1452.04,43.0
+1521,Oklahoma,South Carolina,920.87,26.0
+1522,Oklahoma,South Dakota,598.97,12.0
+1523,Oklahoma,Tennessee,622.3,13.0
+1524,Oklahoma,Texas,269.91,3.0
+1525,Oklahoma,Utah,845.12,24.0
+1526,Oklahoma,Vermont,1423.53,41.0
+1527,Oklahoma,Virgin Islands,2294.37,49.0
+1528,Oklahoma,Virginia,1059.73,31.0
+1529,Oklahoma,Washington,1460.92,44.0
+1530,Oklahoma,West Virginia,932.75,27.0
+1531,Oklahoma,Wisconsin,731.51,18.0
+1532,Oklahoma,Wyoming,732.93,19.0
+1533,Oregon,Pennsylvania,2247.02,34.0
+1534,Oregon,Puerto Rico,3652.19,50.0
+1535,Oregon,Rhode Island,2515.21,47.0
+1536,Oregon,South Carolina,2273.24,35.0
+1537,Oregon,South Dakota,1127.98,12.0
+1538,Oregon,Tennessee,1959.46,28.0
+1539,Oregon,Texas,1532.4,18.0
+1540,Oregon,Utah,622.28,6.0
+1541,Oregon,Vermont,2388.89,41.0
+1542,Oregon,Virgin Islands,3717.47,51.0
+1543,Oregon,Virginia,2299.55,36.0
+1544,Oregon,Washington,174.81,1.0
+1545,Oregon,West Virginia,2132.6,32.0
+1546,Oregon,Wisconsin,1574.67,21.0
+1547,Oregon,Wyoming,750.66,7.0
+1548,Pennsylvania,Puerto Rico,1682.25,41.0
+1549,Pennsylvania,Rhode Island,316.35,9.0
+1550,Pennsylvania,South Carolina,508.48,18.0
+1551,Pennsylvania,South Dakota,1122.11,33.0
+1552,Pennsylvania,Tennessee,580.22,19.0
+1553,Pennsylvania,Texas,1334.46,36.0
+1554,Pennsylvania,Utah,1805.15,43.0
+1555,Pennsylvania,Vermont,332.38,10.0
+1556,Pennsylvania,Virgin Islands,1711.2,42.0
+1557,Pennsylvania,Virginia,239.26,6.0
+1558,Pennsylvania,Washington,2183.13,47.0
+1559,Pennsylvania,West Virginia,224.65,5.0
+1560,Pennsylvania,Wisconsin,674.51,22.0
+1561,Pennsylvania,Wyoming,1523.19,38.0
+1562,Puerto Rico,Rhode Island,1632.91,11.0
+1563,Puerto Rico,South Carolina,1412.55,3.0
+1564,Puerto Rico,South Dakota,2590.3,37.0
+1565,Puerto Rico,Tennessee,1711.37,16.0
+1566,Puerto Rico,Texas,2211.97,30.0
+1567,Puerto Rico,Utah,3069.0,43.0
+1568,Puerto Rico,Vermont,1822.22,24.0
+1569,Puerto Rico,Virgin Islands,94.56,1.0
+1570,Puerto Rico,Virginia,1500.04,6.0
+1571,Puerto Rico,Washington,3645.93,48.0
+1572,Puerto Rico,West Virginia,1660.06,13.0
+1573,Puerto Rico,Wisconsin,2248.82,32.0
+1574,Puerto Rico,Wyoming,2909.08,41.0
+1575,Rhode Island,South Carolina,741.87,16.0
+1576,Rhode Island,South Dakota,1403.02,31.0
+1577,Rhode Island,Tennessee,883.56,19.0
+1578,Rhode Island,Texas,1647.61,38.0
+1579,Rhode Island,Utah,2103.64,43.0
+1580,Rhode Island,Vermont,191.26,4.0
+1581,Rhode Island,Virgin Islands,1644.11,37.0
+1582,Rhode Island,Virginia,467.26,11.0
+1583,Rhode Island,Washington,2438.47,47.0
+1584,Rhode Island,West Virginia,530.18,12.0
+1585,Rhode Island,Wisconsin,944.49,22.0
+1586,Rhode Island,Wyoming,1809.48,40.0
+1587,South Carolina,South Dakota,1180.59,35.0
+1588,South Carolina,Tennessee,315.14,4.0
+1589,South Carolina,Texas,1031.22,32.0
+1590,South Carolina,Utah,1731.81,43.0
+1591,South Carolina,Vermont,829.66,26.0
+1592,South Carolina,Virgin Islands,1465.94,40.0
+1593,South Carolina,Virginia,280.29,3.0
+1594,South Carolina,Washington,2249.71,48.0
+1595,South Carolina,West Virginia,333.46,7.0
+1596,South Carolina,Wisconsin,850.97,27.0
+1597,South Carolina,Wyoming,1522.69,41.0
+1598,South Dakota,Tennessee,880.0,22.0
+1599,South Dakota,Texas,848.44,19.0
+1600,South Dakota,Utah,724.57,16.0
+1601,South Dakota,Vermont,1297.11,41.0
+1602,South Dakota,Virgin Islands,2646.07,50.0
+1603,South Dakota,Virginia,1174.74,33.0
+1604,South Dakota,Washington,1079.7,29.0
+1605,South Dakota,West Virginia,1006.39,26.0
+1606,South Dakota,Wisconsin,459.78,7.0
+1607,South Dakota,Wyoming,407.88,6.0
+1608,Tennessee,Texas,773.88,28.0
+1609,Tennessee,Utah,1417.73,40.0
+1610,Tennessee,Vermont,906.46,32.0
+1611,Tennessee,Virgin Islands,1769.36,46.0
+1612,Tennessee,Virginia,447.23,13.0
+1613,Tennessee,Washington,1939.64,48.0
+1614,Tennessee,West Virginia,356.03,9.0
+1615,Tennessee,Wisconsin,613.69,20.0
+1616,Tennessee,Wyoming,1209.29,39.0
+1617,Texas,Utah,911.34,20.0
+1618,Texas,Vermont,1641.1,43.0
+1619,Texas,Virgin Islands,2289.85,49.0
+1620,Texas,Virginia,1220.74,33.0
+1621,Texas,Washington,1581.33,41.0
+1622,Texas,West Virginia,1118.04,28.0
+1623,Texas,Wisconsin,997.01,23.0
+1624,Texas,Wyoming,895.59,19.0
+1625,Utah,Vermont,2012.83,42.0
+1626,Utah,Virgin Islands,3139.22,51.0
+1627,Utah,Virginia,1807.42,37.0
+1628,Utah,Washington,691.3,10.0
+1629,Utah,West Virginia,1650.74,32.0
+1630,Utah,Wisconsin,1175.31,21.0
+1631,Utah,Wyoming,338.18,4.0
+1632,Vermont,Virgin Islands,1834.65,41.0
+1633,Vermont,Virginia,550.09,11.0
+1634,Vermont,Washington,2302.64,46.0
+1635,Vermont,West Virginia,554.59,12.0
+1636,Vermont,Wisconsin,838.58,19.0
+1637,Vermont,Wyoming,1704.88,37.0
+1638,Virgin Islands,Virginia,1538.06,7.0
+1639,Virgin Islands,Washington,3707.35,48.0
+1640,Virgin Islands,West Virginia,1701.02,14.0
+1641,Virgin Islands,Wisconsin,2294.05,31.0
+1642,Virgin Islands,Wyoming,2972.05,41.0
+1643,Virginia,Washington,2253.69,47.0
+1644,Virginia,West Virginia,170.12,3.0
+1645,Virginia,Wisconsin,767.8,25.0
+1646,Virginia,Wyoming,1555.96,41.0
+1647,Washington,West Virginia,2084.64,32.0
+1648,Washington,Wisconsin,1508.66,19.0
+1649,Washington,Wyoming,738.86,7.0
+1650,West Virginia,Wisconsin,598.63,22.0
+1651,West Virginia,Wyoming,1391.44,38.0
+1652,Wisconsin,Wyoming,867.53,29.0
+1653,Alaska,Alabama,3348.46,38.0
+1654,American Samoa,Alabama,6380.29,28.0
+1655,Arizona,Alabama,1401.62,25.0
+1656,Arkansas,Alabama,361.71,5.0
+1657,California,Alabama,1948.19,29.0
+1658,Colorado,Alabama,1130.24,29.0
+1659,Connecticut,Alabama,982.38,23.0
+1660,Delaware,Alabama,748.12,22.0
+1661,Diamond Princess,Alabama,6027.57,27.0
+1662,District of Columbia,Alabama,6027.57,27.0
+1663,Florida,Alabama,355.25,3.0
+1664,Georgia,Alabama,173.78,1.0
+1665,Grand Princess,Alabama,6027.57,27.0
+1666,Guam,Alabama,7785.12,35.0
+1667,Hawaii,Alabama,4320.79,31.0
+1668,Idaho,Alabama,1677.64,30.0
+1669,Illinois,Alabama,495.42,14.0
+1670,Indiana,Alabama,478.48,13.0
+1671,Iowa,Alabama,731.58,20.0
+1672,Kansas,Alabama,749.98,21.0
+1673,Kentucky,Alabama,339.92,9.0
+1674,Louisiana,Alabama,332.88,3.0
+1675,Maine,Alabama,1223.91,25.0
+1676,Maryland,Alabama,706.53,22.0
+1677,Massachusetts,Alabama,1065.89,23.0
+1678,Michigan,Alabama,754.82,27.0
+1679,Minnesota,Alabama,943.98,22.0
+1680,Mississippi,Alabama,167.7,1.0
+1681,Missouri,Alabama,506.85,13.0
+1682,Montana,Alabama,1560.37,30.0
+1683,Nebraska,Alabama,872.7,25.0
+1684,Nevada,Alabama,1779.8,29.0
+1685,New Hampshire,Alabama,1098.54,23.0
+1686,New Jersey,Alabama,841.62,23.0
+1687,New Mexico,Alabama,1104.36,24.0
+1688,New York,Alabama,927.49,23.0
+1689,North Carolina,Alabama,465.58,12.0
+1690,North Dakota,Alabama,1216.81,30.0
+1691,Northern Mariana Islands,Alabama,7663.2,35.0
+1692,Ohio,Alabama,554.19,19.0
+1693,Oklahoma,Alabama,623.6,14.0
+1694,Oregon,Alabama,2038.8,31.0
+1695,Pennsylvania,Alabama,753.61,23.0
+1696,Puerto Rico,Alabama,1613.4,10.0
+1697,Rhode Island,Alabama,1036.34,23.0
+1698,South Carolina,Alabama,338.24,8.0
+1699,South Dakota,Alabama,1014.72,27.0
+1700,Tennessee,Alabama,215.29,2.0
+1701,Texas,Alabama,698.3,10.0
+1702,Utah,Alabama,1463.06,29.0
+1703,Vermont,Alabama,1085.74,25.0
+1704,Virgin Islands,Alabama,1679.79,13.0
+1705,Virginia,Alabama,572.94,20.0
+1706,Washington,Alabama,2036.91,31.0
+1707,West Virginia,Alabama,532.26,18.0
+1708,Wisconsin,Alabama,811.72,22.0
+1709,Wyoming,Alabama,1298.29,30.0
+1710,American Samoa,Alaska,5219.55,9.0
+1711,Arizona,Alaska,2517.7,48.0
+1712,Arkansas,Alaska,3032.23,50.0
+1713,California,Alaska,1944.64,28.0
+1714,Colorado,Alaska,2373.86,48.0
+1715,Connecticut,Alaska,3383.09,50.0
+1716,Delaware,Alaska,3429.38,50.0
+1717,Diamond Princess,Alaska,8003.38,53.0
+1718,District of Columbia,Alaska,8003.38,53.0
+1719,Florida,Alaska,3697.75,50.0
+1720,Georgia,Alaska,3459.31,50.0
+1721,Grand Princess,Alaska,8003.38,53.0
+1722,Guam,Alaska,4588.8,4.0
+1723,Hawaii,Alaska,2695.36,5.0
+1724,Idaho,Alaska,1815.33,32.0
+1725,Illinois,Alaska,2893.15,50.0
+1726,Indiana,Alaska,2996.11,50.0
+1727,Iowa,Alaska,2627.56,50.0
+1728,Kansas,Alaska,2645.89,50.0
+1729,Kentucky,Alaska,3157.0,50.0
+1730,Louisiana,Alaska,3285.84,50.0
+1731,Maine,Alaska,3331.0,50.0
+1732,Maryland,Alaska,3368.24,50.0
+1733,Massachusetts,Alaska,3394.66,50.0
+1734,Michigan,Alaska,2839.96,50.0
+1735,Minnesota,Alaska,2437.97,48.0
+1736,Mississippi,Alaska,3253.15,50.0
+1737,Missouri,Alaska,2842.02,50.0
+1738,Montana,Alaska,1811.63,41.0
+1739,Nebraska,Alaska,2486.94,49.0
+1740,Nevada,Alaska,1968.08,32.0
+1741,New Hampshire,Alaska,3325.12,50.0
+1742,New Jersey,Alaska,3370.77,50.0
+1743,New Mexico,Alaska,2597.74,48.0
+1744,New York,Alaska,3237.73,50.0
+1745,North Carolina,Alaska,3455.91,50.0
+1746,North Dakota,Alaska,2141.85,48.0
+1747,Northern Mariana Islands,Alaska,4460.9,4.0
+1748,Ohio,Alaska,3079.36,50.0
+1749,Oklahoma,Alaska,2841.63,50.0
+1750,Oregon,Alaska,1538.14,19.0
+1751,Pennsylvania,Alaska,3253.91,50.0
+1752,Puerto Rico,Alaska,4891.39,53.0
+1753,Rhode Island,Alaska,3417.35,50.0
+1754,South Carolina,Alaska,3484.48,50.0
+1755,South Dakota,Alaska,2333.75,48.0
+1756,Tennessee,Alaska,3203.63,50.0
+1757,Texas,Alaska,2999.16,50.0
+1758,Utah,Alaska,2129.19,47.0
+1759,Vermont,Alaska,3238.56,50.0
+1760,Virgin Islands,Alaska,4936.38,53.0
+1761,Virginia,Alaska,3401.56,50.0
+1762,Washington,Alaska,1438.23,17.0
+1763,West Virginia,Alaska,3236.18,50.0
+1764,Wisconsin,Alaska,2642.73,50.0
+1765,Wyoming,Alaska,2111.99,48.0
+1766,Arizona,American Samoa,5092.6,52.0
+1767,Arkansas,American Samoa,6104.85,52.0
+1768,California,American Samoa,4810.08,52.0
+1769,Colorado,American Samoa,5544.68,52.0
+1770,Connecticut,American Samoa,7260.49,55.0
+1771,Delaware,American Samoa,7081.41,55.0
+1772,Diamond Princess,American Samoa,11245.44,57.0
+1773,District of Columbia,American Samoa,11245.44,57.0
+1774,Florida,American Samoa,6571.05,55.0
+1775,Georgia,American Samoa,6546.39,55.0
+1776,Grand Princess,American Samoa,11245.44,57.0
+1777,Guam,American Samoa,3627.23,2.0
+1778,Hawaii,American Samoa,2584.77,3.0
+1779,Idaho,American Samoa,5312.36,52.0
+1780,Illinois,American Samoa,6380.42,55.0
+1781,Indiana,American Samoa,6532.09,55.0
+1782,Iowa,American Samoa,6216.47,52.0
+1783,Kansas,American Samoa,5895.09,52.0
+1784,Kentucky,American Samoa,6560.62,55.0
+1785,Louisiana,American Samoa,6051.27,52.0
+1786,Maine,American Samoa,7428.42,55.0
+1787,Maryland,American Samoa,7021.46,55.0
+1788,Massachusetts,American Samoa,7334.3,55.0
+1789,Michigan,American Samoa,6659.75,55.0
+1790,Minnesota,American Samoa,6241.58,52.0
+1791,Mississippi,American Samoa,6217.45,55.0
+1792,Missouri,American Samoa,6174.73,52.0
+1793,Montana,American Samoa,5618.85,52.0
+1794,Nebraska,American Samoa,5945.38,52.0
+1795,Nevada,American Samoa,4995.68,52.0
+1796,New Hampshire,American Samoa,7326.29,55.0
+1797,New Jersey,American Samoa,7137.53,55.0
+1798,New Mexico,American Samoa,5397.6,52.0
+1799,New York,American Samoa,7139.87,55.0
+1800,North Carolina,American Samoa,6836.88,55.0
+1801,North Dakota,American Samoa,6052.44,52.0
+1802,Northern Mariana Islands,American Samoa,3634.79,2.0
+1803,Ohio,American Samoa,6704.28,55.0
+1804,Oklahoma,American Samoa,5870.64,52.0
+1805,Oregon,American Samoa,5069.63,52.0
+1806,Pennsylvania,American Samoa,7004.41,55.0
+1807,Puerto Rico,American Samoa,7415.53,55.0
+1808,Rhode Island,American Samoa,7320.32,55.0
+1809,South Carolina,American Samoa,6718.53,55.0
+1810,South Dakota,American Samoa,6007.68,52.0
+1811,Tennessee,American Samoa,6470.95,55.0
+1812,Texas,American Samoa,5698.37,52.0
+1813,Utah,American Samoa,5283.81,52.0
+1814,Vermont,American Samoa,7267.96,55.0
+1815,Virgin Islands,American Samoa,7509.64,55.0
+1816,Virginia,American Samoa,6918.17,55.0
+1817,Washington,American Samoa,5213.1,52.0
+1818,West Virginia,American Samoa,6802.76,55.0
+1819,Wisconsin,American Samoa,6447.46,55.0
+1820,Wyoming,American Samoa,5613.93,52.0
+1821,Arkansas,Arizona,1061.86,33.0
+1822,California,Arizona,649.16,6.0
+1823,Colorado,Arizona,493.77,6.0
+1824,Connecticut,Arizona,2171.0,45.0
+1825,Delaware,Arizona,2010.31,44.0
+1826,Diamond Princess,Arizona,7421.33,47.0
+1827,District of Columbia,Arizona,7421.33,47.0
+1828,Florida,Arizona,1706.07,42.0
+1829,Georgia,Arizona,1574.58,42.0
+1830,Grand Princess,Arizona,7421.33,47.0
+1831,Guam,Arizona,6522.12,13.0
+1832,Hawaii,Arizona,2919.24,8.0
+1833,Idaho,Arizona,751.92,10.0
+1834,Illinois,Arizona,1289.39,42.0
+1835,Indiana,Arizona,1443.27,42.0
+1836,Iowa,Arizona,1133.97,40.0
+1837,Kansas,Arizona,802.58,23.0
+1838,Kentucky,Arizona,1492.37,42.0
+1839,Louisiana,Arizona,1131.56,30.0
+1840,Maine,Arizona,2337.27,45.0
+1841,Maryland,Arizona,1946.02,44.0
+1842,Massachusetts,Arizona,2242.99,45.0
+1843,Michigan,Arizona,1573.56,43.0
+1844,Minnesota,Arizona,1206.77,41.0
+1845,Mississippi,Arizona,1236.34,39.0
+1846,Missouri,Arizona,1086.32,37.0
+1847,Montana,Arizona,946.21,16.0
+1848,Nebraska,Arizona,874.46,26.0
+1849,Nevada,Arizona,557.79,5.0
+1850,New Hampshire,Arizona,2233.7,45.0
+1851,New Jersey,Arizona,2053.42,45.0
+1852,New Mexico,Arizona,309.34,2.0
+1853,New York,Arizona,2047.38,45.0
+1854,North Carolina,Arizona,1804.9,44.0
+1855,North Dakota,Arizona,1133.2,27.0
+1856,Northern Mariana Islands,Arizona,6408.02,13.0
+1857,Ohio,Arizona,1615.28,42.0
+1858,Oklahoma,Arizona,802.52,21.0
+1859,Oregon,Arizona,979.81,9.0
+1860,Pennsylvania,Arizona,1916.42,45.0
+1861,Puerto Rico,Arizona,2935.01,42.0
+1862,Rhode Island,Arizona,2230.71,45.0
+1863,South Carolina,Arizona,1717.98,42.0
+1864,South Dakota,Arizona,989.98,24.0
+1865,Tennessee,Arizona,1424.72,41.0
+1866,Texas,Arizona,726.11,11.0
+1867,Utah,Arizona,445.44,5.0
+1868,Vermont,Arizona,2176.59,45.0
+1869,Virgin Islands,Arizona,3014.17,42.0
+1870,Virginia,Arizona,1860.28,44.0
+1871,Washington,Arizona,1091.16,11.0
+1872,West Virginia,Arizona,1725.87,44.0
+1873,Wisconsin,Arizona,1377.19,43.0
+1874,Wyoming,Arizona,708.04,13.0
+1875,California,Arkansas,1588.09,20.0
+1876,Colorado,Arkansas,768.77,17.0
+1877,Connecticut,Arkansas,1173.8,29.0
+1878,Delaware,Arkansas,976.99,28.0
+1879,Diamond Princess,Arkansas,6359.48,33.0
+1880,District of Columbia,Arkansas,6359.48,33.0
+1881,Florida,Arkansas,709.1,11.0
+1882,Georgia,Arkansas,525.78,13.0
+1883,Grand Princess,Arkansas,6359.48,33.0
+1884,Guam,Arkansas,7428.29,28.0
+1885,Hawaii,Arkansas,3975.58,25.0
+1886,Idaho,Arkansas,1322.24,21.0
+1887,Illinois,Arkansas,379.76,9.0
+1888,Indiana,Arkansas,480.53,14.0
+1889,Iowa,Arkansas,491.5,11.0
+1890,Kansas,Arkansas,397.21,6.0
+1891,Kentucky,Arkansas,458.99,14.0
+1892,Louisiana,Arkansas,289.91,2.0
+1893,Maine,Arkansas,1383.65,29.0
+1894,Maryland,Arkansas,918.87,28.0
+1895,Massachusetts,Arkansas,1253.71,29.0
+1896,Michigan,Arkansas,725.99,26.0
+1897,Minnesota,Arkansas,712.73,14.0
+1898,Mississippi,Arkansas,224.66,3.0
+1899,Missouri,Arkansas,239.28,2.0
+1900,Montana,Arkansas,1226.76,22.0
+1901,Nebraska,Arkansas,545.74,12.0
+1902,Nevada,Arkansas,1418.39,20.0
+1903,New Hampshire,Arkansas,1264.91,29.0
+1904,New Jersey,Arkansas,1041.57,28.0
+1905,New Mexico,Arkansas,757.11,11.0
+1906,New York,Arkansas,1077.97,29.0
+1907,North Carolina,Arkansas,745.76,24.0
+1908,North Dakota,Arkansas,938.55,18.0
+1909,Northern Mariana Islands,Arkansas,7307.02,28.0
+1910,Ohio,Arkansas,637.27,26.0
+1911,Oklahoma,Arkansas,265.46,2.0
+1912,Oregon,Arkansas,1682.13,22.0
+1913,Pennsylvania,Arkansas,919.48,29.0
+1914,Puerto Rico,Arkansas,1971.86,26.0
+1915,Rhode Island,Arkansas,1232.83,29.0
+1916,South Carolina,Arkansas,656.9,17.0
+1917,South Dakota,Arkansas,715.74,14.0
+1918,Tennessee,Arkansas,368.17,10.0
+1919,Texas,Arkansas,414.98,3.0
+1920,Utah,Arkansas,1101.38,20.0
+1921,Vermont,Arkansas,1228.45,29.0
+1922,Virgin Islands,Arkansas,2039.83,26.0
+1923,Virginia,Arkansas,814.1,27.0
+1924,Washington,Arkansas,1687.82,23.0
+1925,West Virginia,Arkansas,703.77,28.0
+1926,Wisconsin,Arkansas,669.53,15.0
+1927,Wyoming,Arkansas,949.63,22.0
+1928,Colorado,California,835.07,18.0
+1929,Connecticut,California,2554.21,49.0
+1930,Delaware,California,2442.15,49.0
+1931,Diamond Princess,California,7869.25,52.0
+1932,District of Columbia,California,7869.25,52.0
+1933,Florida,California,2281.38,47.0
+1934,Georgia,California,2113.71,47.0
+1935,Grand Princess,California,7869.25,52.0
+1936,Guam,California,5892.19,7.0
+1937,Hawaii,California,2436.35,1.0
+1938,Idaho,California,516.93,7.0
+1939,Illinois,California,1706.1,47.0
+1940,Indiana,California,1862.04,47.0
+1941,Iowa,California,1477.48,47.0
+1942,Kansas,California,1233.69,37.0
+1943,Kentucky,California,1955.5,48.0
+1944,Louisiana,California,1724.22,45.0
+1945,Maine,California,2669.88,49.0
+1946,Maryland,California,2373.53,49.0
+1947,Massachusetts,California,2614.32,49.0
+1948,Michigan,California,1907.1,47.0
+1949,Minnesota,California,1450.95,47.0
+1950,Mississippi,California,1793.34,46.0
+1951,Missouri,California,1532.25,45.0
+1952,Montana,California,829.39,12.0
+1953,Nebraska,California,1206.36,37.0
+1954,Nevada,California,189.7,1.0
+1955,New Hampshire,California,2586.23,49.0
+1956,New Jersey,California,2458.23,49.0
+1957,New Mexico,California,870.27,16.0
+1958,New York,California,2412.7,49.0
+1959,North Carolina,California,2290.39,48.0
+1960,North Dakota,California,1242.37,32.0
+1961,Northern Mariana Islands,California,5775.92,7.0
+1962,Ohio,California,2023.78,49.0
+1963,Oklahoma,California,1324.6,39.0
+1964,Oregon,California,464.0,4.0
+1965,Pennsylvania,California,2315.05,49.0
+1966,Puerto Rico,California,3535.86,47.0
+1967,Rhode Island,California,2611.38,49.0
+1968,South Carolina,California,2231.63,47.0
+1969,South Dakota,California,1218.73,38.0
+1970,Tennessee,California,1919.54,47.0
+1971,Texas,California,1332.05,35.0
+1972,Utah,California,510.69,8.0
+1973,Vermont,California,2514.86,49.0
+1974,Virgin Islands,California,3610.25,47.0
+1975,Virginia,California,2316.96,49.0
+1976,Washington,California,631.06,5.0
+1977,West Virginia,California,2161.18,49.0
+1978,Wisconsin,California,1676.3,47.0
+1979,Wyoming,California,812.83,18.0
+1980,Connecticut,Colorado,1745.14,39.0
+1981,Delaware,Colorado,1615.12,39.0
+1982,Diamond Princess,Colorado,7049.31,42.0
+1983,District of Columbia,Colorado,7049.31,42.0
+1984,Florida,Colorado,1475.89,39.0
+1985,Georgia,Colorado,1289.68,37.0
+1986,Grand Princess,Colorado,7049.31,42.0
+1987,Guam,Colorado,6664.58,14.0
+1988,Hawaii,Colorado,3262.11,13.0
+1989,Idaho,Colorado,577.61,8.0
+1990,Illinois,Colorado,877.39,31.0
+1991,Indiana,Colorado,1034.4,37.0
+1992,Iowa,Colorado,673.69,17.0
+1993,Kansas,Colorado,398.66,7.0
+1994,Kentucky,Colorado,1120.87,37.0
+1995,Louisiana,Colorado,954.99,23.0
+1996,Maine,Colorado,1887.48,40.0
+1997,Maryland,Colorado,1547.29,37.0
+1998,Massachusetts,Colorado,1811.09,40.0
+1999,Michigan,Colorado,1116.7,38.0
+2000,Minnesota,Colorado,717.15,15.0
+2001,Mississippi,Colorado,985.77,30.0
+2002,Missouri,Colorado,697.43,21.0
+2003,Montana,Colorado,599.0,8.0
+2004,Nebraska,Colorado,400.76,6.0
+2005,Nevada,Colorado,656.27,8.0
+2006,New Hampshire,Colorado,1792.21,40.0
+2007,New Jersey,Colorado,1639.83,39.0
+2008,New Mexico,Colorado,292.28,1.0
+2009,New York,Colorado,1610.85,38.0
+2010,North Carolina,Colorado,1455.32,38.0
+2011,North Dakota,Colorado,649.85,9.0
+2012,Northern Mariana Islands,Colorado,6544.33,15.0
+2013,Ohio,Colorado,1200.71,37.0
+2014,Oklahoma,Colorado,516.72,10.0
+2015,Oregon,Colorado,926.5,8.0
+2016,Pennsylvania,Colorado,1497.92,37.0
+2017,Puerto Rico,Colorado,2738.89,39.0
+2018,Rhode Island,Colorado,1803.83,39.0
+2019,South Carolina,Colorado,1399.16,37.0
+2020,South Dakota,Colorado,496.38,8.0
+2021,Tennessee,Colorado,1085.71,37.0
+2022,Texas,Colorado,625.66,8.0
+2023,Utah,Colorado,333.65,3.0
+2024,Vermont,Colorado,1728.07,38.0
+2025,Virgin Islands,Colorado,2808.04,39.0
+2026,Virginia,Colorado,1484.18,37.0
+2027,Washington,Colorado,959.41,8.0
+2028,West Virginia,Colorado,1331.72,37.0
+2029,Wisconsin,Colorado,903.93,31.0
+2030,Wyoming,Colorado,291.83,1.0
+2031,Delaware,Connecticut,249.4,5.0
+2032,Diamond Princess,Connecticut,5315.23,9.0
+2033,District of Columbia,Connecticut,5315.23,9.0
+2034,Florida,Connecticut,1004.16,24.0
+2035,Georgia,Connecticut,863.48,24.0
+2036,Grand Princess,Connecticut,5315.23,9.0
+2037,Guam,Connecticut,7971.77,46.0
+2038,Hawaii,Connecticut,4989.32,48.0
+2039,Idaho,Connecticut,2126.37,44.0
+2040,Illinois,Connecticut,881.64,32.0
+2041,Indiana,Connecticut,728.5,28.0
+2042,Iowa,Connecticut,1077.76,38.0
+2043,Kansas,Connecticut,1371.45,42.0
+2044,Kentucky,Connecticut,715.98,25.0
+2045,Louisiana,Connecticut,1303.95,36.0
+2046,Maine,Connecticut,255.97,5.0
+2047,Maryland,Connecticut,276.55,8.0
+2048,Massachusetts,Connecticut,83.52,3.0
+2049,Michigan,Connecticut,653.05,19.0
+2050,Minnesota,Connecticut,1128.74,37.0
+2051,Mississippi,Connecticut,1116.25,32.0
+2052,Missouri,Connecticut,1085.96,36.0
+2053,Montana,Connecticut,1879.64,43.0
+2054,Nebraska,Connecticut,1351.52,43.0
+2055,Nevada,Connecticut,2365.33,44.0
+2056,New Hampshire,Connecticut,137.08,5.0
+2057,New Jersey,Connecticut,140.91,3.0
+2058,New Mexico,Connecticut,1863.98,42.0
+2059,New York,Connecticut,152.22,1.0
+2060,North Carolina,Connecticut,545.0,16.0
+2061,North Dakota,Connecticut,1407.47,43.0
+2062,Northern Mariana Islands,Connecticut,7843.82,46.0
+2063,Ohio,Connecticut,556.28,20.0
+2064,Oklahoma,Connecticut,1392.27,40.0
+2065,Oregon,Connecticut,2462.47,44.0
+2066,Pennsylvania,Connecticut,256.58,7.0
+2067,Puerto Rico,Connecticut,1640.44,12.0
+2068,Rhode Island,Connecticut,59.84,2.0
+2069,South Carolina,Connecticut,694.26,20.0
+2070,South Dakota,Connecticut,1347.7,42.0
+2071,Tennessee,Connecticut,826.12,29.0
+2072,Texas,Connecticut,1588.67,42.0
+2073,Utah,Connecticut,2046.05,43.0
+2074,Vermont,Connecticut,185.16,5.0
+2075,Virgin Islands,Connecticut,1655.11,11.0
+2076,Virginia,Connecticut,416.74,11.0
+2077,Washington,Connecticut,2387.79,44.0
+2078,West Virginia,Connecticut,471.83,16.0
+2079,Wisconsin,Connecticut,890.0,30.0
+2080,Wyoming,Connecticut,1753.62,43.0
+2081,Diamond Princess,Delaware,5434.41,12.0
+2082,District of Columbia,Delaware,5434.41,12.0
+2083,Florida,Delaware,755.31,14.0
+2084,Georgia,Delaware,618.83,16.0
+2085,Grand Princess,Delaware,5434.41,12.0
+2086,Guam,Delaware,8010.02,51.0
+2087,Hawaii,Delaware,4876.46,45.0
+2088,Idaho,Delaware,2047.65,42.0
+2089,Illinois,Delaware,737.74,25.0
+2090,Indiana,Delaware,580.83,20.0
+2091,Iowa,Delaware,973.13,33.0
+2092,Kansas,Delaware,1225.35,36.0
+2093,Kentucky,Delaware,521.38,17.0
+2094,Louisiana,Delaware,1076.36,29.0
+2095,Maine,Delaware,505.04,9.0
+2096,Maryland,Delaware,69.42,1.0
+2097,Massachusetts,Delaware,330.3,8.0
+2098,Michigan,Delaware,604.78,16.0
+2099,Minnesota,Delaware,1071.13,36.0
+2100,Mississippi,Delaware,891.96,25.0
+2101,Missouri,Delaware,928.1,31.0
+2102,Montana,Delaware,1827.35,42.0
+2103,Nebraska,Delaware,1237.31,40.0
+2104,Nevada,Delaware,2255.95,41.0
+2105,New Hampshire,Delaware,382.76,9.0
+2106,New Jersey,Delaware,119.1,1.0
+2107,New Mexico,Delaware,1701.03,39.0
+2108,New York,Delaware,273.91,9.0
+2109,North Carolina,Delaware,297.24,5.0
+2110,North Dakota,Delaware,1368.53,41.0
+2111,Northern Mariana Islands,Delaware,7882.78,51.0
+2112,Ohio,Delaware,419.99,11.0
+2113,Oklahoma,Delaware,1214.53,36.0
+2114,Oregon,Delaware,2396.69,43.0
+2115,Pennsylvania,Delaware,176.46,4.0
+2116,Puerto Rico,Delaware,1508.25,7.0
+2117,Rhode Island,Delaware,295.52,8.0
+2118,South Carolina,Delaware,446.36,10.0
+2119,South Dakota,Delaware,1268.83,40.0
+2120,Tennessee,Delaware,614.16,21.0
+2121,Texas,Delaware,1387.59,37.0
+2122,Utah,Delaware,1931.47,40.0
+2123,Vermont,Delaware,405.13,9.0
+2124,Virgin Islands,Delaware,1535.79,6.0
+2125,Virginia,Delaware,175.2,4.0
+2126,Washington,Delaware,2339.44,42.0
+2127,West Virginia,Delaware,285.19,7.0
+2128,Wisconsin,Delaware,833.06,25.0
+2129,Wyoming,Delaware,1663.1,40.0
+2130,District of Columbia,Diamond Princess,0.0,1.5
+2131,Florida,Diamond Princess,5757.49,53.0
+2132,Georgia,Diamond Princess,5853.79,53.0
+2133,Grand Princess,Diamond Princess,0.0,1.5
+2134,Guam,Diamond Princess,9864.52,56.0
+2135,Hawaii,Diamond Princess,10303.93,56.0
+2136,Idaho,Diamond Princess,7426.68,56.0
+2137,Illinois,Diamond Princess,6172.01,53.0
+2138,Indiana,Diamond Princess,6014.93,53.0
+2139,Iowa,Diamond Princess,6391.87,54.0
+2140,Kansas,Diamond Princess,6658.58,54.0
+2141,Kentucky,Diamond Princess,5939.4,53.0
+2142,Louisiana,Diamond Princess,6327.48,54.0
+2143,Maine,Diamond Princess,5212.69,53.0
+2144,Maryland,Diamond Princess,5502.05,53.0
+2145,Massachusetts,Diamond Princess,5256.48,53.0
+2146,Michigan,Diamond Princess,5964.66,53.0
+2147,Minnesota,Diamond Princess,6431.33,54.0
+2148,Mississippi,Diamond Princess,6195.01,53.0
+2149,Missouri,Diamond Princess,6359.38,54.0
+2150,Montana,Diamond Princess,7150.98,56.0
+2151,Nebraska,Diamond Princess,6664.04,54.0
+2152,Nevada,Diamond Princess,7680.54,56.0
+2153,New Hampshire,Diamond Princess,5288.31,53.0
+2154,New Jersey,Diamond Princess,5412.08,53.0
+2155,New Mexico,Diamond Princess,7114.93,56.0
+2156,New York,Diamond Princess,5457.98,53.0
+2157,North Carolina,Diamond Princess,5617.83,53.0
+2158,North Dakota,Diamond Princess,6680.42,56.0
+2159,Northern Mariana Islands,Diamond Princess,9881.55,56.0
+2160,Ohio,Diamond Princess,5849.26,53.0
+2161,Oklahoma,Diamond Princess,6620.0,54.0
+2162,Oregon,Diamond Princess,7737.46,56.0
+2163,Pennsylvania,Diamond Princess,5555.0,53.0
+2164,Puerto Rico,Diamond Princess,4673.48,51.0
+2165,Rhode Island,Diamond Princess,5258.33,53.0
+2166,South Carolina,Diamond Princess,5704.09,53.0
+2167,South Dakota,Diamond Princess,6658.31,54.0
+2168,Tennessee,Diamond Princess,5997.97,53.0
+2169,Texas,Diamond Princess,6723.63,54.0
+2170,Utah,Diamond Princess,7360.03,56.0
+2171,Vermont,Diamond Princess,5363.14,53.0
+2172,Virgin Islands,Diamond Princess,4580.92,51.0
+2173,Virginia,Diamond Princess,5571.42,53.0
+2174,Washington,Diamond Princess,7629.18,56.0
+2175,West Virginia,Diamond Princess,5718.56,53.0
+2176,Wisconsin,Diamond Princess,6198.54,53.0
+2177,Wyoming,Diamond Princess,7066.02,56.0
+2178,Florida,District of Columbia,5757.49,53.0
+2179,Georgia,District of Columbia,5853.79,53.0
+2180,Grand Princess,District of Columbia,0.0,1.5
+2181,Guam,District of Columbia,9864.52,56.0
+2182,Hawaii,District of Columbia,10303.93,56.0
+2183,Idaho,District of Columbia,7426.68,56.0
+2184,Illinois,District of Columbia,6172.01,53.0
+2185,Indiana,District of Columbia,6014.93,53.0
+2186,Iowa,District of Columbia,6391.87,54.0
+2187,Kansas,District of Columbia,6658.58,54.0
+2188,Kentucky,District of Columbia,5939.4,53.0
+2189,Louisiana,District of Columbia,6327.48,54.0
+2190,Maine,District of Columbia,5212.69,53.0
+2191,Maryland,District of Columbia,5502.05,53.0
+2192,Massachusetts,District of Columbia,5256.48,53.0
+2193,Michigan,District of Columbia,5964.66,53.0
+2194,Minnesota,District of Columbia,6431.33,54.0
+2195,Mississippi,District of Columbia,6195.01,53.0
+2196,Missouri,District of Columbia,6359.38,54.0
+2197,Montana,District of Columbia,7150.98,56.0
+2198,Nebraska,District of Columbia,6664.04,54.0
+2199,Nevada,District of Columbia,7680.54,56.0
+2200,New Hampshire,District of Columbia,5288.31,53.0
+2201,New Jersey,District of Columbia,5412.08,53.0
+2202,New Mexico,District of Columbia,7114.93,56.0
+2203,New York,District of Columbia,5457.98,53.0
+2204,North Carolina,District of Columbia,5617.83,53.0
+2205,North Dakota,District of Columbia,6680.42,56.0
+2206,Northern Mariana Islands,District of Columbia,9881.55,56.0
+2207,Ohio,District of Columbia,5849.26,53.0
+2208,Oklahoma,District of Columbia,6620.0,54.0
+2209,Oregon,District of Columbia,7737.46,56.0
+2210,Pennsylvania,District of Columbia,5555.0,53.0
+2211,Puerto Rico,District of Columbia,4673.48,51.0
+2212,Rhode Island,District of Columbia,5258.33,53.0
+2213,South Carolina,District of Columbia,5704.09,53.0
+2214,South Dakota,District of Columbia,6658.31,54.0
+2215,Tennessee,District of Columbia,5997.97,53.0
+2216,Texas,District of Columbia,6723.63,54.0
+2217,Utah,District of Columbia,7360.03,56.0
+2218,Vermont,District of Columbia,5363.14,53.0
+2219,Virgin Islands,District of Columbia,4580.92,51.0
+2220,Virginia,District of Columbia,5571.42,53.0
+2221,Washington,District of Columbia,7629.18,56.0
+2222,West Virginia,District of Columbia,5718.56,53.0
+2223,Wisconsin,District of Columbia,6198.54,53.0
+2224,Wyoming,District of Columbia,7066.02,56.0
+2225,Georgia,Florida,249.42,3.0
+2226,Grand Princess,Florida,5757.49,20.0
+2227,Guam,Florida,8137.31,52.0
+2228,Hawaii,Florida,4618.03,38.0
+2229,Idaho,Florida,2030.42,40.0
+2230,Illinois,Florida,816.95,30.0
+2231,Indiana,Florida,753.25,29.0
+2232,Iowa,Florida,1072.5,36.0
+2233,Kansas,Florida,1103.04,33.0
+2234,Kentucky,Florida,586.9,21.0
+2235,Louisiana,Florida,576.58,9.0
+2236,Maine,Florida,1260.11,26.0
+2237,Maryland,Florida,744.6,23.0
+2238,Massachusetts,Florida,1083.03,24.0
+2239,Michigan,Florida,1002.51,35.0
+2240,Minnesota,Florida,1275.87,45.0
+2241,Mississippi,Florida,490.53,10.0
+2242,Missouri,Florida,859.64,29.0
+2243,Montana,Florida,1915.16,45.0
+2244,Nebraska,Florida,1227.65,39.0
+2245,Nevada,Florida,2118.48,36.0
+2246,New Hampshire,Florida,1137.98,25.0
+2247,New Jersey,Florida,871.56,24.0
+2248,New Mexico,Florida,1421.89,34.0
+2249,New York,Florida,1003.56,27.0
+2250,North Carolina,Florida,471.01,13.0
+2251,North Dakota,Florida,1559.74,47.0
+2252,Northern Mariana Islands,Florida,8015.88,52.0
+2253,Ohio,Florida,759.08,29.0
+2254,Oklahoma,Florida,961.83,28.0
+2255,Oregon,Florida,2390.9,42.0
+2256,Pennsylvania,Florida,838.88,26.0
+2257,Puerto Rico,Florida,1263.09,2.0
+2258,Rhode Island,Florida,1045.78,24.0
+2259,South Carolina,Florida,332.68,6.0
+2260,South Dakota,Florida,1364.96,43.0
+2261,Tennessee,Florida,504.44,15.0
+2262,Texas,Florida,981.89,22.0
+2263,Utah,Florida,1806.66,36.0
+2264,Vermont,Florida,1152.81,27.0
+2265,Virgin Islands,Florida,1332.57,2.0
+2266,Virginia,Florida,604.11,21.0
+2267,Washington,Florida,2391.71,45.0
+2268,West Virginia,Florida,663.0,25.0
+2269,Wisconsin,Florida,1114.06,40.0
+2270,Wyoming,Florida,1652.93,39.0
+2271,Grand Princess,Georgia,5853.79,22.0
+2272,Guam,Georgia,7930.49,42.0
+2273,Hawaii,Georgia,4493.51,36.0
+2274,Idaho,Georgia,1825.81,33.0
+2275,Illinois,Georgia,570.62,17.0
+2276,Indiana,Georgia,504.35,16.0
+2277,Iowa,Georgia,831.75,23.0
+2278,Kansas,Georgia,901.19,26.0
+2279,Kentucky,Georgia,339.04,8.0
+2280,Louisiana,Georgia,495.11,7.0
+2281,Maine,Georgia,1113.83,22.0
+2282,Maryland,Georgia,588.18,20.0
+2283,Massachusetts,Georgia,946.41,21.0
+2284,Michigan,Georgia,759.48,28.0
+2285,Minnesota,Georgia,1030.13,32.0
+2286,Mississippi,Georgia,341.34,5.0
+2287,Missouri,Georgia,634.35,19.0
+2288,Montana,Georgia,1690.47,33.0
+2289,Nebraska,Georgia,1006.58,28.0
+2290,Nevada,Georgia,1942.74,31.0
+2291,New Hampshire,Georgia,988.36,22.0
+2292,New Jersey,Georgia,723.37,20.0
+2293,New Mexico,Georgia,1275.89,29.0
+2294,New York,Georgia,830.83,22.0
+2295,North Carolina,Georgia,323.21,6.0
+2296,North Dakota,Georgia,1318.31,36.0
+2297,Northern Mariana Islands,Georgia,7807.57,42.0
+2298,Ohio,Georgia,524.11,16.0
+2299,Oklahoma,Georgia,790.61,20.0
+2300,Oregon,Georgia,2187.78,33.0
+2301,Pennsylvania,Georgia,657.77,21.0
+2302,Puerto Rico,Georgia,1468.41,5.0
+2303,Rhode Island,Georgia,913.52,20.0
+2304,South Carolina,Georgia,179.42,2.0
+2305,South Dakota,Georgia,1131.04,32.0
+2306,Tennessee,Georgia,257.38,3.0
+2307,Texas,Georgia,871.62,16.0
+2308,Utah,Georgia,1623.27,31.0
+2309,Vermont,Georgia,987.28,22.0
+2310,Virgin Islands,Georgia,1530.6,5.0
+2311,Virginia,Georgia,446.74,12.0
+2312,Washington,Georgia,2177.55,33.0
+2313,West Virginia,Georgia,453.44,14.0
+2314,Wisconsin,Georgia,864.64,28.0
+2315,Wyoming,Georgia,1441.45,32.0
+2316,Guam,Grand Princess,9864.52,56.0
+2317,Hawaii,Grand Princess,10303.93,56.0
+2318,Idaho,Grand Princess,7426.68,56.0
+2319,Illinois,Grand Princess,6172.01,53.0
+2320,Indiana,Grand Princess,6014.93,53.0
+2321,Iowa,Grand Princess,6391.87,54.0
+2322,Kansas,Grand Princess,6658.58,54.0
+2323,Kentucky,Grand Princess,5939.4,53.0
+2324,Louisiana,Grand Princess,6327.48,54.0
+2325,Maine,Grand Princess,5212.69,53.0
+2326,Maryland,Grand Princess,5502.05,53.0
+2327,Massachusetts,Grand Princess,5256.48,53.0
+2328,Michigan,Grand Princess,5964.66,53.0
+2329,Minnesota,Grand Princess,6431.33,54.0
+2330,Mississippi,Grand Princess,6195.01,53.0
+2331,Missouri,Grand Princess,6359.38,54.0
+2332,Montana,Grand Princess,7150.98,56.0
+2333,Nebraska,Grand Princess,6664.04,54.0
+2334,Nevada,Grand Princess,7680.54,56.0
+2335,New Hampshire,Grand Princess,5288.31,53.0
+2336,New Jersey,Grand Princess,5412.08,53.0
+2337,New Mexico,Grand Princess,7114.93,56.0
+2338,New York,Grand Princess,5457.98,53.0
+2339,North Carolina,Grand Princess,5617.83,53.0
+2340,North Dakota,Grand Princess,6680.42,56.0
+2341,Northern Mariana Islands,Grand Princess,9881.55,56.0
+2342,Ohio,Grand Princess,5849.26,53.0
+2343,Oklahoma,Grand Princess,6620.0,54.0
+2344,Oregon,Grand Princess,7737.46,56.0
+2345,Pennsylvania,Grand Princess,5555.0,53.0
+2346,Puerto Rico,Grand Princess,4673.48,51.0
+2347,Rhode Island,Grand Princess,5258.33,53.0
+2348,South Carolina,Grand Princess,5704.09,53.0
+2349,South Dakota,Grand Princess,6658.31,54.0
+2350,Tennessee,Grand Princess,5997.97,53.0
+2351,Texas,Grand Princess,6723.63,54.0
+2352,Utah,Grand Princess,7360.03,56.0
+2353,Vermont,Grand Princess,5363.14,53.0
+2354,Virgin Islands,Grand Princess,4580.92,51.0
+2355,Virginia,Grand Princess,5571.42,53.0
+2356,Washington,Grand Princess,7629.18,56.0
+2357,West Virginia,Grand Princess,5718.56,53.0
+2358,Wisconsin,Grand Princess,6198.54,53.0
+2359,Wyoming,Grand Princess,7066.02,56.0
+2360,Hawaii,Guam,3890.46,22.0
+2361,Idaho,Guam,6107.49,54.0
+2362,Illinois,Guam,7401.67,57.0
+2363,Indiana,Guam,7528.15,57.0
+2364,Iowa,Guam,7129.58,57.0
+2365,Kansas,Guam,7035.16,57.0
+2366,Kentucky,Guam,7675.56,57.0
+2367,Louisiana,Guam,7608.45,57.0
+2368,Maine,Guam,7906.97,57.0
+2369,Maryland,Guam,7946.46,57.0
+2370,Massachusetts,Guam,7981.46,57.0
+2371,Michigan,Guam,7410.47,57.0
+2372,Minnesota,Guam,6972.22,57.0
+2373,Mississippi,Guam,7649.28,57.0
+2374,Missouri,Guam,7297.35,57.0
+2375,Montana,Guam,6248.49,54.0
+2376,Nebraska,Guam,6925.06,57.0
+2377,Nevada,Guam,6038.44,54.0
+2378,New Hampshire,Guam,7910.14,57.0
+2379,New Jersey,Guam,7957.35,57.0
+2380,New Mexico,Guam,6761.54,54.0
+2381,New York,Guam,7826.46,57.0
+2382,North Carolina,Guam,7999.77,57.0
+2383,North Dakota,Guam,6668.2,54.0
+2384,Northern Mariana Islands,Guam,128.09,1.0
+2385,Ohio,Guam,7636.39,57.0
+2386,Oklahoma,Guam,7181.2,57.0
+2387,Oregon,Guam,5746.51,54.0
+2388,Pennsylvania,Guam,7836.3,57.0
+2389,Puerto Rico,Guam,9398.12,57.0
+2390,Rhode Island,Guam,8005.19,57.0
+2391,South Carolina,Guam,7998.97,57.0
+2392,South Dakota,Guam,6818.87,57.0
+2393,Tennessee,Guam,7692.05,57.0
+2394,Texas,Guam,7223.85,57.0
+2395,Utah,Guam,6338.04,54.0
+2396,Vermont,Guam,7824.03,57.0
+2397,Virgin Islands,Guam,9460.7,57.0
+2398,Virginia,Guam,7964.57,57.0
+2399,Washington,Guam,5753.35,54.0
+2400,West Virginia,Guam,7795.28,57.0
+2401,Wisconsin,Guam,7196.79,57.0
+2402,Wyoming,Guam,6489.21,54.0
+2403,Idaho,Hawaii,2879.58,49.0
+2404,Illinois,Hawaii,4138.96,51.0
+2405,Indiana,Hawaii,4295.66,51.0
+2406,Iowa,Hawaii,3913.71,51.0
+2407,Kansas,Hawaii,3656.68,51.0
+2408,Kentucky,Hawaii,4379.28,51.0
+2409,Louisiana,Hawaii,4041.48,51.0
+2410,Maine,Hawaii,5092.61,51.0
+2411,Maryland,Hawaii,4808.2,51.0
+2412,Massachusetts,Hawaii,5047.53,51.0
+2413,Michigan,Hawaii,4339.32,51.0
+2414,Minnesota,Hawaii,3873.02,51.0
+2415,Mississippi,Hawaii,4155.53,51.0
+2416,Missouri,Hawaii,3956.71,51.0
+2417,Montana,Hawaii,3161.48,50.0
+2418,Nebraska,Hawaii,3642.58,51.0
+2419,Nevada,Hawaii,2624.51,49.0
+2420,New Hampshire,Hawaii,5015.73,51.0
+2421,New Jersey,Hawaii,4894.57,51.0
+2422,New Mexico,Hawaii,3218.92,51.0
+2423,New York,Hawaii,4846.07,51.0
+2424,North Carolina,Hawaii,4707.6,51.0
+2425,North Dakota,Hawaii,3628.52,51.0
+2426,Northern Mariana Islands,Hawaii,3802.89,3.0
+2427,Ohio,Hawaii,4459.3,51.0
+2428,Oklahoma,Hawaii,3711.39,51.0
+2429,Oregon,Hawaii,2579.04,49.0
+2430,Pennsylvania,Hawaii,4751.4,51.0
+2431,Puerto Rico,Hawaii,5799.16,54.0
+2432,Rhode Island,Hawaii,5045.99,51.0
+2433,South Carolina,Hawaii,4632.21,51.0
+2434,South Dakota,Hawaii,3645.64,51.0
+2435,Tennessee,Hawaii,4329.38,51.0
+2436,Texas,Hawaii,3636.98,51.0
+2437,Utah,Hawaii,2946.52,49.0
+2438,Vermont,Hawaii,4941.3,51.0
+2439,Virgin Islands,Hawaii,5885.55,54.0
+2440,Virginia,Hawaii,4745.3,51.0
+2441,Washington,Hawaii,2699.21,49.0
+2442,West Virginia,Hawaii,4593.74,51.0
+2443,Wisconsin,Hawaii,4105.4,51.0
+2444,Wyoming,Hawaii,3237.91,51.0
+2445,Illinois,Idaho,1335.46,43.0
+2446,Indiana,Idaho,1482.79,43.0
+2447,Iowa,Idaho,1076.97,37.0
+2448,Kansas,Idaho,927.68,27.0
+2449,Kentucky,Idaho,1604.42,43.0
+2450,Louisiana,Idaho,1530.01,42.0
+2451,Maine,Idaho,2214.02,44.0
+2452,Maryland,Idaho,1978.22,45.0
+2453,Massachusetts,Idaho,2178.59,44.0
+2454,Michigan,Idaho,1473.4,42.0
+2455,Minnesota,Idaho,998.84,28.0
+2456,Mississippi,Idaho,1545.25,43.0
+2457,Missouri,Idaho,1198.62,42.0
+2458,Montana,Idaho,312.58,2.0
+2459,Nebraska,Idaho,832.0,24.0
+2460,Nevada,Idaho,356.2,3.0
+2461,New Hampshire,Idaho,2141.46,44.0
+2462,New Jersey,Idaho,2045.64,44.0
+2463,New Mexico,Idaho,782.52,13.0
+2464,New York,Idaho,1978.65,44.0
+2465,North Carolina,Idaho,1942.42,45.0
+2466,North Dakota,Idaho,751.42,11.0
+2467,Northern Mariana Islands,Idaho,5985.65,9.0
+2468,Ohio,Idaho,1629.18,43.0
+2469,Oklahoma,Idaho,1085.86,32.0
+2470,Oregon,Idaho,362.05,2.0
+2471,Pennsylvania,Idaho,1902.97,44.0
+2472,Puerto Rico,Idaho,3290.87,45.0
+2473,Rhode Island,Idaho,2180.77,44.0
+2474,South Carolina,Idaho,1911.84,45.0
+2475,South Dakota,Idaho,780.87,18.0
+2476,Tennessee,Idaho,1597.78,43.0
+2477,Texas,Idaho,1197.78,31.0
+2478,Utah,Idaho,319.7,1.0
+2479,Vermont,Idaho,2064.74,44.0
+2480,Virgin Islands,Idaho,3355.73,45.0
+2481,Virginia,Idaho,1944.64,45.0
+2482,Washington,Idaho,383.65,2.0
+2483,West Virginia,Idaho,1779.09,45.0
+2484,Wisconsin,Idaho,1236.38,42.0
+2485,Wyoming,Idaho,390.29,4.0
+2486,Indiana,Illinois,157.15,1.0
+2487,Iowa,Illinois,272.2,4.0
+2488,Kansas,Illinois,491.31,9.0
+2489,Kentucky,Illinois,274.17,5.0
+2490,Louisiana,Illinois,637.79,11.0
+2491,Maine,Illinois,1058.01,21.0
+2492,Maryland,Illinois,669.96,21.0
+2493,Massachusetts,Illinois,953.96,22.0
+2494,Michigan,Illinois,347.62,4.0
+2495,Minnesota,Illinois,459.52,6.0
+2496,Mississippi,Illinois,483.92,9.0
+2497,Missouri,Illinois,208.24,1.0
+2498,Montana,Illinois,1154.45,20.0
+2499,Nebraska,Illinois,507.34,11.0
+2500,Nevada,Illinois,1521.1,22.0
+2501,New Hampshire,Illinois,948.48,21.0
+2502,New Jersey,Illinois,767.05,21.0
+2503,New Mexico,Illinois,982.88,21.0
+2504,New York,Illinois,760.6,21.0
+2505,North Carolina,Illinois,608.29,18.0
+2506,North Dakota,Illinois,751.44,12.0
+2507,Northern Mariana Islands,Illinois,7276.9,26.0
+2508,Ohio,Illinois,326.89,6.0
+2509,Oklahoma,Illinois,527.63,11.0
+2510,Oregon,Illinois,1693.39,23.0
+2511,Pennsylvania,Illinois,627.83,20.0
+2512,Puerto Rico,Illinois,2010.92,27.0
+2513,Rhode Island,Illinois,941.33,21.0
+2514,South Carolina,Illinois,598.86,16.0
+2515,South Dakota,Illinois,582.9,11.0
+2516,Tennessee,Illinois,313.24,6.0
+2517,Texas,Illinois,764.1,13.0
+2518,Utah,Illinois,1195.75,22.0
+2519,Vermont,Illinois,897.95,20.0
+2520,Virgin Islands,Illinois,2064.79,27.0
+2521,Virginia,Illinois,613.4,22.0
+2522,Washington,Illinois,1658.54,22.0
+2523,West Virginia,Illinois,455.11,15.0
+2524,Wisconsin,Illinois,320.8,4.0
+2525,Wyoming,Illinois,945.52,21.0
+2526,Iowa,Indiana,407.83,8.0
+2527,Kansas,Indiana,647.75,17.0
+2528,Kentucky,Indiana,167.72,2.0
+2529,Louisiana,Indiana,697.15,14.0
+2530,Maine,Indiana,915.26,16.0
+2531,Maryland,Indiana,512.89,16.0
+2532,Massachusetts,Indiana,802.69,18.0
+2533,Michigan,Indiana,278.6,3.0
+2534,Minnesota,Indiana,560.08,10.0
+2535,Mississippi,Indiana,520.09,12.0
+2536,Missouri,Indiana,357.47,6.0
+2537,Montana,Indiana,1288.44,24.0
+2538,Nebraska,Indiana,659.92,15.0
+2539,Nevada,Indiana,1676.51,25.0
+2540,New Hampshire,Indiana,801.87,16.0
+2541,New Jersey,Indiana,610.99,18.0
+2542,New Mexico,Indiana,1135.68,26.0
+2543,New York,Indiana,613.36,16.0
+2544,North Carolina,Indiana,472.03,14.0
+2545,North Dakota,Indiana,862.57,16.0
+2546,Northern Mariana Islands,Indiana,7402.7,29.0
+2547,Ohio,Indiana,172.22,2.0
+2548,Oklahoma,Indiana,668.22,15.0
+2549,Oregon,Indiana,1838.43,25.0
+2550,Pennsylvania,Indiana,473.18,16.0
+2551,Puerto Rico,Indiana,1897.15,25.0
+2552,Rhode Island,Indiana,788.32,18.0
+2553,South Carolina,Indiana,489.4,12.0
+2554,South Dakota,Indiana,717.11,15.0
+2555,Tennessee,Indiana,265.53,4.0
+2556,Texas,Indiana,887.19,18.0
+2557,Utah,Indiana,1351.48,25.0
+2558,Vermont,Indiana,756.75,16.0
+2559,Virgin Islands,Indiana,1946.59,25.0
+2560,Virginia,Indiana,461.96,14.0
+2561,Washington,Indiana,1796.74,25.0
+2562,West Virginia,Indiana,299.56,8.0
+2563,Wisconsin,Indiana,364.43,5.0
+2564,Wyoming,Indiana,1094.0,23.0
+2565,Kansas,Iowa,350.84,4.0
+2566,Kentucky,Iowa,546.0,19.0
+2567,Louisiana,Iowa,781.26,15.0
+2568,Maine,Iowa,1213.87,23.0
+2569,Maryland,Iowa,903.78,27.0
+2570,Massachusetts,Iowa,1140.65,25.0
+2571,Michigan,Iowa,443.39,8.0
+2572,Minnesota,Iowa,222.26,1.0
+2573,Mississippi,Iowa,673.15,18.0
+2574,Missouri,Iowa,253.28,3.0
+2575,Montana,Iowa,883.3,15.0
+2576,Nebraska,Iowa,274.6,3.0
+2577,Nevada,Iowa,1289.23,18.0
+2578,New Hampshire,Iowa,1119.11,24.0
+2579,New Jersey,Iowa,981.34,27.0
+2580,New Mexico,Iowa,844.1,14.0
+2581,New York,Iowa,939.53,24.0
+2582,North Carolina,Iowa,876.44,29.0
+2583,North Dakota,Iowa,487.24,6.0
+2584,Northern Mariana Islands,Iowa,7004.76,21.0
+2585,Ohio,Iowa,553.35,18.0
+2586,Oklahoma,Iowa,494.26,8.0
+2587,Oregon,Iowa,1431.07,16.0
+2588,Pennsylvania,Iowa,838.01,25.0
+2589,Puerto Rico,Iowa,2282.43,33.0
+2590,Rhode Island,Iowa,1135.57,25.0
+2591,South Carolina,Iowa,870.9,28.0
+2592,South Dakota,Iowa,311.27,4.0
+2593,Tennessee,Iowa,576.5,18.0
+2594,Texas,Iowa,763.64,12.0
+2595,Utah,Iowa,968.42,18.0
+2596,Vermont,Iowa,1054.38,23.0
+2597,Virgin Islands,Iowa,2336.84,33.0
+2598,Virginia,Iowa,868.48,28.0
+2599,Washington,Iowa,1389.66,16.0
+2600,West Virginia,Iowa,702.14,27.0
+2601,Wisconsin,Iowa,250.41,3.0
+2602,Wyoming,Iowa,690.23,12.0
+2603,Kentucky,Kansas,723.29,27.0
+2604,Louisiana,Kansas,641.06,12.0
+2605,Maine,Kansas,1534.95,33.0
+2606,Maryland,Kansas,1158.61,32.0
+2607,Massachusetts,Kansas,1441.91,33.0
+2608,Michigan,Kansas,775.78,31.0
+2609,Minnesota,Kansas,500.63,9.0
+2610,Mississippi,Kansas,621.79,15.0
+2611,Missouri,Kansas,300.06,4.0
+2612,Montana,Kansas,835.3,13.0
+2613,Nebraska,Kansas,190.94,1.0
+2614,Nevada,Kansas,1054.33,13.0
+2615,New Hampshire,Kansas,1431.21,34.0
+2616,New Jersey,Kansas,1258.35,32.0
+2617,New Mexico,Kansas,501.68,6.0
+2618,New York,Kansas,1245.24,33.0
+2619,North Carolina,Kansas,1056.74,32.0
+2620,North Dakota,Kansas,618.99,8.0
+2621,Northern Mariana Islands,Kansas,6913.31,20.0
+2622,Ohio,Kansas,818.15,31.0
+2623,Oklahoma,Kansas,213.34,1.0
+2624,Oregon,Kansas,1288.87,14.0
+2625,Pennsylvania,Kansas,1118.84,32.0
+2626,Puerto Rico,Kansas,2363.33,34.0
+2627,Rhode Island,Kansas,1430.95,33.0
+2628,South Carolina,Kansas,1002.34,31.0
+2629,South Dakota,Kansas,387.73,5.0
+2630,Tennessee,Kansas,687.99,23.0
+2631,Texas,Kansas,463.17,5.0
+2632,Utah,Kansas,729.76,13.0
+2633,Vermont,Kansas,1374.23,33.0
+2634,Virgin Islands,Kansas,2428.93,34.0
+2635,Virginia,Kansas,1088.65,32.0
+2636,Washington,Kansas,1290.68,15.0
+2637,West Virginia,Kansas,940.47,32.0
+2638,Wisconsin,Kansas,601.24,13.0
+2639,Wyoming,Kansas,552.44,8.0
+2640,Louisiana,Kentucky,611.87,10.0
+2641,Maine,Kentucky,934.73,17.0
+2642,Maryland,Kentucky,460.95,15.0
+2643,Massachusetts,Kentucky,796.8,17.0
+2644,Michigan,Kentucky,424.31,6.0
+2645,Minnesota,Kentucky,719.03,16.0
+2646,Mississippi,Kentucky,423.63,6.0
+2647,Missouri,Kentucky,423.48,9.0
+2648,Montana,Kentucky,1428.61,26.0
+2649,Nebraska,Kentucky,772.87,21.0
+2650,Nevada,Kentucky,1773.66,28.0
+2651,New Hampshire,Kentucky,812.99,17.0
+2652,New Jersey,Kentucky,582.64,17.0
+2653,New Mexico,Kentucky,1183.09,28.0
+2654,New York,Kentucky,629.32,17.0
+2655,North Carolina,Kentucky,338.56,7.0
+2656,North Dakota,Kentucky,1018.37,21.0
+2657,Northern Mariana Islands,Kentucky,7550.69,33.0
+2658,Ohio,Kentucky,216.22,3.0
+2659,Oklahoma,Kentucky,693.61,17.0
+2660,Oregon,Kentucky,1963.86,29.0
+2661,Pennsylvania,Kentucky,464.07,15.0
+2662,Puerto Rico,Kentucky,1740.21,17.0
+2663,Rhode Island,Kentucky,774.66,17.0
+2664,South Carolina,Kentucky,327.97,5.0
+2665,South Dakota,Kentucky,857.01,21.0
+2666,Tennessee,Kentucky,129.16,1.0
+2667,Texas,Kentucky,873.2,17.0
+2668,Utah,Kentucky,1447.87,28.0
+2669,Vermont,Kentucky,784.59,17.0
+2670,Virgin Islands,Kentucky,1792.47,19.0
+2671,Virginia,Kentucky,368.51,9.0
+2672,Washington,Kentucky,1932.11,29.0
+2673,West Virginia,Kentucky,244.85,6.0
+2674,Wisconsin,Kentucky,531.96,10.0
+2675,Wyoming,Kentucky,1214.14,28.0
+2676,Maine,Louisiana,1537.91,34.0
+2677,Maryland,Louisiana,1030.69,30.0
+2678,Massachusetts,Louisiana,1387.14,30.0
+2679,Michigan,Louisiana,967.96,34.0
+2680,Minnesota,Louisiana,1002.64,30.0
+2681,Mississippi,Louisiana,189.28,2.0
+2682,Missouri,Louisiana,528.42,15.0
+2683,Montana,Louisiana,1474.28,29.0
+2684,Nebraska,Louisiana,813.34,22.0
+2685,Nevada,Louisiana,1570.69,23.0
+2686,New Hampshire,Louisiana,1413.7,33.0
+2687,New Jersey,Louisiana,1164.16,30.0
+2688,New Mexico,Louisiana,855.96,15.0
+2689,New York,Louisiana,1235.44,32.0
+2690,North Carolina,Louisiana,798.28,26.0
+2691,North Dakota,Louisiana,1221.7,31.0
+2692,Northern Mariana Islands,Louisiana,7489.88,30.0
+2693,Ohio,Louisiana,822.98,32.0
+2694,Oklahoma,Louisiana,447.47,6.0
+2695,Oregon,Louisiana,1881.44,26.0
+2696,Pennsylvania,Louisiana,1064.43,30.0
+2697,Puerto Rico,Louisiana,1812.32,21.0
+2698,Rhode Island,Louisiana,1359.64,30.0
+2699,South Carolina,Louisiana,669.14,18.0
+2700,South Dakota,Louisiana,994.65,25.0
+2701,Tennessee,Louisiana,486.46,14.0
+2702,Texas,Louisiana,405.85,2.0
+2703,Utah,Louisiana,1272.88,23.0
+2704,Vermont,Louisiana,1392.64,34.0
+2705,Virgin Islands,Louisiana,1888.37,24.0
+2706,Virginia,Louisiana,901.73,29.0
+2707,Washington,Louisiana,1907.32,26.0
+2708,West Virginia,Louisiana,839.8,30.0
+2709,Wisconsin,Louisiana,947.03,35.0
+2710,Wyoming,Louisiana,1180.12,26.0
+2711,Maryland,Maine,525.85,17.0
+2712,Massachusetts,Maine,180.34,5.0
+2713,Michigan,Maine,770.87,30.0
+2714,Minnesota,Maine,1220.71,42.0
+2715,Mississippi,Maine,1348.84,41.0
+2716,Missouri,Maine,1266.21,43.0
+2717,Montana,Maine,1945.23,48.0
+2718,Nebraska,Maine,1487.24,47.0
+2719,Nevada,Maine,2480.18,48.0
+2720,New Hampshire,Maine,125.66,4.0
+2721,New Jersey,Maine,391.77,12.0
+2722,New Mexico,Maine,2035.31,47.0
+2723,New York,Maine,305.94,10.0
+2724,North Carolina,Maine,798.81,27.0
+2725,North Dakota,Maine,1471.28,46.0
+2726,Northern Mariana Islands,Maine,7778.91,40.0
+2727,Ohio,Maine,748.08,28.0
+2728,Oklahoma,Maine,1582.84,47.0
+2729,Oregon,Maine,2533.18,48.0
+2730,Pennsylvania,Maine,473.5,17.0
+2731,Puerto Rico,Maine,1814.19,22.0
+2732,Rhode Island,Maine,220.42,7.0
+2733,South Carolina,Maine,947.81,30.0
+2734,South Dakota,Maine,1451.3,47.0
+2735,Tennessee,Maine,1053.45,35.0
+2736,Texas,Maine,1797.35,47.0
+2737,Utah,Maine,2169.58,48.0
+2738,Vermont,Maine,160.73,4.0
+2739,Virgin Islands,Maine,1818.04,20.0
+2740,Virginia,Maine,668.36,23.0
+2741,Washington,Maine,2441.91,48.0
+2742,West Virginia,Maine,698.15,26.0
+2743,Wisconsin,Maine,994.41,36.0
+2744,Wyoming,Maine,1858.6,47.0
+2745,Massachusetts,Maryland,360.0,10.0
+2746,Michigan,Maryland,538.4,11.0
+2747,Minnesota,Maryland,1002.57,29.0
+2748,Mississippi,Maryland,844.24,23.0
+2749,Missouri,Maryland,862.25,30.0
+2750,Montana,Maryland,1758.51,37.0
+2751,Nebraska,Maryland,1168.36,34.0
+2752,Nevada,Maryland,2187.16,39.0
+2753,New Hampshire,Maryland,400.63,10.0
+2754,New Jersey,Maryland,135.69,2.0
+2755,New Mexico,Maryland,1636.87,38.0
+2756,New York,Maryland,261.45,8.0
+2757,North Carolina,Maryland,275.45,4.0
+2758,North Dakota,Maryland,1300.64,35.0
+2759,Northern Mariana Islands,Maryland,7819.34,43.0
+2760,Ohio,Maryland,350.77,9.0
+2761,Oklahoma,Maryland,1152.38,34.0
+2762,Oregon,Maryland,2327.36,39.0
+2763,Pennsylvania,Maryland,125.12,1.0
+2764,Puerto Rico,Maryland,1558.79,8.0
+2765,Rhode Island,Maryland,329.82,10.0
+2766,South Carolina,Maryland,423.24,9.0
+2767,South Dakota,Maryland,1199.47,36.0
+2768,Tennessee,Maryland,560.03,17.0
+2769,Texas,Maryland,1331.34,34.0
+2770,Utah,Maryland,1862.84,38.0
+2771,Vermont,Maryland,408.26,10.0
+2772,Virgin Islands,Maryland,1589.08,8.0
+2773,Virginia,Maryland,142.97,2.0
+2774,Washington,Maryland,2270.6,39.0
+2775,West Virginia,Maryland,220.19,3.0
+2776,Wisconsin,Maryland,764.97,19.0
+2777,Wyoming,Maryland,1593.71,37.0
+2778,Michigan,Massachusetts,708.23,24.0
+2779,Minnesota,Massachusetts,1179.77,39.0
+2780,Mississippi,Massachusetts,1199.28,36.0
+2781,Missouri,Massachusetts,1159.73,41.0
+2782,Montana,Massachusetts,1925.32,46.0
+2783,Nebraska,Massachusetts,1415.1,46.0
+2784,Nevada,Massachusetts,2425.06,47.0
+2785,New Hampshire,Massachusetts,81.34,1.0
+2786,New Jersey,Massachusetts,224.4,7.0
+2787,New Mexico,Massachusetts,1936.84,46.0
+2788,New York,Massachusetts,201.62,6.0
+2789,North Carolina,Massachusetts,627.0,20.0
+2790,North Dakota,Massachusetts,1451.49,44.0
+2791,Northern Mariana Islands,Massachusetts,7853.4,47.0
+2792,Ohio,Massachusetts,630.78,23.0
+2793,Oklahoma,Massachusetts,1468.74,45.0
+2794,Oregon,Massachusetts,2510.42,46.0
+2795,Pennsylvania,Massachusetts,334.5,11.0
+2796,Puerto Rico,Massachusetts,1669.35,14.0
+2797,Rhode Island,Massachusetts,40.79,1.0
+2798,South Carolina,Massachusetts,776.26,24.0
+2799,South Dakota,Massachusetts,1402.75,45.0
+2800,Tennessee,Massachusetts,908.39,33.0
+2801,Texas,Massachusetts,1668.68,45.0
+2802,Utah,Massachusetts,2107.67,46.0
+2803,Vermont,Massachusetts,159.88,3.0
+2804,Virgin Islands,Massachusetts,1679.42,12.0
+2805,Virginia,Massachusetts,499.68,16.0
+2806,Washington,Massachusetts,2430.95,46.0
+2807,West Virginia,Massachusetts,553.35,19.0
+2808,Wisconsin,Massachusetts,943.3,33.0
+2809,Wyoming,Massachusetts,1809.96,46.0
+2810,Minnesota,Michigan,477.3,8.0
+2811,Mississippi,Michigan,796.12,21.0
+2812,Missouri,Michigan,540.97,17.0
+2813,Montana,Michigan,1232.86,23.0
+2814,Nebraska,Michigan,716.37,18.0
+2815,Nevada,Michigan,1717.65,26.0
+2816,New Hampshire,Michigan,679.74,15.0
+2817,New Jersey,Michigan,578.87,16.0
+2818,New Mexico,Michigan,1277.2,30.0
+2819,New York,Michigan,506.91,14.0
+2820,North Carolina,Michigan,631.59,21.0
+2821,North Dakota,Michigan,766.68,13.0
+2822,Northern Mariana Islands,Michigan,7283.58,27.0
+2823,Ohio,Michigan,254.3,4.0
+2824,Oklahoma,Michigan,860.51,25.0
+2825,Oregon,Michigan,1811.87,24.0
+2826,Pennsylvania,Michigan,440.31,14.0
+2827,Puerto Rico,Michigan,2060.59,28.0
+2828,Rhode Island,Michigan,708.07,15.0
+2829,South Carolina,Michigan,701.17,21.0
+2830,South Dakota,Michigan,694.96,13.0
+2831,Tennessee,Michigan,539.92,16.0
+2832,Texas,Michigan,1108.3,27.0
+2833,Utah,Michigan,1402.38,26.0
+2834,Vermont,Michigan,611.99,14.0
+2835,Virgin Islands,Michigan,2100.06,28.0
+2836,Virginia,Michigan,562.2,19.0
+2837,Washington,Michigan,1743.84,24.0
+2838,West Virginia,Michigan,401.13,13.0
+2839,Wisconsin,Michigan,237.35,1.0
+2840,Wyoming,Michigan,1101.79,24.0
+2841,Mississippi,Minnesota,894.31,26.0
+2842,Missouri,Minnesota,475.38,12.0
+2843,Montana,Minnesota,757.05,11.0
+2844,Nebraska,Minnesota,344.99,4.0
+2845,Nevada,Minnesota,1261.41,17.0
+2846,New Hampshire,Minnesota,1143.44,26.0
+2847,New Jersey,Minnesota,1055.15,29.0
+2848,New Mexico,Minnesota,944.58,20.0
+2849,New York,Minnesota,980.12,26.0
+2850,North Carolina,Minnesota,1028.61,31.0
+2851,North Dakota,Minnesota,304.02,2.0
+2852,Northern Mariana Islands,Minnesota,6846.35,19.0
+2853,Ohio,Minnesota,667.74,27.0
+2854,Oklahoma,Minnesota,683.2,16.0
+2855,Oregon,Minnesota,1334.59,15.0
+2856,Pennsylvania,Minnesota,914.61,28.0
+2857,Puerto Rico,Minnesota,2457.11,35.0
+2858,Rhode Island,Minnesota,1182.46,28.0
+2859,South Carolina,Minnesota,1046.7,33.0
+2860,South Dakota,Minnesota,234.11,3.0
+2861,Tennessee,Minnesota,772.75,27.0
+2862,Texas,Minnesota,951.59,21.0
+2863,Utah,Minnesota,958.68,17.0
+2864,Vermont,Minnesota,1068.27,24.0
+2865,Virgin Islands,Minnesota,2506.59,35.0
+2866,Virginia,Minnesota,996.25,30.0
+2867,Washington,Minnesota,1268.91,14.0
+2868,West Virginia,Minnesota,826.13,29.0
+2869,Wisconsin,Minnesota,240.34,2.0
+2870,Wyoming,Minnesota,638.41,11.0
+2871,Missouri,Mississippi,425.47,10.0
+2872,Montana,Mississippi,1450.32,28.0
+2873,Nebraska,Mississippi,766.36,19.0
+2874,Nevada,Mississippi,1628.55,24.0
+2875,New Hampshire,Mississippi,1224.79,28.0
+2876,New Jersey,Mississippi,976.9,26.0
+2877,New Mexico,Mississippi,941.83,19.0
+2878,New York,Mississippi,1046.17,28.0
+2879,North Carolina,Mississippi,621.55,19.0
+2880,North Dakota,Mississippi,1143.73,28.0
+2881,Northern Mariana Islands,Mississippi,7528.45,32.0
+2882,Ohio,Mississippi,636.58,25.0
+2883,Oklahoma,Mississippi,471.35,7.0
+2884,Oregon,Mississippi,1904.3,27.0
+2885,Pennsylvania,Mississippi,875.34,27.0
+2886,Puerto Rico,Mississippi,1753.18,19.0
+2887,Rhode Island,Mississippi,1172.4,27.0
+2888,South Carolina,Mississippi,502.7,13.0
+2889,South Dakota,Mississippi,927.74,23.0
+2890,Tennessee,Mississippi,297.33,5.0
+2891,Texas,Mississippi,530.67,6.0
+2892,Utah,Mississippi,1316.14,24.0
+2893,Vermont,Mississippi,1203.36,28.0
+2894,Virgin Islands,Mississippi,1823.11,21.0
+2895,Virginia,Mississippi,718.27,24.0
+2896,Washington,Mississippi,1912.22,27.0
+2897,West Virginia,Mississippi,650.69,24.0
+2898,Wisconsin,Mississippi,803.1,21.0
+2899,Wyoming,Mississippi,1174.23,25.0
+2900,Montana,Missouri,1057.02,19.0
+2901,Nebraska,Missouri,372.39,5.0
+2902,Nevada,Missouri,1351.15,19.0
+2903,New Hampshire,Missouri,1156.12,27.0
+2904,New Jersey,Missouri,967.11,25.0
+2905,New Mexico,Missouri,778.33,12.0
+2906,New York,Missouri,967.99,25.0
+2907,North Carolina,Missouri,758.71,25.0
+2908,North Dakota,Missouri,718.97,10.0
+2909,Northern Mariana Islands,Missouri,7174.09,25.0
+2910,Ohio,Missouri,529.69,17.0
+2911,Oklahoma,Missouri,321.25,4.0
+2912,Oregon,Missouri,1560.41,20.0
+2913,Pennsylvania,Missouri,830.52,24.0
+2914,Puerto Rico,Missouri,2102.48,29.0
+2915,Rhode Island,Missouri,1145.77,26.0
+2916,South Carolina,Missouri,713.94,22.0
+2917,South Dakota,Missouri,508.73,9.0
+2918,Tennessee,Missouri,399.25,12.0
+2919,Texas,Missouri,569.33,7.0
+2920,Utah,Missouri,1025.58,19.0
+2921,Vermont,Missouri,1106.19,26.0
+2922,Virgin Islands,Missouri,2163.34,29.0
+2923,Virginia,Missouri,788.7,26.0
+2924,Washington,Missouri,1544.0,20.0
+2925,West Virginia,Missouri,642.91,23.0
+2926,Wisconsin,Missouri,440.89,7.0
+2927,Wyoming,Missouri,810.67,17.0
+2928,Nebraska,Montana,687.72,16.0
+2929,Nevada,Montana,662.67,9.0
+2930,New Hampshire,Montana,1881.69,41.0
+2931,New Jersey,Montana,1811.6,42.0
+2932,New Mexico,Montana,873.86,17.0
+2933,New York,Montana,1728.94,39.0
+2934,North Carolina,Montana,1759.33,42.0
+2935,North Dakota,Montana,474.61,5.0
+2936,Northern Mariana Islands,Montana,6124.17,10.0
+2937,Ohio,Montana,1417.62,40.0
+2938,Oklahoma,Montana,1030.41,30.0
+2939,Oregon,Montana,588.0,5.0
+2940,Pennsylvania,Montana,1671.56,40.0
+2941,Puerto Rico,Montana,3156.36,44.0
+2942,Rhode Island,Montana,1931.35,42.0
+2943,South Carolina,Montana,1750.5,44.0
+2944,South Dakota,Montana,572.06,10.0
+2945,Tennessee,Montana,1445.15,42.0
+2946,Texas,Montana,1206.05,32.0
+2947,Utah,Montana,508.37,7.0
+2948,Vermont,Montana,1801.6,39.0
+2949,Virgin Islands,Montana,3214.26,44.0
+2950,Virginia,Montana,1743.12,42.0
+2951,Washington,Montana,512.09,3.0
+2952,West Virginia,Montana,1573.72,40.0
+2953,Wisconsin,Montana,997.05,38.0
+2954,Wyoming,Montana,311.35,2.0
+2955,Nevada,Nebraska,1019.13,11.0
+2956,New Hampshire,Nebraska,1393.6,31.0
+2957,New Jersey,Nebraska,1252.1,31.0
+2958,New Mexico,Nebraska,601.13,8.0
+2959,New York,Nebraska,1214.07,31.0
+2960,North Carolina,Nebraska,1111.25,33.0
+2961,North Dakota,Nebraska,428.07,3.0
+2962,Northern Mariana Islands,Nebraska,6801.74,18.0
+2963,Ohio,Nebraska,817.95,30.0
+2964,Oklahoma,Nebraska,403.18,5.0
+2965,Oregon,Nebraska,1192.54,13.0
+2966,Pennsylvania,Nebraska,1109.07,31.0
+2967,Puerto Rico,Nebraska,2474.85,36.0
+2968,Rhode Island,Nebraska,1409.57,32.0
+2969,South Carolina,Nebraska,1081.24,34.0
+2970,South Dakota,Nebraska,196.91,1.0
+2971,Tennessee,Nebraska,768.79,26.0
+2972,Texas,Nebraska,651.95,9.0
+2973,Utah,Nebraska,696.12,11.0
+2974,Vermont,Nebraska,1328.16,32.0
+2975,Virgin Islands,Nebraska,2535.65,36.0
+2976,Virginia,Nebraska,1120.49,33.0
+2977,Washington,Nebraska,1171.73,13.0
+2978,West Virginia,Nebraska,959.35,33.0
+2979,Wisconsin,Nebraska,504.85,9.0
+2980,Wyoming,Nebraska,441.93,6.0
+2981,New Hampshire,Nevada,2396.65,47.0
+2982,New Jersey,Nevada,2270.36,46.0
+2983,New Mexico,Nevada,727.6,9.0
+2984,New York,Nevada,2223.45,46.0
+2985,North Carolina,Nevada,2109.85,46.0
+2986,North Dakota,Nevada,1057.41,22.0
+2987,Northern Mariana Islands,Nevada,5920.58,8.0
+2988,Ohio,Nevada,1837.01,45.0
+2989,Oklahoma,Nevada,1157.59,35.0
+2990,Oregon,Nevada,433.6,3.0
+2991,Pennsylvania,Nevada,2127.1,46.0
+2992,Puerto Rico,Nevada,3377.83,46.0
+2993,Rhode Island,Nevada,2422.37,46.0
+2994,South Carolina,Nevada,2055.39,46.0
+2995,South Dakota,Nevada,1029.06,28.0
+2996,Tennessee,Nevada,1741.93,45.0
+2997,Texas,Nevada,1188.65,30.0
+2998,Utah,Nevada,325.85,2.0
+2999,Vermont,Nevada,2325.18,47.0
+3000,Virgin Islands,Nevada,3450.21,46.0
+3001,Virginia,Nevada,2133.14,46.0
+3002,Washington,Nevada,572.03,4.0
+3003,West Virginia,Nevada,1975.92,46.0
+3004,Wisconsin,Nevada,1486.63,44.0
+3005,Wyoming,Nevada,623.53,10.0
+3006,New Jersey,New Hampshire,267.41,8.0
+3007,New Mexico,New Hampshire,1929.61,45.0
+3008,New York,New Hampshire,188.53,5.0
+3009,North Carolina,New Hampshire,674.4,22.0
+3010,North Dakota,New Hampshire,1407.13,42.0
+3011,Northern Mariana Islands,New Hampshire,7782.06,41.0
+3012,Ohio,New Hampshire,632.28,24.0
+3013,Oklahoma,New Hampshire,1470.08,46.0
+3014,Oregon,New Hampshire,2468.41,45.0
+3015,Pennsylvania,New Hampshire,349.91,12.0
+3016,Puerto Rico,New Hampshire,1750.68,18.0
+3017,Rhode Island,New Hampshire,119.47,3.0
+3018,South Carolina,New Hampshire,823.19,25.0
+3019,South Dakota,New Hampshire,1370.24,44.0
+3020,Tennessee,New Hampshire,930.13,34.0
+3021,Texas,New Hampshire,1679.37,46.0
+3022,Utah,New Hampshire,2082.12,44.0
+3023,Vermont,New Hampshire,86.86,1.0
+3024,Virgin Islands,New Hampshire,1760.54,16.0
+3025,Virginia,New Hampshire,543.36,17.0
+3026,Washington,New Hampshire,2384.36,43.0
+3027,West Virginia,New Hampshire,574.32,21.0
+3028,Wisconsin,New Hampshire,910.66,32.0
+3029,Wyoming,New Hampshire,1778.1,44.0
+3030,New Mexico,New Jersey,1745.12,41.0
+3031,New York,New Jersey,162.3,3.0
+3032,North Carolina,New Jersey,407.09,11.0
+3033,North Dakota,New Jersey,1344.82,39.0
+3034,Northern Mariana Islands,New Jersey,7829.73,44.0
+3035,Ohio,New Jersey,440.32,13.0
+3036,Oklahoma,New Jersey,1266.95,37.0
+3037,Oregon,New Jersey,2388.67,40.0
+3038,Pennsylvania,New Jersey,143.38,2.0
+3039,Puerto Rico,New Jersey,1596.21,9.0
+3040,Rhode Island,New Jersey,195.51,5.0
+3041,South Carolina,New Jersey,556.04,15.0
+3042,South Dakota,New Jersey,1264.77,39.0
+3043,Tennessee,New Jersey,688.84,24.0
+3044,Texas,New Jersey,1455.77,38.0
+3045,Utah,New Jersey,1948.22,41.0
+3046,Vermont,New Jersey,286.03,7.0
+3047,Virgin Islands,New Jersey,1618.79,9.0
+3048,Virginia,New Jersey,276.93,6.0
+3049,Washington,New Jersey,2322.71,41.0
+3050,West Virginia,New Jersey,337.81,10.0
+3051,Wisconsin,New Jersey,814.83,24.0
+3052,Wyoming,New Jersey,1666.42,41.0
+3053,New York,New Mexico,1742.55,40.0
+3054,North Carolina,New Mexico,1497.36,40.0
+3055,North Dakota,New Mexico,929.28,17.0
+3056,Northern Mariana Islands,New Mexico,6644.66,16.0
+3057,Ohio,New Mexico,1307.85,39.0
+3058,Oklahoma,New Mexico,494.94,9.0
+3059,Oregon,New Mexico,1091.62,11.0
+3060,Pennsylvania,New Mexico,1608.83,39.0
+3061,Puerto Rico,New Mexico,2668.25,38.0
+3062,Rhode Island,New Mexico,1923.76,41.0
+3063,South Carolina,New Mexico,1414.01,39.0
+3064,South Dakota,New Mexico,748.22,17.0
+3065,Tennessee,New Mexico,1117.12,38.0
+3066,Texas,New Mexico,462.37,4.0
+3067,Utah,New Mexico,471.99,6.0
+3068,Vermont,New Mexico,1874.6,42.0
+3069,Virgin Islands,New Mexico,2744.21,38.0
+3070,Virginia,New Mexico,1551.11,40.0
+3071,Washington,New Mexico,1161.69,12.0
+3072,West Virginia,New Mexico,1416.7,39.0
+3073,Wisconsin,New Mexico,1092.25,39.0
+3074,Wyoming,New Mexico,577.56,9.0
+3075,North Carolina,New York,532.61,15.0
+3076,North Dakota,New York,1256.19,33.0
+3077,Northern Mariana Islands,New York,7698.6,38.0
+3078,Ohio,New York,443.9,14.0
+3079,Oklahoma,New York,1281.56,38.0
+3080,Oregon,New York,2312.67,38.0
+3081,Pennsylvania,New York,174.28,3.0
+3082,Puerto Rico,New York,1754.0,20.0
+3083,Rhode Island,New York,202.54,6.0
+3084,South Carolina,New York,676.71,19.0
+3085,South Dakota,New York,1201.72,37.0
+3086,Tennessee,New York,749.66,25.0
+3087,Texas,New York,1492.01,39.0
+3088,Utah,New York,1906.14,39.0
+3089,Vermont,New York,158.24,2.0
+3090,Virgin Islands,New York,1774.19,18.0
+3091,Virginia,New York,399.45,10.0
+3092,Washington,New York,2236.44,35.0
+3093,West Virginia,New York,396.58,12.0
+3094,Wisconsin,New York,742.63,18.0
+3095,Wyoming,New York,1608.69,38.0
+3096,North Dakota,North Carolina,1332.35,38.0
+3097,Northern Mariana Islands,North Carolina,7874.18,48.0
+3098,Ohio,North Carolina,380.06,10.0
+3099,Oklahoma,North Carolina,1002.53,29.0
+3100,Oregon,North Carolina,2301.27,37.0
+3101,Pennsylvania,North Carolina,369.24,13.0
+3102,Puerto Rico,North Carolina,1435.98,4.0
+3103,Rhode Island,North Carolina,592.74,13.0
+3104,South Carolina,North Carolina,149.28,1.0
+3105,South Dakota,North Carolina,1187.37,35.0
+3106,Tennessee,North Carolina,380.24,11.0
+3107,Texas,North Carolina,1140.04,29.0
+3108,Utah,North Carolina,1784.29,34.0
+3109,Vermont,North Carolina,683.29,15.0
+3110,Virgin Islands,North Carolina,1480.94,4.0
+3111,Virginia,North Carolina,133.32,1.0
+3112,Washington,North Carolina,2265.91,38.0
+3113,West Virginia,North Carolina,233.62,5.0
+3114,Wisconsin,North Carolina,813.22,23.0
+3115,Wyoming,North Carolina,1552.16,35.0
+3116,Northern Mariana Islands,North Dakota,6542.34,14.0
+3117,Ohio,North Dakota,970.79,35.0
+3118,Oklahoma,North Dakota,830.88,22.0
+3119,Oregon,North Dakota,1062.1,10.0
+3120,Pennsylvania,North Dakota,1206.98,35.0
+3121,Puerto Rico,North Dakota,2758.32,40.0
+3122,Rhode Island,North Dakota,1458.34,35.0
+3123,South Carolina,North Dakota,1346.31,36.0
+3124,South Dakota,North Dakota,232.06,2.0
+3125,Tennessee,North Dakota,1062.0,36.0
+3126,Texas,North Dakota,1077.26,26.0
+3127,Utah,North Dakota,792.62,14.0
+3128,Vermont,North Dakota,1327.0,31.0
+3129,Virgin Islands,North Dakota,2808.99,40.0
+3130,Virginia,North Dakota,1299.51,36.0
+3131,Washington,North Dakota,980.32,9.0
+3132,West Virginia,North Dakota,1129.45,36.0
+3133,Wisconsin,North Dakota,535.8,11.0
+3134,Wyoming,North Dakota,454.71,7.0
+3135,Ohio,Northern Mariana Islands,7510.1,56.0
+3136,Oklahoma,Northern Mariana Islands,7061.03,56.0
+3137,Oregon,Northern Mariana Islands,5624.98,53.0
+3138,Pennsylvania,Northern Mariana Islands,7708.93,56.0
+3139,Puerto Rico,Northern Mariana Islands,9275.65,56.0
+3140,Rhode Island,Northern Mariana Islands,7877.17,56.0
+3141,South Carolina,Northern Mariana Islands,7874.53,56.0
+3142,South Dakota,Northern Mariana Islands,6694.19,56.0
+3143,Tennessee,Northern Mariana Islands,7568.24,56.0
+3144,Texas,Northern Mariana Islands,7107.03,56.0
+3145,Utah,Northern Mariana Islands,6218.59,53.0
+3146,Vermont,Northern Mariana Islands,7695.96,56.0
+3147,Virgin Islands,Northern Mariana Islands,9337.31,56.0
+3148,Virginia,Northern Mariana Islands,7838.16,56.0
+3149,Washington,Northern Mariana Islands,5630.14,53.0
+3150,West Virginia,Northern Mariana Islands,7668.97,56.0
+3151,Wisconsin,Northern Mariana Islands,7070.42,56.0
+3152,Wyoming,Northern Mariana Islands,6366.57,53.0
+3153,Oklahoma,Ohio,838.64,23.0
+3154,Oregon,Ohio,1980.43,30.0
+3155,Pennsylvania,Ohio,301.18,8.0
+3156,Puerto Rico,Ohio,1814.51,23.0
+3157,Rhode Island,Ohio,616.1,14.0
+3158,South Carolina,Ohio,448.31,11.0
+3159,South Dakota,Ohio,852.78,20.0
+3160,Tennessee,Ohio,345.32,8.0
+3161,Texas,Ohio,1049.65,25.0
+3162,Utah,Ohio,1513.14,30.0
+3163,Vermont,Ohio,591.48,13.0
+3164,Virgin Islands,Ohio,1857.15,23.0
+3165,Virginia,Ohio,328.76,8.0
+3166,Washington,Ohio,1929.09,28.0
+3167,West Virginia,Ohio,158.91,1.0
+3168,Wisconsin,Ohio,439.87,6.0
+3169,Wyoming,Ohio,1243.54,29.0
+3170,Oregon,Oklahoma,1440.98,17.0
+3171,Pennsylvania,Oklahoma,1135.69,34.0
+3172,Puerto Rico,Oklahoma,2223.88,31.0
+3173,Rhode Island,Oklahoma,1452.04,34.0
+3174,South Carolina,Oklahoma,920.87,29.0
+3175,South Dakota,Oklahoma,598.97,12.0
+3176,Tennessee,Oklahoma,622.3,22.0
+3177,Texas,Oklahoma,269.91,1.0
+3178,Utah,Oklahoma,845.12,15.0
+3179,Vermont,Oklahoma,1423.53,35.0
+3180,Virgin Islands,Oklahoma,2294.37,32.0
+3181,Virginia,Oklahoma,1059.73,31.0
+3182,Washington,Oklahoma,1460.92,18.0
+3183,West Virginia,Oklahoma,932.75,31.0
+3184,Wisconsin,Oklahoma,731.51,17.0
+3185,Wyoming,Oklahoma,732.93,14.0
+3186,Pennsylvania,Oregon,2247.02,48.0
+3187,Puerto Rico,Oregon,3652.19,49.0
+3188,Rhode Island,Oregon,2515.21,48.0
+3189,South Carolina,Oregon,2273.24,49.0
+3190,South Dakota,Oregon,1127.98,31.0
+3191,Tennessee,Oregon,1959.46,49.0
+3192,Texas,Oregon,1532.4,40.0
+3193,Utah,Oregon,622.28,9.0
+3194,Vermont,Oregon,2388.89,48.0
+3195,Virgin Islands,Oregon,3717.47,49.0
+3196,Virginia,Oregon,2299.55,48.0
+3197,Washington,Oregon,174.81,1.0
+3198,West Virginia,Oregon,2132.6,48.0
+3199,Wisconsin,Oregon,1574.67,46.0
+3200,Wyoming,Oregon,750.66,16.0
+3201,Puerto Rico,Pennsylvania,1682.25,15.0
+3202,Rhode Island,Pennsylvania,316.35,9.0
+3203,South Carolina,Pennsylvania,508.48,14.0
+3204,South Dakota,Pennsylvania,1122.11,30.0
+3205,Tennessee,Pennsylvania,580.22,19.0
+3206,Texas,Pennsylvania,1334.46,36.0
+3207,Utah,Pennsylvania,1805.15,35.0
+3208,Vermont,Pennsylvania,332.38,8.0
+3209,Virgin Islands,Pennsylvania,1711.2,15.0
+3210,Virginia,Pennsylvania,239.26,5.0
+3211,Washington,Pennsylvania,2183.13,34.0
+3212,West Virginia,Pennsylvania,224.65,4.0
+3213,Wisconsin,Pennsylvania,674.51,16.0
+3214,Wyoming,Pennsylvania,1523.19,34.0
+3215,Rhode Island,Puerto Rico,1632.91,36.0
+3216,South Carolina,Puerto Rico,1412.55,38.0
+3217,South Dakota,Puerto Rico,2590.3,49.0
+3218,Tennessee,Puerto Rico,1711.37,44.0
+3219,Texas,Puerto Rico,2211.97,48.0
+3220,Utah,Puerto Rico,3069.0,50.0
+3221,Vermont,Puerto Rico,1822.22,40.0
+3222,Virgin Islands,Puerto Rico,94.56,1.0
+3223,Virginia,Puerto Rico,1500.04,38.0
+3224,Washington,Puerto Rico,3645.93,50.0
+3225,West Virginia,Puerto Rico,1660.06,42.0
+3226,Wisconsin,Puerto Rico,2248.82,48.0
+3227,Wyoming,Puerto Rico,2909.08,49.0
+3228,South Carolina,Rhode Island,741.87,23.0
+3229,South Dakota,Rhode Island,1403.02,46.0
+3230,Tennessee,Rhode Island,883.56,31.0
+3231,Texas,Rhode Island,1647.61,44.0
+3232,Utah,Rhode Island,2103.64,45.0
+3233,Vermont,Rhode Island,191.26,6.0
+3234,Virgin Islands,Rhode Island,1644.11,10.0
+3235,Virginia,Rhode Island,467.26,15.0
+3236,Washington,Rhode Island,2438.47,47.0
+3237,West Virginia,Rhode Island,530.18,17.0
+3238,Wisconsin,Rhode Island,944.49,34.0
+3239,Wyoming,Rhode Island,1809.48,45.0
+3240,South Dakota,South Carolina,1180.59,34.0
+3241,Tennessee,South Carolina,315.14,7.0
+3242,Texas,South Carolina,1031.22,24.0
+3243,Utah,South Carolina,1731.81,33.0
+3244,Vermont,South Carolina,829.66,18.0
+3245,Virgin Islands,South Carolina,1465.94,3.0
+3246,Virginia,South Carolina,280.29,7.0
+3247,Washington,South Carolina,2249.71,36.0
+3248,West Virginia,South Carolina,333.46,9.0
+3249,Wisconsin,South Carolina,850.97,27.0
+3250,Wyoming,South Carolina,1522.69,33.0
+3251,Tennessee,South Dakota,880.0,30.0
+3252,Texas,South Dakota,848.44,15.0
+3253,Utah,South Dakota,724.57,12.0
+3254,Vermont,South Dakota,1297.11,30.0
+3255,Virgin Islands,South Dakota,2646.07,37.0
+3256,Virginia,South Dakota,1174.74,34.0
+3257,Washington,South Dakota,1079.7,10.0
+3258,West Virginia,South Dakota,1006.39,34.0
+3259,Wisconsin,South Dakota,459.78,8.0
+3260,Wyoming,South Dakota,407.88,5.0
+3261,Texas,Tennessee,773.88,14.0
+3262,Utah,Tennessee,1417.73,27.0
+3263,Vermont,Tennessee,906.46,21.0
+3264,Virgin Islands,Tennessee,1769.36,17.0
+3265,Virginia,Tennessee,447.23,13.0
+3266,Washington,Tennessee,1939.64,30.0
+3267,West Virginia,Tennessee,356.03,11.0
+3268,Wisconsin,Tennessee,613.69,14.0
+3269,Wyoming,Tennessee,1209.29,27.0
+3270,Utah,Texas,911.34,16.0
+3271,Vermont,Texas,1641.1,36.0
+3272,Virgin Islands,Texas,2289.85,30.0
+3273,Virginia,Texas,1220.74,35.0
+3274,Washington,Texas,1581.33,21.0
+3275,West Virginia,Texas,1118.04,35.0
+3276,Wisconsin,Texas,997.01,37.0
+3277,Wyoming,Texas,895.59,20.0
+3278,Vermont,Utah,2012.83,43.0
+3279,Virgin Islands,Utah,3139.22,43.0
+3280,Virginia,Utah,1807.42,43.0
+3281,Washington,Utah,691.3,6.0
+3282,West Virginia,Utah,1650.74,41.0
+3283,Wisconsin,Utah,1175.31,41.0
+3284,Wyoming,Utah,338.18,3.0
+3285,Virgin Islands,Vermont,1834.65,22.0
+3286,Virginia,Vermont,550.09,18.0
+3287,Washington,Vermont,2302.64,40.0
+3288,West Virginia,Vermont,554.59,20.0
+3289,Wisconsin,Vermont,838.58,26.0
+3290,Wyoming,Vermont,1704.88,42.0
+3291,Virginia,Virgin Islands,1538.06,39.0
+3292,Washington,Virgin Islands,3707.35,51.0
+3293,West Virginia,Virgin Islands,1701.02,43.0
+3294,Wisconsin,Virgin Islands,2294.05,49.0
+3295,Wyoming,Virgin Islands,2972.05,50.0
+3296,Washington,Virginia,2253.69,37.0
+3297,West Virginia,Virginia,170.12,2.0
+3298,Wisconsin,Virginia,767.8,20.0
+3299,Wyoming,Virginia,1555.96,36.0
+3300,West Virginia,Washington,2084.64,47.0
+3301,Wisconsin,Washington,1508.66,45.0
+3302,Wyoming,Washington,738.86,15.0
+3303,Wisconsin,West Virginia,598.63,12.0
+3304,Wyoming,West Virginia,1391.44,31.0
+3305,Wyoming,Wisconsin,867.53,19.0
