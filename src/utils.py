@@ -203,8 +203,8 @@ def raw_data_preprocessing_US(data_fp='../data/daily_mobility_US.csv', horizon=7
     mobility_US['Country/Region'] = 'US'
     mobility = pd.concat([mobility, mobility_US], axis=0, ignore_index=True)
     print(mobility.tail())
-    use_countries = set(mobility['Country/Region'].unique()) & set(daily_ts['Country/Region'].unique()) 
-    # use_countries = daily_ts['Country/Region'].unique()
+    # use_countries = set(mobility['Country/Region'].unique()) & set(daily_ts['Country/Region'].unique()) 
+    use_countries = daily_ts['Country/Region'].unique()
     print(use_countries)
     mobility[mobility_features] = mobility[mobility_features] / 100.0
     mobility = mobility[mobility['Country/Region'].isin(use_countries)]
@@ -493,7 +493,7 @@ if __name__ == "__main__":
     #raw_data_preprocessing(data_fp='../data/daily_mobility_global.csv',horizon=7,only_china=False)
     raw_data_preprocessing_US(horizon=7)
     raw_data_preprocessing_US(horizon=14)
-    raw_data_preprocessing_US(horizon=21)
-    raw_data_preprocessing_US(horizon=28)
+    # raw_data_preprocessing_US(horizon=21)
+    # raw_data_preprocessing_US(horizon=28)
 
     # process_government_data()

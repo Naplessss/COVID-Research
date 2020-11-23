@@ -192,7 +192,7 @@ def apply_lgb(features, target, q, params, k, num_round=1000):
                           verbose_eval=20
                           )
 
-        train.loc[te_ind, 'PREDICTION'] = model.predict(val[feature_names])
+        train.loc[te_ind, 'PREDICTION'] = model.predict(val[feature_names], )
         test['PREDICTION'] += model.predict(test[feature_names]) / N_FOLDS
 
         fimp = pd.DataFrame({'f': feature_names, 'imp': model.feature_importance()})
@@ -223,11 +223,12 @@ def get_locations():
     return location2id
 
 if __name__=='__main__':
+    np.random.seed(42)
     # newest date of labeling data
-    LABEL_END_DATE = '2020-11-15'    
+    LABEL_END_DATE = '2020-11-22'    
     # test start day to infer next epidemic weeks (included this day)
     # prefer to be sunday of this epidemic week (the same as LABEL_DATE_END)
-    FORECAST_START_DATE = '2020-11-15'   
+    FORECAST_START_DATE = '2020-11-22'   
 
     DAYS = 7
     ONLY_POINT = True
@@ -235,7 +236,7 @@ if __name__=='__main__':
     PRECISION = 2
     N_FOLDS = 5
     RELOAD_FEATURES = False
-    N_SEEDS = 10
+    N_SEEDS = 50
     TRAIN_START = '2020-04-30'
     CLOSEST_PATH = '/home/zhgao/COVID-Research/data/us_geo_closest.v2.csv'
     FEATURE_FILE_PATH = f'/home/zhgao/COVID-Research/data/features_{LABEL_END_DATE}.csv'
@@ -272,7 +273,7 @@ if __name__=='__main__':
 
     train_results, test_results = [], []
     for target in ['Deaths', 'Confirmed']:
-        for k in [7, 14, 21, 28]:
+        for k in [7, 14]:
             for q in [0.01,0.025,0.05,0.1,0.15,0.2,0.25,0.3,
                          0.35,0.4,0.45,0.5,0.55,0.6,0.65,
                          0.7,0.75,0.8,0.85,0.9,0.95,0.975,0.99]:
@@ -294,7 +295,7 @@ if __name__=='__main__':
                         alpha=q,
                         metric='mae',
                         max_depth=np.random.choice([14,15,16]),
-                        learning_rate=np.random.choice([0.06,0.07,0.08,0.09]),
+                        learning_rate=np.random.choice([0.09]),
                         feature_fraction=np.random.choice([0.35, 0.45, 0.55, 0.65]),
                         bagging_freq=np.random.choice([3, 4, 5]),
                         bagging_fraction=np.random.choice([0.7, 0.8]),
@@ -305,9 +306,9 @@ if __name__=='__main__':
                         n_jobs=12
                     )
                     if target == 'Deaths':
-                        num_round = np.random.choice([35,40,50,55])
+                        num_round = np.random.choice([30,40,50,60]) + 30
                     if target == 'Confirmed':
-                        num_round = np.random.choice([50,60,70,80])
+                        num_round = np.random.choice([50,60,70,80]) + 30
                     _cv_error, _val_error, _train_preds, _test_preds, feature_importances = apply_lgb(
                         features, target, q, params, k, num_round=num_round)
                     print(target,k,q,seed,_cv_error,_val_error)

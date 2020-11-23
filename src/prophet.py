@@ -75,10 +75,10 @@ def dump_results(label_end_date='2020-11-16', forecast_start_date='2020-11-15'):
 
 if __name__=='__main__':
     # newest date of labeling data
-    LABEL_END_DATE = '2020-11-18'    
+    LABEL_END_DATE = '2020-11-22'    
     # test start day to infer next epidemic weeks (included this day)
     # prefer to be sunday of this epidemic week (the same as LABEL_DATE_END)
-    FORECAST_START_DATE = '2020-11-15'   
+    FORECAST_START_DATE = '2020-11-22'   
 
     deaths, confirmed = get_label()
     dump_results(label_end_date=LABEL_END_DATE, forecast_start_date=FORECAST_START_DATE)

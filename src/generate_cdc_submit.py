@@ -151,13 +151,23 @@ def generate_gnn_cdc_format(save_dir = './',
     prophet = pd.read_csv('../output/prophet.predict.{}.csv'.format(forecast_start_date))
     date_list = sorted(prophet['ds'].unique())
 
-    ### weighted average for week3 and week4  
+    ### weighted average  
+    _idx = predict_deaths_list[0].index
+    tmp = prophet[prophet['TYPE']=='deaths'][prophet['ds']==date_list[0]][['region','predict_week']].set_index('region').loc[_idx]
+    predict_deaths_list[0] = (0.8 * predict_deaths_list[0]).add(np.abs(tmp['predict_week'].values) * 0.2, axis='index')
+
+    _idx = predict_confirmed_list[0].index
+    tmp = prophet[prophet['TYPE']=='confirmed'][prophet['ds']==date_list[0]][['region','predict_week']].set_index('region').loc[_idx]
+    predict_confirmed_list[0] = (0.8 * predict_confirmed_list[0]).add(np.abs(tmp['predict_week'].values) * 0.2, axis='index') 
+
+
+
     predict_deaths_list[1] = predict_deaths_list[1] - pd.DataFrame(predict_deaths_list[0].values, 
                                                                         columns=predict_deaths_list[1].columns,
                                                                         index=predict_deaths_list[1].index)
     _idx = predict_deaths_list[1].index
     tmp = prophet[prophet['TYPE']=='deaths'][prophet['ds']==date_list[1]][['region','predict_week']].set_index('region').loc[_idx]
-    predict_deaths_list[1] = (0.5 * predict_deaths_list[1]).add(np.abs(tmp['predict_week'].values) * 0.5, axis='index')
+    predict_deaths_list[1] = (0.8 * predict_deaths_list[1]).add(np.abs(tmp['predict_week'].values) * 0.2, axis='index')
 
 
     predict_confirmed_list[1] = predict_confirmed_list[1] - pd.DataFrame(predict_confirmed_list[0].values, 
@@ -174,7 +184,7 @@ def generate_gnn_cdc_format(save_dir = './',
 
     _idx = predict_deaths_list[2].index
     tmp = prophet[prophet['TYPE']=='deaths'][prophet['ds']==date_list[2]][['region','predict_week']].set_index('region').loc[_idx]
-    predict_deaths_list[2] = (0.3 * predict_deaths_list[2]).add(np.abs(tmp['predict_week'].values) * 0.7, axis='index')
+    predict_deaths_list[2] = (0.5 * predict_deaths_list[2]).add(np.abs(tmp['predict_week'].values) * 0.5, axis='index')
 
 
     predict_confirmed_list.append(pd.DataFrame(predict_confirmed_list[1].values*0.7 + predict_confirmed_list[0].values*0.3,    
@@ -192,7 +202,7 @@ def generate_gnn_cdc_format(save_dir = './',
 
     _idx = predict_deaths_list[3].index
     tmp = prophet[prophet['TYPE']=='deaths'][prophet['ds']==date_list[3]][['region','predict_week']].set_index('region').loc[_idx]
-    predict_deaths_list[3] = (0.2 * predict_deaths_list[3]).add(np.abs(tmp['predict_week'].values) * 0.8, axis='index')
+    predict_deaths_list[3] = (0.5 * predict_deaths_list[3]).add(np.abs(tmp['predict_week'].values) * 0.5, axis='index')
 
 
     predict_confirmed_list.append(pd.DataFrame(predict_confirmed_list[1].values*0.5 + predict_confirmed_list[0].values*0.5,    
@@ -295,8 +305,8 @@ if __name__=='__main__':
     results = generate_gnn_cdc_format(save_dir = '../CDC',
                             model_name = 'MSRA-DeepST',
                             model_use=  ['NBEATS','GNN'],        # ['NBEATS','GNN', 'KRNN']
-                            forecast_date = '2020-10-12',
-                            predict_date = '2020-10-17',
+                            forecast_date = '2020-11-23',
+                            predict_date = '2020-11-28',
                             quantile = use_quantile_list,
                             use_ensemble= True,
-                            factor = 0.5)   # weight for NN models
+                            factor = 0.2)   # weight for NN models
