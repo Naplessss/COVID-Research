@@ -8,7 +8,7 @@ import pandas as pd
 
 
 def get_locations():
-    location = pd.read_csv('../data/locations.csv')
+    location = pd.read_csv('https://raw.githubusercontent.com/reichlab/covid19-forecast-hub/master/data-locations/locations.csv')
     location2id = location[['location_name','location']].set_index('location_name')['location'].to_dict()
     return location2id
 
@@ -175,7 +175,7 @@ def generate_gnn_cdc_format(save_dir = './',
                                                                         index=predict_confirmed_list[1].index) 
     _idx = predict_confirmed_list[1].index
     tmp = prophet[prophet['TYPE']=='confirmed'][prophet['ds']==date_list[1]][['region','predict_week']].set_index('region').loc[_idx]
-    predict_confirmed_list[1] = (0.5 * predict_confirmed_list[1]).add(np.abs(tmp['predict_week'].values) * 0.5, axis='index') 
+    predict_confirmed_list[1] = (0.8 * predict_confirmed_list[1]).add(np.abs(tmp['predict_week'].values) * 0.2, axis='index') 
 
     predict_deaths_list.append(pd.DataFrame(predict_deaths_list[1].values*0.7 + predict_deaths_list[0].values*0.3,
                                                                         columns=predict_deaths_list[1].columns,
@@ -184,7 +184,7 @@ def generate_gnn_cdc_format(save_dir = './',
 
     _idx = predict_deaths_list[2].index
     tmp = prophet[prophet['TYPE']=='deaths'][prophet['ds']==date_list[2]][['region','predict_week']].set_index('region').loc[_idx]
-    predict_deaths_list[2] = (0.5 * predict_deaths_list[2]).add(np.abs(tmp['predict_week'].values) * 0.5, axis='index')
+    predict_deaths_list[2] = (0.8 * predict_deaths_list[2]).add(np.abs(tmp['predict_week'].values) * 0.2, axis='index')
 
 
     predict_confirmed_list.append(pd.DataFrame(predict_confirmed_list[1].values*0.7 + predict_confirmed_list[0].values*0.3,    
@@ -193,7 +193,7 @@ def generate_gnn_cdc_format(save_dir = './',
                                     )
     _idx = predict_confirmed_list[2].index
     tmp = prophet[prophet['TYPE']=='confirmed'][prophet['ds']==date_list[2]][['region','predict_week']].set_index('region').loc[_idx]
-    predict_confirmed_list[2] = (0.3 * predict_confirmed_list[2]).add(np.abs(tmp['predict_week'].values) * 0.7, axis='index') 
+    predict_confirmed_list[2] = (0.8 * predict_confirmed_list[2]).add(np.abs(tmp['predict_week'].values) * 0.2, axis='index') 
 
     predict_deaths_list.append(pd.DataFrame(predict_deaths_list[1].values*0.5 + predict_deaths_list[0].values*0.5,
                                                                         columns=predict_deaths_list[1].columns,
@@ -202,7 +202,7 @@ def generate_gnn_cdc_format(save_dir = './',
 
     _idx = predict_deaths_list[3].index
     tmp = prophet[prophet['TYPE']=='deaths'][prophet['ds']==date_list[3]][['region','predict_week']].set_index('region').loc[_idx]
-    predict_deaths_list[3] = (0.5 * predict_deaths_list[3]).add(np.abs(tmp['predict_week'].values) * 0.5, axis='index')
+    predict_deaths_list[3] = (0.8 * predict_deaths_list[3]).add(np.abs(tmp['predict_week'].values) * 0.2, axis='index')
 
 
     predict_confirmed_list.append(pd.DataFrame(predict_confirmed_list[1].values*0.5 + predict_confirmed_list[0].values*0.5,    
@@ -211,7 +211,7 @@ def generate_gnn_cdc_format(save_dir = './',
                                     )
     _idx = predict_confirmed_list[3].index
     tmp = prophet[prophet['TYPE']=='confirmed'][prophet['ds']==date_list[3]][['region','predict_week']].set_index('region').loc[_idx]
-    predict_confirmed_list[3] = (0.2 * predict_confirmed_list[3]).add(np.abs(tmp['predict_week'].values) * 0.8, axis='index') 
+    predict_confirmed_list[3] = (0.8 * predict_confirmed_list[3]).add(np.abs(tmp['predict_week'].values) * 0.2, axis='index') 
 
     for i in range(1,4):
         predict_deaths_list[i] = predict_deaths_list[i] + pd.DataFrame(predict_deaths_list[i-1].values, 
@@ -302,11 +302,11 @@ def generate_gnn_cdc_format(save_dir = './',
     return results
 
 if __name__=='__main__':
-    results = generate_gnn_cdc_format(save_dir = '../CDC',
-                            model_name = 'MSRA-DeepST',
+    results = generate_gnn_cdc_format(save_dir = '../output_zhgao',
+                            model_name = 'MSRA-DeepST-gzf',
                             model_use=  ['NBEATS','GNN'],        # ['NBEATS','GNN', 'KRNN']
-                            forecast_date = '2020-11-23',
-                            predict_date = '2020-11-28',
+                            forecast_date = '2020-12-07',
+                            predict_date = '2020-12-12',
                             quantile = use_quantile_list,
                             use_ensemble= True,
                             factor = 0.2)   # weight for NN models

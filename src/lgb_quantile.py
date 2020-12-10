@@ -225,10 +225,10 @@ def get_locations():
 if __name__=='__main__':
     np.random.seed(42)
     # newest date of labeling data
-    LABEL_END_DATE = '2020-11-22'    
+    LABEL_END_DATE = '2020-12-06'    
     # test start day to infer next epidemic weeks (included this day)
     # prefer to be sunday of this epidemic week (the same as LABEL_DATE_END)
-    FORECAST_START_DATE = '2020-11-22'   
+    FORECAST_START_DATE = '2020-12-06'   
 
     DAYS = 7
     ONLY_POINT = True
